@@ -10,6 +10,7 @@
 
 #include <iostream>
 
+#include "EntityManager.h"
 std::string display_text = "This is a test";
 
 
@@ -29,13 +30,13 @@ PxPvd*                  gPvd        = NULL;
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
-
+EntityManager* entityManager = nullptr;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
 	PX_UNUSED(interactive);
-
+	
 	gFoundation = PxCreateFoundation(PX_FOUNDATION_VERSION, gAllocator, gErrorCallback);
 
 	gPvd = PxCreatePvd(*gFoundation);
@@ -54,6 +55,9 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+	entityManager = new EntityManager(gPhysics);
+	entityManager->createAxes();
+	
 	}
 
 
@@ -84,6 +88,7 @@ void cleanupPhysics(bool interactive)
 	transport->release();
 	
 	gFoundation->release();
+	entityManager->ReleaseEntities();
 	}
 
 // Function called when a key is pressed

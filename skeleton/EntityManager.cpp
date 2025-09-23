@@ -1,0 +1,41 @@
+#include "EntityManager.h"
+
+EntityManager::EntityManager(physx::PxPhysics* gP)
+{
+	entityList = std::list<Entity*>();
+	gPhysics = gP;
+}
+
+EntityManager::~EntityManager()
+{
+	ReleaseEntities();
+}
+
+
+
+Entity* EntityManager::createSphere(const Vector3& transform, double r, const Vector4& color, const float& mat1, const float& mat2, const float& mat3)
+{
+	Entity* aux = new Entity();
+	aux->mGeo = new physx::PxSphereGeometry(r);
+	aux->mtrans = new physx::PxTransform(transform);
+	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(mat1,mat2,mat3));
+	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
+	RegisterRenderItem(aux->mItem);
+	return aux;
+}
+void EntityManager::createAxes()
+{
+	createSphere();
+	createSphere(Vector3(10, 0, 0), 1, Vector4(1, 0, 0, 1));
+	createSphere(Vector3(0, 10, 0), 1, Vector4(0, 1, 0, 1));
+	createSphere(Vector3(0, 0, 10), 1, Vector4(0, 0, 1, 1));
+}
+void EntityManager::ReleaseEntities()
+{
+	for (auto a : entityList) {
+		DeregisterRenderItem(a->mItem);
+		delete a->mItem;
+		delete a->mtrans;
+		delete a;
+	}
+}
