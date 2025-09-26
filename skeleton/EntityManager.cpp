@@ -1,5 +1,5 @@
 #include "EntityManager.h"
-
+#include "Particle.h"
 EntityManager::EntityManager(physx::PxPhysics* gP)
 {
 	entityList = std::list<Entity*>();
@@ -21,6 +21,19 @@ Entity* EntityManager::createSphere(const Vector3& transform, double r, const Ve
 	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(mat1,mat2,mat3));
 	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
 	RegisterRenderItem(aux->mItem);
+	entityList.push_back(aux);
+	return aux;
+}
+Entity* EntityManager::createParticle(const Vector3& transform, const Vector3& v, const Vector3& a, double d,int mt, double r, const Vector4& color, const float& mat1, const float& mat2, const float& mat3)
+{
+	Particle* aux = new Particle(v,a,d, mt);
+	aux->mGeo = new physx::PxSphereGeometry(r);
+	aux->mtrans = new physx::PxTransform(transform);
+	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(mat1, mat2, mat3));
+	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
+	RegisterRenderItem(aux->mItem);
+	entityList.push_back(aux);
+	aux->setLastPos(transform);
 	return aux;
 }
 void EntityManager::createAxes()
@@ -38,4 +51,9 @@ void EntityManager::ReleaseEntities()
 		delete a->mtrans;
 		delete a;
 	}
+}
+
+void EntityManager::updateEntities(double t)
+{
+	for (auto a : entityList) a->update(t);
 }

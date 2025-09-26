@@ -56,7 +56,8 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	entityManager = new EntityManager(gPhysics);
-	entityManager->createAxes();
+	//entityManager->createAxes();
+	entityManager->createParticle(Vector3(0,0,0),Vector3(1,0,0),Vector3(0,1,0),1,0);
 	
 	}
 
@@ -69,6 +70,7 @@ void stepPhysics(bool interactive, double t)
 	PX_UNUSED(interactive);
 
 	gScene->simulate(t);
+	entityManager->updateEntities(t);
 	gScene->fetchResults(true);
 }
 
