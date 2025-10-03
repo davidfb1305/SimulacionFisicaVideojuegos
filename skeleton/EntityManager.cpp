@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Particle.h"
+#include "Bullet.h"
 EntityManager::EntityManager(physx::PxPhysics* gP)
 {
 	entityList = std::list<Entity*>();
@@ -27,6 +28,18 @@ Entity* EntityManager::createSphere(const Vector3& transform, double r, const Ve
 Entity* EntityManager::createParticle(const Vector3& transform, const Vector3& v, const Vector3& a, double d,int mt, double r, const Vector4& color, const float& mat1, const float& mat2, const float& mat3)
 {
 	Particle* aux = new Particle(v,a,d, mt);
+	aux->mGeo = new physx::PxSphereGeometry(r);
+	aux->mtrans = new physx::PxTransform(transform);
+	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(mat1, mat2, mat3));
+	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
+	RegisterRenderItem(aux->mItem);
+	entityList.push_back(aux);
+	aux->setLastPos(transform);
+	return aux;
+}
+Entity* EntityManager::createBullet(const Vector3& transform, const Vector3& v, const Vector3& a, double d, int mt, double r, const Vector4& color, const float& mat1, const float& mat2, const float& mat3, const physx::PxVec3& vrreal, double m, const physx::PxVec3& g)
+{
+	Bullet* aux = new Bullet(v,vrreal,a,d,mt,m,g);
 	aux->mGeo = new physx::PxSphereGeometry(r);
 	aux->mtrans = new physx::PxTransform(transform);
 	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(mat1, mat2, mat3));

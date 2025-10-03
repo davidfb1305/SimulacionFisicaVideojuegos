@@ -49,7 +49,7 @@ void Particle::integrate(double t)
 
 	}
 }
-void Particle::update(double t)
+void Particle::update(double t) 
 {
 	integrate(t);
 }

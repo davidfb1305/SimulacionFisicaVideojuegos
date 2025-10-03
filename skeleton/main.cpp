@@ -3,7 +3,7 @@
 #include <PxPhysicsAPI.h>
 
 #include <vector>
-
+#include "checkML.h"
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
@@ -56,9 +56,10 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	entityManager = new EntityManager(gPhysics);
-	//entityManager->createAxes();
-	entityManager->createParticle(Vector3(0,0,0),Vector3(1,0,0),Vector3(0,1,0),1,0);
-	
+	entityManager->createAxes();
+	//entityManager->createParticle(Vector3(0,0,0),Vector3(3,0,0),Vector3(0,0,0),1,0);
+	//entityManager->createBullet(Vector3(0.0,0.0,0.0),Vector3(0.0,10.0,0.0),Vector3(0.0,0.0,0.0),0.999,0,2.0,
+	//	Vector4(1.0f,0.0f,1.0f,1.0f),1,1,1,Vector3(500.0,0.0,0.0),1.0, sceneDesc.gravity);
 	}
 
 
@@ -100,7 +101,18 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch(toupper(key))
 	{
-	//case 'B': break;
+	case 'B':{
+		;
+		entityManager->createBullet(camera.p, GetCamera()->getDir()*10.0,Vector3(0.0,0.0,0.0),0.999,0,2.0,
+		Vector4(1.0f,0.0f,1.0f,1.0f),1,1,1,Vector3(500.0,0.0,0.0),1.0, Vector3(0.0,-9.81,0.0));
+		break;
+	}
+	case 'V': {
+		;
+		entityManager->createBullet(camera.p, GetCamera()->getDir() * 50.0, Vector3(0.0, 0.0, 0.0), 0.999, 0, 1.0,
+			Vector4(1.0f, 1.0f, 0.0f, 1.0f), 1, 1, 1, Vector3(500.0, 0.0, 0.0), 1.0, Vector3(0.0, -9.81, 0.0));
+		break;
+	}
 	//case ' ':	break;
 	case ' ':
 	{
@@ -130,6 +142,6 @@ int main(int, const char*const*)
 		stepPhysics(false);
 	cleanupPhysics(false);
 #endif
-
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	return 0;
 }
