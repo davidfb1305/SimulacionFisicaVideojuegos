@@ -14,11 +14,34 @@ Particle::Particle( const Vector3& v, const Vector3& a, double d,int mt)
 	ac = a; 
 	dumping = d;
 	mMt = MoveType(mt);
+	
 }
 
 void Particle::setLastPos(Vector3 a)
 {
 	lastpos = a;
+}
+
+
+bool Particle::uptadeDestroyCondition(double t)
+{
+	switch (mRc)
+	{
+	case NONE:
+		return true;
+		break;
+	case TIME:
+		timeToRemove -= t;
+		return (timeToRemove > 0);
+		break;
+	case DISTANCE:
+		Vector3 auxpos = Vector3(std::abs(mtrans->p.x), std::abs(mtrans->p.y), std::abs(mtrans->p.z));
+		return (auxpos.x < maxpos.x&& auxpos.y < maxpos.y&& auxpos.z < maxpos.z);
+		break;
+	default:
+		break;
+	}
+	
 }
 
 
@@ -49,7 +72,9 @@ void Particle::integrate(double t)
 
 	}
 }
-void Particle::update(double t) 
+bool Particle::update(double t) 
 {
 	integrate(t);
+
+	return uptadeDestroyCondition(t);
 }

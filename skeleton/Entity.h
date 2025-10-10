@@ -10,6 +10,6 @@ public:
 	RenderItem* mItem = nullptr;
 	Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, RenderItem* r);
 	Entity();
-	virtual void update(double t);
+	virtual bool update(double t);
 };
 

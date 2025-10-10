@@ -18,6 +18,7 @@ class EntityManager
 {
 private:
 	std::list<Entity*> entityList;
+	std::list<Entity*> entityListToRemove;
 	physx::PxPhysics* gPhysics;
 protected:
 

@@ -7,7 +7,8 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
-
+#include <thread>
+#include <chrono>
 #include <iostream>
 
 #include "EntityManager.h"
@@ -73,6 +74,7 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	entityManager->updateEntities(t);
 	gScene->fetchResults(true);
+	std::this_thread::sleep_for(std::chrono::microseconds(10));
 }
 
 // Function to clean data

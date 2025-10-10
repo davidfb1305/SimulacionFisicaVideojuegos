@@ -68,5 +68,11 @@ void EntityManager::ReleaseEntities()
 
 void EntityManager::updateEntities(double t)
 {
-	for (auto a : entityList) a->update(t);
+	for (auto a : entityList) { 
+		if (!a->update(t)) entityListToRemove.push_back(a);
+	}
+	for (auto a : entityListToRemove) {
+		entityList.remove(a);
+	}
+	entityListToRemove.clear();
 }
