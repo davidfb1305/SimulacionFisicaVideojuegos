@@ -11,7 +11,8 @@
 #include <chrono>
 #include <iostream>
 
-#include "EntityManager.h"
+#include "SceneManager.h"
+#include "Scene1.h"
 std::string display_text = "This is a test";
 
 
@@ -28,10 +29,12 @@ PxMaterial*				gMaterial	= NULL;
 
 PxPvd*                  gPvd        = NULL;
 
+SceneManager* sceneManager = NULL;
+
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
-EntityManager* entityManager = nullptr;
+
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -50,14 +53,18 @@ void initPhysics(bool interactive)
 
 	// For Solid Rigids +++++++++++++++++++++++++++++++++++++
 	PxSceneDesc sceneDesc(gPhysics->getTolerancesScale());
-	sceneDesc.gravity = PxVec3(0.0f, -9.8f, 0.0f);
+
 	gDispatcher = PxDefaultCpuDispatcherCreate(2);
 	sceneDesc.cpuDispatcher = gDispatcher;
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	entityManager = new EntityManager(gPhysics);
-	entityManager->createAxes();
+	//entityManager = new EntityManager(gPhysics);
+	//entityManager->createAxes();
+	sceneManager = new SceneManager();
+	sceneManager->addScene(new Scene1(gPhysics));
+
+
 	//entityManager->createParticle(Vector3(0,0,0),Vector3(3,0,0),Vector3(0,0,0),1,0);
 	//entityManager->createBullet(Vector3(0.0,0.0,0.0),Vector3(0.0,10.0,0.0),Vector3(0.0,0.0,0.0),0.999,0,2.0,
 	//	Vector4(1.0f,0.0f,1.0f,1.0f),1,1,1,Vector3(500.0,0.0,0.0),1.0, sceneDesc.gravity);
@@ -72,7 +79,7 @@ void stepPhysics(bool interactive, double t)
 	PX_UNUSED(interactive);
 
 	gScene->simulate(t);
-	entityManager->updateEntities(t);
+	sceneManager->updateScene(t);
 	gScene->fetchResults(true);
 	std::this_thread::sleep_for(std::chrono::microseconds(10));
 }
@@ -93,7 +100,8 @@ void cleanupPhysics(bool interactive)
 	transport->release();
 	
 	gFoundation->release();
-	entityManager->ReleaseEntities();
+	delete sceneManager;
+	
 	}
 
 // Function called when a key is pressed
@@ -105,14 +113,14 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	case 'B':{
 		;
-		entityManager->createBullet(camera.p, GetCamera()->getDir()*10.0,Vector3(0.0,0.0,0.0),0.999,0,2.0,
-		Vector4(1.0f,0.0f,1.0f,1.0f),1,1,1,Vector3(500.0,0.0,0.0),1.0, Vector3(0.0,-9.81,0.0));
+		//entityManager->createBullet(camera.p, GetCamera()->getDir()*10.0,Vector3(0.0,0.0,0.0),0.999,0,2.0,
+		//Vector4(1.0f,0.0f,1.0f,1.0f),1,1,1,Vector3(500.0,0.0,0.0),1.0, Vector3(0.0,-9.81,0.0));
 		break;
 	}
 	case 'V': {
 		;
-		entityManager->createBullet(camera.p, GetCamera()->getDir() * 50.0, Vector3(0.0, 0.0, 0.0), 0.999, 0, 1.0,
-			Vector4(1.0f, 1.0f, 0.0f, 1.0f), 1, 1, 1, Vector3(500.0, 0.0, 0.0), 1.0, Vector3(0.0, -9.81, 0.0));
+		//entityManager->createBullet(camera.p, GetCamera()->getDir() * 50.0, Vector3(0.0, 0.0, 0.0), 0.999, 0, 1.0,
+			//Vector4(1.0f, 1.0f, 0.0f, 1.0f), 1, 1, 1, Vector3(500.0, 0.0, 0.0), 1.0, Vector3(0.0, -9.81, 0.0));
 		break;
 	}
 	//case ' ':	break;

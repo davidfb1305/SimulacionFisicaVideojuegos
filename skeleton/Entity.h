@@ -9,6 +9,7 @@ public:
 	physx::PxShape* mshape = nullptr;
 	RenderItem* mItem = nullptr;
 	Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, RenderItem* r);
+	~Entity();
 	Entity();
 	virtual bool update(double t);
 };

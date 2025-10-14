@@ -38,8 +38,6 @@ bool Particle::uptadeDestroyCondition(double t)
 		Vector3 auxpos = Vector3(std::abs(mtrans->p.x), std::abs(mtrans->p.y), std::abs(mtrans->p.z));
 		return (auxpos.x < maxpos.x&& auxpos.y < maxpos.y&& auxpos.z < maxpos.z);
 		break;
-	default:
-		break;
 	}
 	
 }

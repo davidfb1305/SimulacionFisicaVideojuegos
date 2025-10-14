@@ -8,14 +8,19 @@ Entity::Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, R
 	mItem = r;
 }
 
+Entity::~Entity()
+{
+
+}
+
 Entity::Entity()
 {
 		mtrans = nullptr;
 		mItem = nullptr;
 		mshape = nullptr;	
 }
-void
+bool
 Entity::update(double d) {
-
+	return false;
 }
 
