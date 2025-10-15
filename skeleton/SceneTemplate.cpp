@@ -19,6 +19,9 @@ void SceneTemplate::unLoadScene()
 {
 	mEntityManager->ReleaseEntities();
 }
+void SceneTemplate::inputListener(unsigned char key, const physx::PxTransform& camera) {
+
+ }
 
 void SceneTemplate::update(double t)
 {

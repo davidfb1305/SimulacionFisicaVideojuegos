@@ -111,26 +111,10 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch(toupper(key))
 	{
-	case 'B':{
-		;
-		//entityManager->createBullet(camera.p, GetCamera()->getDir()*10.0,Vector3(0.0,0.0,0.0),0.999,0,2.0,
-		//Vector4(1.0f,0.0f,1.0f,1.0f),1,1,1,Vector3(500.0,0.0,0.0),1.0, Vector3(0.0,-9.81,0.0));
-		break;
-	}
-	case 'V': {
-		;
-		//entityManager->createBullet(camera.p, GetCamera()->getDir() * 50.0, Vector3(0.0, 0.0, 0.0), 0.999, 0, 1.0,
-			//Vector4(1.0f, 1.0f, 0.0f, 1.0f), 1, 1, 1, Vector3(500.0, 0.0, 0.0), 1.0, Vector3(0.0, -9.81, 0.0));
-		break;
-	}
-	//case ' ':	break;
-	case ' ':
-	{
-		break;
-	}
 	default:
 		break;
 	}
+	sceneManager->inputListener(key, camera);
 }
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)

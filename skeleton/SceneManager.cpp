@@ -40,3 +40,6 @@ void SceneManager::addScene(SceneTemplate* newScene)
 	actScene->loadScene();
 	}
 }
+void SceneManager::inputListener(unsigned char key, const  physx::PxTransform& camera) {
+	actScene->inputListener(key, camera);
+}

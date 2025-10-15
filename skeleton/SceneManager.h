@@ -18,5 +18,6 @@ public:
 	void previousScene();
 	void updateScene(double t);
 	void addScene(SceneTemplate* newScene);
+	void inputListener(unsigned char key, const  physx::PxTransform& camera);
 };
 
