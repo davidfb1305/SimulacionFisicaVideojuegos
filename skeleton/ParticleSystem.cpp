@@ -15,6 +15,6 @@ ParticleSystem::~ParticleSystem()
 
 bool ParticleSystem::update(double t)
 {
-    for (ParticleGenerator* pg : generatorList) pg->generateParticle();
+    for (ParticleGenerator* pg : generatorList) if(pg->isActive())pg->generateParticle();
     return true;
 }

@@ -3,6 +3,9 @@
 #include "RenderUtils.hpp"
 class Entity
 {
+
+private: 
+	bool active = false;
 public:
 	physx::PxGeometry* mGeo;
 	physx::PxTransform* mtrans = nullptr;
@@ -11,6 +14,8 @@ public:
 	Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, RenderItem* r);
 	~Entity();
 	Entity();
+	void setActive(bool b);
+	bool isActive();
 	virtual bool update(double t);
 };
 

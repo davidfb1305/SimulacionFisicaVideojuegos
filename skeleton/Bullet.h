@@ -12,7 +12,7 @@ private:
 protected:
 	
 public:
-	Bullet(const physx::PxVec3& v = physx::PxVec3(0.0, 0.0, 0.0),const physx::PxVec3& vrreal = physx::PxVec3(0.0, 0.0, 0.0),
+	Bullet(const physx::PxVec3& p = Vector3(0.0,0.0,0.0),const physx::PxVec3& v = physx::PxVec3(0.0, 0.0, 0.0),const physx::PxVec3& vrreal = physx::PxVec3(0.0, 0.0, 0.0),
 		const physx::PxVec3& a = physx::PxVec3(0.0, 0.0, 0.0), double d = 0.999, int mt = 0,double m = 0,const physx::PxVec3& g = Vector3(0.0,0.0,0.0));
 	~Bullet();
 	

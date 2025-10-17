@@ -12,12 +12,12 @@ SceneTemplate::~SceneTemplate()
 
 void SceneTemplate::loadScene()
 {
-
+	for (auto e : mEntityManager->getEntityList()) e->setActive(true);
 }
 
 void SceneTemplate::unLoadScene()
 {
-	mEntityManager->ReleaseEntities();
+	for (auto e : mEntityManager->getEntityList()) e->setActive(false);
 }
 void SceneTemplate::inputListener(unsigned char key, const physx::PxTransform& camera) {
 

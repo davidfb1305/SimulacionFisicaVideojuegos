@@ -25,9 +25,9 @@ Entity* EntityManager::createSphere(const Vector3& transform, double r, const Ve
 	entityList.push_back(aux);
 	return aux;
 }
-Entity* EntityManager::createParticle(const Vector3& transform, const Vector3& v, const Vector3& a, double d,int mt, double r, const Vector4& color, const float& mat1, const float& mat2, const float& mat3)
+Entity* EntityManager::createParticle(const Vector3& transform, const Vector3& v, const Vector3& a, double d,int mt, double r, int rc, int rct, Vector3 maxdis, const Vector4& color, const float& mat1, const float& mat2, const float& mat3)
 {
-	Particle* aux = new Particle(v,a,d, mt);
+	Particle* aux = new Particle(transform,v,a,d, mt,rc,rct,maxdis);
 	aux->mGeo = new physx::PxSphereGeometry(r);
 	aux->mtrans = new physx::PxTransform(transform);
 	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(mat1, mat2, mat3));
@@ -37,9 +37,9 @@ Entity* EntityManager::createParticle(const Vector3& transform, const Vector3& v
 	aux->setLastPos(transform);
 	return aux;
 }
-Entity* EntityManager::createBullet(const Vector3& transform, const Vector3& v, const Vector3& a, double d, int mt, double r, const Vector4& color, const float& mat1, const float& mat2, const float& mat3, const physx::PxVec3& vrreal, double m, const physx::PxVec3& g)
+Entity* EntityManager::createBullet(const Vector3& transform, const Vector3& v, const Vector3& a, double d, int mt, double r, int rc, int rct, Vector3 maxdis, const Vector4& color, const float& mat1, const float& mat2, const float& mat3, const physx::PxVec3& vrreal, double m, const physx::PxVec3& g)
 {
-	Bullet* aux = new Bullet(v,vrreal,a,d,mt,m,g);
+	Bullet* aux = new Bullet(transform,v,vrreal,a,d,mt,m,g);
 	aux->mGeo = new physx::PxSphereGeometry(r);
 	aux->mtrans = new physx::PxTransform(transform);
 	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(mat1, mat2, mat3));
@@ -48,6 +48,10 @@ Entity* EntityManager::createBullet(const Vector3& transform, const Vector3& v, 
 	entityList.push_back(aux);
 	aux->setLastPos(transform);
 	return aux;
+}
+const std::list<Entity*>& EntityManager::getEntityList()
+{
+	return entityList;
 }
 void EntityManager::createAxes()
 {
@@ -66,13 +70,20 @@ void EntityManager::ReleaseEntities()
 	}
 }
 
+void EntityManager::addEntity(Entity* e)
+{
+	entityList.push_back(e);
+}
+
 void EntityManager::updateEntities(double t)
 {
 	for (auto a : entityList) { 
 		if (!a->update(t)) entityListToRemove.push_back(a);
 	}
 	for (auto a : entityListToRemove) {
+		DeregisterRenderItem(a->mItem);
 		entityList.remove(a);
+		delete a;
 	}
 	entityListToRemove.clear();
 }

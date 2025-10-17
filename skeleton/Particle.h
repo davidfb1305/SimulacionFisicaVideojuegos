@@ -24,14 +24,15 @@ protected:
 	double timeToRemove;
 	physx::PxVec3 initpos;
 	physx::PxVec3 maxpos;
-	physx::PxVec3 maxistance;
+	physx::PxVec3 maxdistance;
 
 	//Valet only
 	physx::PxVec3 lastpos;
 	void integrate(double t);
 public:
 	Particle();
-	Particle(const Vector3& v = Vector3(0.0, 0.0, 0.0), const Vector3& a = Vector3(0.0, 0.0, 0.0),double d= 0.999, int mt = 0.0);
+	Particle(const Vector3& p = Vector3(0.0, 0.0, 0.0),const Vector3& v = Vector3(0.0, 0.0, 0.0),
+		const Vector3& a = Vector3(0.0, 0.0, 0.0),double d= 0.999, int mt = 0.0,int rc = 0,int rct = 0,Vector3 maxdis = Vector3(0.0,0.0,0.0));
 	void setLastPos(Vector3 a);
 	bool uptadeDestroyCondition(double t);
 	~Particle();

@@ -54,3 +54,13 @@ const double ParticleGenerator::getR()
 {
     return r;
 }
+
+bool ParticleGenerator::isActive()
+{
+    return active;
+}
+
+void ParticleGenerator::setActive(bool b)
+{
+    active = b;
+}

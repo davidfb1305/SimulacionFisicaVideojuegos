@@ -8,13 +8,17 @@ Particle::Particle()
 	mMt = SemiEuler;
 }
 
-Particle::Particle( const Vector3& v, const Vector3& a, double d,int mt)
+Particle::Particle(const Vector3& p, const Vector3& v, const Vector3& a, double d,int mt, int rc, int rct, Vector3 maxdis)
 {
 	vel = v;
 	ac = a; 
 	dumping = d;
 	mMt = MoveType(mt);
-	
+	mRc = RemoveCondition(rc);
+	timeToRemove = rct;
+	maxdistance = maxdis;
+	initpos = p;
+	maxpos = p + maxdis;
 }
 
 void Particle::setLastPos(Vector3 a)

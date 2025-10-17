@@ -1,10 +1,12 @@
 #pragma once
 #include "SceneTemplate.h"
-class Scene1 : public SceneTemplate
+class Scene2 : public SceneTemplate
 {
+private:
+protected:
 public:
-	Scene1(physx::PxPhysics* gPh);
-	~Scene1();
+	Scene2(physx::PxPhysics* gPh);
+	~Scene2();
 	void inputListener(unsigned char key, const physx::PxTransform& camera) override;
 };
 

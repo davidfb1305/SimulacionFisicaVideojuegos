@@ -1,8 +1,8 @@
 #include "Bullet.h"
 
-Bullet::Bullet(const physx::PxVec3& v, const physx::PxVec3& vrreal,
+Bullet::Bullet(const physx::PxVec3& p,const physx::PxVec3& v, const physx::PxVec3& vrreal,
 	const physx::PxVec3& a, double d, int mt, double m, const physx::PxVec3& g) :
-	Particle(v,a,d,mt)
+	Particle(p,v,a,d,mt)
 {
 	massReal = m;
 	velReal = vrreal;

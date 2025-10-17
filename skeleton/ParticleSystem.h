@@ -7,6 +7,7 @@ class EntityManager;
 class ParticleSystem : public Entity
 {
 private:
+
 	std::list<ParticleGenerator*> generatorList;
 	EntityManager* mEntityManager;
 	

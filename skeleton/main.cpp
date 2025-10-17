@@ -13,6 +13,7 @@
 
 #include "SceneManager.h"
 #include "Scene1.h"
+#include "Scene2.h"
 std::string display_text = "This is a test";
 
 
@@ -62,7 +63,9 @@ void initPhysics(bool interactive)
 	//entityManager = new EntityManager(gPhysics);
 	//entityManager->createAxes();
 	sceneManager = new SceneManager();
-	sceneManager->addScene(new Scene1(gPhysics));
+	sceneManager->addScene(new Scene2(gPhysics));
+	//sceneManager->addScene(new Scene1(gPhysics));
+	
 
 
 	//entityManager->createParticle(Vector3(0,0,0),Vector3(3,0,0),Vector3(0,0,0),1,0);
@@ -111,6 +114,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 	switch(toupper(key))
 	{
+	case '+':
+		sceneManager->nextScene();
+		break;
+	case '-':
+		sceneManager->previousScene();
+		break;
 	default:
 		break;
 	}
