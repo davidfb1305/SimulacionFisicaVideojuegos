@@ -20,15 +20,22 @@ void GausianGenerator::generateParticle()
 {
 	std::normal_distribution<float> _u(-0.5, 0.5 );
 
-	float aux = _u(RANDOM);
-	Vector3 p = pos + (posVar * aux);
-	aux = _u(RANDOM);
-	Vector3 v  = vel +(velVar * aux);
-	aux = _u(RANDOM);
-	Vector3 a = ac + (acVar *aux);
-	aux = _u(RANDOM);
-	Vector4 c = color + (colorVar * aux);
+	float auxx = _u(RANDOM);
+	float auxy = _u(RANDOM);
+	float auxz = _u(RANDOM);
+	Vector3 p = pos + (posVar.multiply(Vector3(auxx, auxy, auxz)));
+	auxx = _u(RANDOM);
+	auxy = _u(RANDOM);
+	auxz = _u(RANDOM);
+	Vector3 v  = vel +(velVar.multiply(Vector3(auxx, auxy, auxz)));
+	auxx = _u(RANDOM);
+	auxy = _u(RANDOM);
+	auxz = _u(RANDOM);
+	Vector3 a = ac + (acVar.multiply(Vector3(auxx,auxy,auxz)));
+	auxx = _u(RANDOM);
+
+	Vector4 c = color + (colorVar * auxx);
 	double rd = r ;
-	mEntityManager->createParticle(p, v, a, 0.999, 0, r,1,3.0,Vector3(0,0,0),c);
+	mEntityManager->createParticle(p, v, a, 0.999, 0, r,1,10.0,Vector3(0,0,0),c);
 
 }

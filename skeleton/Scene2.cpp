@@ -4,11 +4,17 @@
 Scene2::Scene2(physx::PxPhysics* gPh): SceneTemplate(gPh)
 {
 	ParticleSystem* ps = new ParticleSystem(mEntityManager);
-	ps->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 0.0, 0.0), Vector3(10.1, 10.1, 0.1), Vector3(1.0, -5.0, 1.0), Vector3(100.1, 100.1, 100.1), Vector3(10.0, 30.1, 24.0),Vector3(10,5,5),Vector4(1.0,0.0,1.0,1.0),Vector4(0,0,0.5,0), 1));
-	ps->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 0.0, 0.0), Vector3(10.1, -10.1, 2.1), Vector3(-0.1, 1.0, -1.0), Vector3(-100.1, 100.1, 100.1), Vector3(2.0, 1.0, 20.0), Vector3(10, 5, 5), Vector4(1.0, 0.0, 1.0, 1.0), Vector4(0.1, 0.5, 0, 0),1));
-	ps->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 0.0, 0.0), Vector3(10.1,10.1, 0.1), Vector3(0.1, -8.0, 2.0), Vector3(10.0, 10.1, -10.0), Vector3(20.0, 10.4, 20.0), Vector3(10, 5, 5), Vector4(1.0, 0.0, 1.0, 1.0), Vector4(0, 0, 0.5, 0), 1));
-	ps->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 0.0, 0.0), Vector3(10.1, -10.1, -2.1), Vector3(-0.1, 2.0, -2.0), Vector3(-10.0, -10.1, 10.1), Vector3(20.0, 20.2, 30.0), Vector3(10, 5, 5), Vector4(1.0, 0.0, 1.0, 1.0), Vector4(0, 0.5, 0, 0), 1));
-	mEntityManager->addEntity(ps);
+	//Rain gausian
+	/*ps->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 30.0, 0.0), Vector3(300.1, 0.1, 300.1), Vector3(0.1, -22.0, 0.1), Vector3(0.0, -0.5, 0.0), Vector3(0.0, 0.0, 0.0),Vector3(0,0,0),Vector4(0.0,0.0,1.0,1.0),Vector4(0,0,0.5,0), 1));
+	ps->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 30.0, 0.0), Vector3(300.1, 0.1, 300.1), Vector3(0.1, -22.0, 0.1), Vector3(0.0, -0.5, 0.0), Vector3(0.0, 0.0, 0.0),Vector3(0,0,0),Vector4(0.0,0.0,1.0,1.0),Vector4(0,0,0.5,0), 1));
+	ps->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 30.0, 0.0), Vector3(300.1, 0.1, 300.1), Vector3(0.1, -22.0, 0.1), Vector3(0.0, -0.5, 0.0), Vector3(0.0, 0.0, 0.0),Vector3(0,0,0),Vector4(0.0,0.0,1.0,1.0),Vector4(0,0,0.5,0), 1));
+	ps->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 30.0, 0.0), Vector3(300.1, 0.1, 300.1), Vector3(0.1, -22.0, 0.1), Vector3(0.0, -0.5, 0.0), Vector3(0.0, 0.0, 0.0),Vector3(0,0,0),Vector4(0.0,0.0,1.0,1.0),Vector4(0,0,0.5,0), 1));
+	*/mEntityManager->addEntity(ps);
+	//Fog distribucion uniforme WIP
+	//ps->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 30.0, 0.0), Vector3(300.1, 300.1, 300.1), Vector3(1.1, 1.1, 1.1), Vector3(1.1, 1.1, 1.1), Vector3(0.0, 0.0, 0.0), Vector3(0, 0, 0), Vector4(1.0, 1.0, 1.0,0.5), Vector4(0, 0, 0.0, 0.1), 3));
+	//explosion
+	ps->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 0.0, 0.0), Vector3(0.1, 0.1, 0.1), Vector3(1.1, 1.1, 1.1), Vector3(1.1, 1.1, 1.1), Vector3(0.0, 0.0, 0.0), Vector3(100, 100, 100), Vector4(0.5, 0, 0.0, 1), Vector4(0.2, 0, 0.0, 0), 3));
+
 }
 
 Scene2::~Scene2()
