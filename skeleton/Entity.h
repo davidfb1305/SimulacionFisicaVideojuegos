@@ -4,7 +4,7 @@
 class Entity
 {
 
-private: 
+protected: 
 	bool active = false;
 public:
 	physx::PxGeometry* mGeo;

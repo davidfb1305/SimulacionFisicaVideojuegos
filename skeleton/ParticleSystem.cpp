@@ -11,10 +11,13 @@ void ParticleSystem::addGenerator(ParticleGenerator* pg)
 
 ParticleSystem::~ParticleSystem()
 {
+    for (auto a : generatorList) delete a;
 }
 
 bool ParticleSystem::update(double t)
 {
-    for (ParticleGenerator* pg : generatorList) if(pg->isActive())pg->generateParticle();
+    if (active) { 
+        for (ParticleGenerator* pg : generatorList) if (pg->isActive())pg->generateParticle(); 
+    }
     return true;
 }

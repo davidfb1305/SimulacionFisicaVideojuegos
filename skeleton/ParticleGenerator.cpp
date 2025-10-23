@@ -2,13 +2,14 @@
 
 
 
-ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vector3 a, double rd)
+ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vector3 a, double rd, int genprob)
 {
     mEntityManager = m;
     pos = p;
     vel = v;
     ac = a;
     r = rd;
+    generateProb = genprob;
 }
 
 ParticleGenerator::~ParticleGenerator()

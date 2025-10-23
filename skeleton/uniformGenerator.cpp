@@ -1,9 +1,9 @@
-#include "GausianGenerator.h"
+#include "uniformGenerator.h"
 #include "EntityManager.h"
-GausianGenerator::GausianGenerator(EntityManager* m, Vector3 p, Vector3 _posVar, Vector3 v, Vector3 _velVar , Vector3 a,Vector3 _acVar, Vector4 _color, Vector4 _colorVar, double rd, int geprob)
-	:ParticleGenerator(m,p,v,a,rd,geprob)
+uniformGenerator::uniformGenerator(EntityManager* m, Vector3 p, Vector3 _posVar, Vector3 v, Vector3 _velVar, Vector3 a, Vector3 _acVar, Vector4 _color, Vector4 _colorVar, double rd, int geprob)
+	:ParticleGenerator(m, p, v, a, rd,geprob)
 {
-    std::random_device __randomDevice;
+	std::random_device __randomDevice;
 	RANDOM = std::mt19937(__randomDevice());
 	velVar = _velVar;
 	acVar = _acVar;
@@ -12,14 +12,14 @@ GausianGenerator::GausianGenerator(EntityManager* m, Vector3 p, Vector3 _posVar,
 	posVar = _posVar;
 }
 
-GausianGenerator::~GausianGenerator()
+uniformGenerator::~uniformGenerator()
 {
 }
 
-void GausianGenerator::generateParticle()
+void uniformGenerator::generateParticle()
 {
 	if (generateProb > rand() % 101) {
-		std::normal_distribution<float> _u(-0.5, 0.5);
+		std::uniform_real_distribution<float> _u(-0.5, 0.5);
 
 		float auxx = _u(RANDOM);
 		float auxy = _u(RANDOM);

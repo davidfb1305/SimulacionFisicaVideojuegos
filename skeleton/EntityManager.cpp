@@ -62,12 +62,12 @@ void EntityManager::createAxes()
 }
 void EntityManager::ReleaseEntities()
 {
-	for (auto a : entityList) {
+	entityListToRemove = entityList;
+	for (Entity* a : entityListToRemove) {
 		DeregisterRenderItem(a->mItem);
-		delete a->mItem;
-		delete a->mtrans;
-		delete a;
+	//	delete a;
 	}
+	entityList.clear();
 }
 
 void EntityManager::addEntity(Entity* e)

@@ -13,10 +13,11 @@ protected:
 	Vector3 ac;
 	double r;
 	bool active = true;
+	int generateProb;
 public:
 
 	ParticleGenerator(EntityManager* m, Vector3 p = Vector3(0.0,0.0,0.0), Vector3 v = Vector3(0.0, 0.0, 0.0),
-		Vector3 a = Vector3(0.0, 0.0, 0.0),double rd = 1.0);
+		Vector3 a = Vector3(0.0, 0.0, 0.0),double rd = 1.0,int genprob = 100);
 	~ParticleGenerator();
 	void setPos(Vector3 v);
 	void setVel(Vector3 v);

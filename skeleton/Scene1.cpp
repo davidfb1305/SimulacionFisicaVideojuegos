@@ -2,12 +2,17 @@
 
 Scene1::Scene1(physx::PxPhysics* gPh) : SceneTemplate(gPh)
 {
-	mEntityManager->createAxes();
-	mEntityManager->createParticle(Vector3(0, 0, 0), Vector3(3, 0, 0), Vector3(0, 0, 0), 1, 0);
-}
 
+}
 Scene1::~Scene1()
 {
+
+}
+
+void Scene1::loadScene()
+{
+	mEntityManager->createAxes();
+	mEntityManager->createParticle(Vector3(0, 0, 0), Vector3(3, 0, 0), Vector3(0, 0, 0), 1, 0);
 }
 
 void Scene1::inputListener(unsigned char key, const physx::PxTransform& camera)

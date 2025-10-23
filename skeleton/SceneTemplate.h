@@ -12,7 +12,7 @@ public:
 	~SceneTemplate();
 	void unLoadScene();
 	void update(double t);
-	void loadScene();
+	virtual void loadScene();
 	virtual void inputListener(unsigned char key, const physx::PxTransform& camera);
 };
 
