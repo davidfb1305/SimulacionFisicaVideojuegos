@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include <list>
 enum MoveType
 {
 	SemiEuler= 0,
@@ -37,5 +38,7 @@ public:
 	bool uptadeDestroyCondition(double t);
 	~Particle();
 	virtual bool update(double t) override;
+	
+
 };
 

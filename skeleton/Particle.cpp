@@ -77,6 +77,7 @@ void Particle::integrate(double t)
 bool Particle::update(double t) 
 {
 	integrate(t);
-
+	clearForce();
+	addForces();
 	return uptadeDestroyCondition(t);
 }

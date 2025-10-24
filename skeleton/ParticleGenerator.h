@@ -1,7 +1,9 @@
 #pragma once
 #include "core.hpp"
+#include <list>
 #include <random>
 class EntityManager;
+class ForceGenerator;
 class ParticleGenerator
 {
 private:
@@ -14,14 +16,16 @@ protected:
 	double r;
 	bool active = true;
 	int generateProb;
+	std::list<ForceGenerator*>* forceList;
 public:
 
 	ParticleGenerator(EntityManager* m, Vector3 p = Vector3(0.0,0.0,0.0), Vector3 v = Vector3(0.0, 0.0, 0.0),
-		Vector3 a = Vector3(0.0, 0.0, 0.0),double rd = 1.0,int genprob = 100);
+		Vector3 a = Vector3(0.0, 0.0, 0.0),double rd = 1.0,int genprob = 100, std::list<ForceGenerator*>* fl = nullptr);
 	~ParticleGenerator();
 	void setPos(Vector3 v);
 	void setVel(Vector3 v);
 	void setac(Vector3 v);
+	void setForceList(std::list<ForceGenerator*>* fl);
 	void setR(double v); 
 	const Vector3 getPos();
 	const Vector3 getVel();

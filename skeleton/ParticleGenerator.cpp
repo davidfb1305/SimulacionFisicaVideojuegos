@@ -1,8 +1,8 @@
 #include "ParticleGenerator.h"
+#include "ForceGenerator.h"
 
 
-
-ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vector3 a, double rd, int genprob)
+ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vector3 a, double rd, int genprob,std::list<ForceGenerator*>* fl)
 {
     mEntityManager = m;
     pos = p;
@@ -10,6 +10,7 @@ ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vec
     ac = a;
     r = rd;
     generateProb = genprob;
+    forceList = fl
 }
 
 ParticleGenerator::~ParticleGenerator()

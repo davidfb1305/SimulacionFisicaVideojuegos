@@ -5,8 +5,19 @@ ParticleSystem::ParticleSystem(EntityManager* em) : mEntityManager(em)
 }
 
 void ParticleSystem::addGenerator(ParticleGenerator* pg)
-{
+{   
+    pg->setForceList(&myForceList);
     generatorList.push_back(pg);
+}
+
+void ParticleSystem::addForce(ForceGenerator* fg)
+{
+    myForceList.push_back(fg);
+}
+
+void ParticleSystem::remove(ForceGenerator* fg)
+{
+    myForceList.remove(fg);
 }
 
 ParticleSystem::~ParticleSystem()

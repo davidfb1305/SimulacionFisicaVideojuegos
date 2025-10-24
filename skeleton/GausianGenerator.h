@@ -14,7 +14,7 @@ private:
 protected:
 
 public:
-	GausianGenerator(EntityManager* m, Vector3 p,Vector3 _posVar, Vector3 v, Vector3 _velVar, Vector3 a,Vector3 _acVar,Vector4 _color, Vector4 _colorVar, double rd, int geprob);
+	GausianGenerator(EntityManager* m, Vector3 p,Vector3 _posVar, Vector3 v, Vector3 _velVar, Vector3 a,Vector3 _acVar,Vector4 _color, Vector4 _colorVar, double rd, int geprob, std::list<ForceGenerator*>* fl = nullptr);
 	~GausianGenerator();
 	virtual void generateParticle() override;
 };
