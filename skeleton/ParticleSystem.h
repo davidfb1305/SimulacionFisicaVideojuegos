@@ -18,7 +18,7 @@ protected:
 public:
 	ParticleSystem(EntityManager* em);
 	void addGenerator(ParticleGenerator* pg);
-	void addForce(ForceGenerator* fg);
+	void addGenForce(ForceGenerator* fg);
 	void remove(ForceGenerator* fg);
 	~ParticleSystem();
 	virtual bool update(double t) override;

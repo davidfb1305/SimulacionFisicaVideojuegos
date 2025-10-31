@@ -30,6 +30,7 @@ Entity::Entity()
 		mtrans = nullptr;
 		mItem = nullptr;
 		mshape = nullptr;	
+		forceToAdd = Vector3(0, 0, 0);
 }
 bool
 Entity::update(double d) {
@@ -41,6 +42,7 @@ void Entity::addForces()
 	for (std::list<ForceGenerator*>::iterator it = forceList->begin(); it != forceList->end(); ++it){
 		it.operator*()->addForceToParticle(this);
 	}
+	
 }
 
 void Entity::addForce(Vector3 vec)

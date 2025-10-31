@@ -2,15 +2,18 @@
 #include "ForceGenerator.h"
 
 
-ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vector3 a, double rd, int genprob,std::list<ForceGenerator*>* fl)
+ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vector3 vr,
+    double ms,Vector3 a, double rd, int genprob,std::list<ForceGenerator*>* fl)
 {
     mEntityManager = m;
     pos = p;
     vel = v;
+    velReal = vr;
+    mass = ms;
     ac = a;
     r = rd;
     generateProb = genprob;
-    forceList = fl
+    forceList = fl;
 }
 
 ParticleGenerator::~ParticleGenerator()
@@ -30,6 +33,11 @@ void ParticleGenerator::setVel(Vector3 v)
 void ParticleGenerator::setac(Vector3 v)
 {
     ac = v;
+}
+
+void ParticleGenerator::setmForceList(std::list<ForceGenerator*>* fl)
+{
+    forceList = fl;
 }
 
 void ParticleGenerator::setR(double v)

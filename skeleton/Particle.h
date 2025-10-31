@@ -27,14 +27,19 @@ protected:
 	physx::PxVec3 maxpos;
 	physx::PxVec3 maxdistance;
 
+	double massReal = 0.0;
+	Vector3 velReal;
+	double massSim = 0.0;
+
 	//Valet only
 	physx::PxVec3 lastpos;
 	void integrate(double t);
 public:
-	Particle();
-	Particle(const Vector3& p = Vector3(0.0, 0.0, 0.0),const Vector3& v = Vector3(0.0, 0.0, 0.0),
-		const Vector3& a = Vector3(0.0, 0.0, 0.0),double d= 0.999, int mt = 0.0,int rc = 0,int rct = 0,Vector3 maxdis = Vector3(0.0,0.0,0.0));
+	Particle(const Vector3& p = Vector3(0.0, 0.0, 0.0), const Vector3& v = Vector3(0.0, 0.0, 0.0),
+		const Vector3& a = Vector3(0.0, 0.0, 0.0) ,double d = 0.999, int mt = 0.0, int rc = 0, 
+	int rct = 0, Vector3 maxdis = Vector3(0.0, 0.0, 0.0), Vector3& vr = Vector3(1.0, 1.0, 1.0), double mass = 1);
 	void setLastPos(Vector3 a);
+	void setMass(double d);
 	bool uptadeDestroyCondition(double t);
 	~Particle();
 	virtual bool update(double t) override;

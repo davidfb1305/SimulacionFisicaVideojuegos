@@ -1,16 +1,18 @@
 #include "ParticleSystem.h"
-
+#include "ForceGenerator.h"
 ParticleSystem::ParticleSystem(EntityManager* em) : mEntityManager(em)
 {
+    myForceList = std::list<ForceGenerator*>();
 }
 
 void ParticleSystem::addGenerator(ParticleGenerator* pg)
-{   
-    pg->setForceList(&myForceList);
+{
     generatorList.push_back(pg);
+    pg->setmForceList(&myForceList);
+    
 }
 
-void ParticleSystem::addForce(ForceGenerator* fg)
+void ParticleSystem::addGenForce(ForceGenerator* fg)
 {
     myForceList.push_back(fg);
 }

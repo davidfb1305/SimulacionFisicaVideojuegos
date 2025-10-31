@@ -1,13 +1,6 @@
 #include "Particle.h"
 #include <math.h>
-Particle::Particle()
-{
-	vel = Vector3(0, 0, 0);
-	ac = Vector3(0, 0, 0);
-	dumping = 1;
-	mMt = SemiEuler;
-}
-
+/*
 Particle::Particle(const Vector3& p, const Vector3& v, const Vector3& a, double d,int mt, int rc, int rct, Vector3 maxdis)
 {
 	vel = v;
@@ -19,13 +12,45 @@ Particle::Particle(const Vector3& p, const Vector3& v, const Vector3& a, double 
 	maxdistance = maxdis;
 	initpos = p;
 	maxpos = p + maxdis;
+
+	massReal = 1;
+	velReal = Vector3(1.0,1.0,1.0);
+	massSim = massReal;// *(pow((velReal.magnitudeSquared() / vel.magnitudeSquared()), 2));
+}
+
+*/
+
+Particle::Particle(const Vector3& p, const Vector3& v,
+	const Vector3& a, double d, int mt, int rc, int rct, Vector3 maxdis, Vector3& vr, double mass)
+{
+	vel = v;
+	ac = a;
+	dumping = d;
+	mMt = MoveType(mt);
+	mRc = RemoveCondition(rc);
+	timeToRemove = rct;
+	maxdistance = maxdis;
+	initpos = p;
+	maxpos = p + maxdis;
+
+	
+	velReal = vr;
+	massReal = mass;
+	massSim = massReal;
+	
 }
 
 void Particle::setLastPos(Vector3 a)
+
 {
 	lastpos = a;
 }
 
+void Particle::setMass(double d)
+{
+	massReal = d;
+	massSim = d;
+}
 
 bool Particle::uptadeDestroyCondition(double t)
 {
@@ -76,8 +101,10 @@ void Particle::integrate(double t)
 }
 bool Particle::update(double t) 
 {
-	integrate(t);
 	clearForce();
 	addForces();
+	ac =  forceToAdd* pow(massSim,-1);
+	integrate(t);
+
 	return uptadeDestroyCondition(t);
 }
