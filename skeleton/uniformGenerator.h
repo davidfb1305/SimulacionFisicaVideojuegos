@@ -15,7 +15,7 @@ protected:
 public:
 	uniformGenerator(EntityManager* m, Vector3 p, Vector3 _posVar, Vector3 v, Vector3 vr,
 		double ms,Vector3 _velVar, Vector3 a,
-		Vector3 _acVar, Vector4 _color, Vector4 _colorVar, double rd, int geprob, std::list<ForceGenerator*>* fl = nullptr);
+		Vector3 _acVar, Vector4 _color, Vector4 _colorVar, double rd, int geprob, std::list<ForceGenerator*> fl = std::list<ForceGenerator*>());
 	~uniformGenerator();
 	virtual void generateParticle() override;
 };

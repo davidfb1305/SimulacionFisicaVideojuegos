@@ -1,6 +1,6 @@
 #include "Entity.h"
 #include "ForceGenerator.h"
-Entity::Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, RenderItem* r, std::list<ForceGenerator*>* fl)
+Entity::Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, RenderItem* r, std::list<ForceGenerator*> fl)
 {
 	mGeo = g;
 	mtrans = t;
@@ -38,10 +38,10 @@ Entity::update(double d) {
 }
 
 void Entity::addForces()
-{
+{/*
 	for (std::list<ForceGenerator*>::iterator it = forceList->begin(); it != forceList->end(); ++it){
 		it.operator*()->addForceToParticle(this);
-	}
+	}*/
 	
 }
 
@@ -50,19 +50,19 @@ void Entity::addForce(Vector3 vec)
 	forceToAdd += vec;
 }
 
-void Entity::setForceList(std::list<ForceGenerator*>* fl)
+void Entity::setForceList(std::list<ForceGenerator*> fl)
 {
 	forceList = fl;
 }
 
 void Entity::addForceGenerator(ForceGenerator* fg)
 {
-	forceList->push_back(fg);
+	forceList.push_back(fg);
 }
 
 void Entity::removeForceGenerator(ForceGenerator* fg)
 {
-	forceList->remove(fg);
+	forceList.remove(fg);
 }
 
 void Entity::clearForce()

@@ -8,12 +8,12 @@ GravityForceGen::~GravityForceGen()
 {
 }
 
-bool GravityForceGen::checkAddForce(Entity* p)
+bool GravityForceGen::checkAddForce(Particle* p)
 {
     return true;
 }
 
-bool GravityForceGen::removeForceGenerator(Entity* p)
+bool GravityForceGen::removeForceGenerator(Particle* p)
 {
     return false;
 }

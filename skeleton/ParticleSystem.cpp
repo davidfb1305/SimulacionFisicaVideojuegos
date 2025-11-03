@@ -8,7 +8,7 @@ ParticleSystem::ParticleSystem(EntityManager* em) : mEntityManager(em)
 void ParticleSystem::addGenerator(ParticleGenerator* pg)
 {
     generatorList.push_back(pg);
-    pg->setmForceList(&myForceList);
+    pg->setmForceList(myForceList);
     
 }
 

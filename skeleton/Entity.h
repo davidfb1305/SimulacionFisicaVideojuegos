@@ -8,8 +8,8 @@ class Entity
 
 protected: 
 	bool active = false;
-	void addForces();
-	std::list<ForceGenerator*>* forceList;
+	virtual void addForces();
+	std::list<ForceGenerator*> forceList;
 public:
 	physx::PxGeometry* mGeo;
 	physx::PxTransform* mtrans = nullptr;
@@ -18,13 +18,13 @@ public:
 	
 
 	physx::PxVec3 forceToAdd;
-	Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, RenderItem* r,std::list<ForceGenerator*>* fl = nullptr);
+	Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, RenderItem* r,std::list<ForceGenerator*> fl);
 	~Entity();
 	Entity();
 	void setActive(bool b);
 	bool isActive();
 	void addForce(Vector3 vec);
-	void setForceList(std::list<ForceGenerator*>* fl);
+	void setForceList(std::list<ForceGenerator*> fl);
 	void addForceGenerator(ForceGenerator* fg);
 	void removeForceGenerator(ForceGenerator* fg);
 	void clearForce();

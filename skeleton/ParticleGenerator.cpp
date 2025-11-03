@@ -3,7 +3,7 @@
 
 
 ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vector3 vr,
-    double ms,Vector3 a, double rd, int genprob,std::list<ForceGenerator*>* fl)
+    double ms,Vector3 a, double rd, int genprob,std::list<ForceGenerator*> fl)
 {
     mEntityManager = m;
     pos = p;
@@ -35,7 +35,7 @@ void ParticleGenerator::setac(Vector3 v)
     ac = v;
 }
 
-void ParticleGenerator::setmForceList(std::list<ForceGenerator*>* fl)
+void ParticleGenerator::setmForceList(std::list<ForceGenerator*> fl)
 {
     forceList = fl;
 }

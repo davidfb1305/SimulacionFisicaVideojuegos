@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "ForceGenerator.h"
 #include <math.h>
 /*
 Particle::Particle(const Vector3& p, const Vector3& v, const Vector3& a, double d,int mt, int rc, int rct, Vector3 maxdis)
@@ -97,6 +98,12 @@ void Particle::integrate(double t)
 		mtrans->p = (((2 * mtrans->p) - aux) + (pow(t, 2) * ac));
 		break;
 
+	}
+}
+void Particle::addForces()
+{
+	for (ForceGenerator* f : forceList){
+		f->addForceToParticle(this);
 	}
 }
 bool Particle::update(double t) 

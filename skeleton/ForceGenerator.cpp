@@ -5,17 +5,17 @@ ForceGenerator::ForceGenerator(Vector3 force)
     forceToApply = force;
 }
 
-bool ForceGenerator::checkAddForce(Entity* p)
+bool ForceGenerator::checkAddForce(Particle* p)
 {
     return true;
 }
 
-bool ForceGenerator::removeForceGenerator(Entity* p)
+bool ForceGenerator::removeForceGenerator(Particle* p)
 {
     return false;
 }
 
-void ForceGenerator::addForceToParticle(Entity* p)
+void ForceGenerator::addForceToParticle(Particle* p)
 {
     if (checkAddForce(p)) {
         p->addForce(forceToApply);
