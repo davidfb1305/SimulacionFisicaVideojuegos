@@ -15,6 +15,7 @@ void ParticleSystem::addGenerator(ParticleGenerator* pg)
 void ParticleSystem::addGenForce(ForceGenerator* fg)
 {
     myForceList.push_back(fg);
+    for (auto a : generatorList) a->addForceGen(fg);
 }
 
 void ParticleSystem::remove(ForceGenerator* fg)

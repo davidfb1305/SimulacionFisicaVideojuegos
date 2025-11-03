@@ -40,6 +40,11 @@ void ParticleGenerator::setmForceList(std::list<ForceGenerator*> fl)
     forceList = fl;
 }
 
+void ParticleGenerator::addForceGen(ForceGenerator* f)
+{
+    forceList.push_back(f);
+}
+
 void ParticleGenerator::setR(double v)
 {
     r = v;

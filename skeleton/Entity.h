@@ -18,7 +18,7 @@ public:
 	
 
 	physx::PxVec3 forceToAdd;
-	Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, RenderItem* r,std::list<ForceGenerator*> fl);
+	Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, RenderItem* r,std::list<ForceGenerator*> fl = std::list<ForceGenerator*>());
 	~Entity();
 	Entity();
 	void setActive(bool b);

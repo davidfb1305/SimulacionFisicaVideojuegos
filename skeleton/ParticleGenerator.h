@@ -28,6 +28,7 @@ public:
 	void setVel(Vector3 v);
 	void setac(Vector3 v);
 	void setmForceList(std::list<ForceGenerator*> fl);
+	void addForceGen(ForceGenerator* f);
 	void setR(double v); 
 	const Vector3 getPos();
 	const Vector3 getVel();

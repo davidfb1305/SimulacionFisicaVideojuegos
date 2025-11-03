@@ -30,7 +30,7 @@ protected:
 	double massReal = 0.0;
 	Vector3 velReal;
 	double massSim = 0.0;
-	double k = 1.0;
+	double k = 0.0;
 	//Valet only
 	physx::PxVec3 lastpos;
 	void integrate(double t);
