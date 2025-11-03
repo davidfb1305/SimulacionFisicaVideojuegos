@@ -26,6 +26,8 @@
     <ClCompile Include="Scene3.cpp" />
     <ClCompile Include="GravityForceGen.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
+    <ClCompile Include="windGenerator.cpp" />
+    <ClCompile Include="whirlGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -54,6 +56,8 @@
     <ClInclude Include="Scene3.h" />
     <ClInclude Include="GravityForceGen.h" />
     <ClInclude Include="ForceGenerator.h" />
+    <ClInclude Include="windGenerator.h" />
+    <ClInclude Include="whirlGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -43,7 +43,8 @@ public:
 	void setMass(double d);
 	inline void setK(double d) { k = 1.0; };
 	inline double getK() { return k; };
-	inline const Vector3 getVel() { return vel; };
+	inline const Vector3& getPos() { return mtrans->p; };
+ 	inline const Vector3 getVel() { return vel; };
 	bool uptadeDestroyCondition(double t);
 	~Particle();
 	virtual bool update(double t) override;

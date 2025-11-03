@@ -3,6 +3,7 @@
 #include "GravityForceGen.h"
 #include "GausianGenerator.h"
 #include "windGenerator.h"
+#include "whirlGenerator.h"
 Scene3::Scene3(physx::PxPhysics* gPh) :SceneTemplate(gPh)
 {
 	GravityForceGen* aux = new GravityForceGen();
@@ -13,7 +14,7 @@ Scene3::Scene3(physx::PxPhysics* gPh) :SceneTemplate(gPh)
 		Vector3(0, 0, 0), Vector4(0.0, 0.0, 1.0, 1.0), Vector4(0, 0, 0.5, 0), 1, 100));
 	mEntityManager->addEntity(prueba);
 	prueba->addGenForce(aux);
-	windGenerator* aux1 = new windGenerator(Vector3(10,0,0),1);
+	whirlGenerator* aux1 = new whirlGenerator(Vector3(0,0,0),1);
 	prueba->addGenForce(aux1);
 	prueba->setActive(true);
 }
