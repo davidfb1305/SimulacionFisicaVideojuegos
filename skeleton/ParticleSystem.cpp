@@ -2,6 +2,7 @@
 #include "ForceGenerator.h"
 ParticleSystem::ParticleSystem(EntityManager* em) : mEntityManager(em)
 {
+    mItem = nullptr;
     myForceList = std::list<ForceGenerator*>();
 }
 
@@ -15,7 +16,8 @@ void ParticleSystem::addGenerator(ParticleGenerator* pg)
 void ParticleSystem::addGenForce(ForceGenerator* fg)
 {
     myForceList.push_back(fg);
-    for (auto a : generatorList) a->addForceGen(fg);
+    for (auto a : generatorList) a->
+        addForceGen(fg);
 }
 
 void ParticleSystem::remove(ForceGenerator* fg)

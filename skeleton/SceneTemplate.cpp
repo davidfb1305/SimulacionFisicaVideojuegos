@@ -18,6 +18,7 @@ void SceneTemplate::loadScene()
 void SceneTemplate::unLoadScene()
 {
 	mEntityManager->ReleaseEntities();
+	delete mEntityManager;
 }
 void SceneTemplate::inputListener(unsigned char key, const physx::PxTransform& camera) {
 

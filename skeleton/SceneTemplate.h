@@ -7,6 +7,7 @@ private:
 	
 protected:
 	EntityManager* mEntityManager;
+	physx::PxPhysics* gPh;
 public:
 	SceneTemplate(physx::PxPhysics* gPh);
 	~SceneTemplate();

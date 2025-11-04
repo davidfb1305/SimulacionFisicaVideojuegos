@@ -9,6 +9,7 @@ class Entity
 protected: 
 	bool active = false;
 	virtual void addForces();
+
 	std::list<ForceGenerator*> forceList;
 public:
 	physx::PxGeometry* mGeo;

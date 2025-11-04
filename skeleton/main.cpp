@@ -64,9 +64,10 @@ void initPhysics(bool interactive)
 	//entityManager = new EntityManager(gPhysics);
 	//entityManager->createAxes();
 	sceneManager = new SceneManager();
-	//sceneManager->addScene(new Scene1(gPhysics));
-	sceneManager->addScene(new Scene3(gPhysics));
 	
+	sceneManager->addScene(new Scene3(gPhysics));
+	sceneManager->addScene(new Scene1(gPhysics));
+	sceneManager->addScene(new Scene2(gPhysics));
 	
 
 

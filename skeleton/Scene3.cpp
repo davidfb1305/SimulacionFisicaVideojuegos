@@ -7,6 +7,8 @@
 Scene3::Scene3(physx::PxPhysics* gPh) :SceneTemplate(gPh)
 {
 	std::cout << "Q activa y desactiva el viento, G la gravedad y T el ciclon\n";
+
+	loadScene();
 }
 
 Scene3::~Scene3()

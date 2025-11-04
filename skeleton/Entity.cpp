@@ -13,10 +13,8 @@ Entity::Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, R
 
 Entity::~Entity()
 {
+	if(mItem!=nullptr)
 	DeregisterRenderItem(mItem);
-	delete mtrans;
-	delete mItem;
-	delete mGeo;
 }
 bool Entity::isActive() {
 	return active;

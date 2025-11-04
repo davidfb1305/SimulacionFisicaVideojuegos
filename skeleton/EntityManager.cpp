@@ -76,10 +76,11 @@ void EntityManager::createAxes()
 }
 void EntityManager::ReleaseEntities()
 {
-	entityListToRemove = entityList;
-	for (Entity* a : entityListToRemove) {
-		DeregisterRenderItem(a->mItem);
-	//	delete a;
+	for (auto a : entityList) {
+		entityListToRemove.push_back(a);
+	}
+	for (auto a : entityListToRemove) {
+		delete a;
 	}
 	entityList.clear();
 }
@@ -95,7 +96,6 @@ void EntityManager::updateEntities(double t)
 		if (!a->update(t)) entityListToRemove.push_back(a);
 	}
 	for (auto a : entityListToRemove) {
-		DeregisterRenderItem(a->mItem);
 		entityList.remove(a);
 		delete a;
 	}
