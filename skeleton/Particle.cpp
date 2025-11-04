@@ -103,7 +103,7 @@ void Particle::integrate(double t)
 void Particle::addForces()
 {
 	for (ForceGenerator* f : forceList){
-		f->addForceToParticle(this);
+		if(f->checkAddForce(this)) f->addForceToParticle(this);
 	}
 }
 bool Particle::update(double t) 

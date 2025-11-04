@@ -10,7 +10,7 @@ GravityForceGen::~GravityForceGen()
 
 bool GravityForceGen::checkAddForce(Particle* p)
 {
-    return true;
+    return _active;
 }
 
 bool GravityForceGen::removeForceGenerator(Particle* p)

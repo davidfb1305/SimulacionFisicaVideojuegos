@@ -7,7 +7,8 @@ ForceGenerator::ForceGenerator(Vector3 force)
 
 bool ForceGenerator::checkAddForce(Particle* p)
 {
-    return true;
+
+    return _active;
 }
 
 bool ForceGenerator::removeForceGenerator(Particle* p)
@@ -21,7 +22,10 @@ void ForceGenerator::addForceToParticle(Particle* p)
         p->addForce(forceToApply);
     }
 }
-
+void ForceGenerator::setActive(bool b)
+{
+    _active = b;
+}
 ForceGenerator::~ForceGenerator()
 {
 }

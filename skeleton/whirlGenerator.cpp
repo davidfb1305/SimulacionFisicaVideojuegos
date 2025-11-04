@@ -12,7 +12,7 @@ whirlGenerator::~whirlGenerator()
 
 bool whirlGenerator::checkAddForce(Particle* p)
 {
-    return true;
+    return _active;
 }
 
 bool whirlGenerator::removeForceGenerator(Particle* p)

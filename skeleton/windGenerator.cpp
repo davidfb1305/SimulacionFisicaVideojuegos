@@ -13,7 +13,7 @@ windGenerator::~windGenerator()
 
 bool windGenerator::checkAddForce(Particle* p)
 {
-    return true;
+    return _active;
 }
 
 bool windGenerator::removeForceGenerator(Particle* p)
