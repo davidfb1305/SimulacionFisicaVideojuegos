@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Particle.h"
+#include "PlayerEntity.h"
 #include "Bullet.h"
 EntityManager::EntityManager(physx::PxPhysics* gP)
 {
@@ -61,6 +62,17 @@ Entity* EntityManager::createBullet(const Vector3& transform, const Vector3& v, 
 	RegisterRenderItem(aux->mItem);
 	entityList.push_back(aux);
 	aux->setLastPos(transform);
+	return aux;
+}
+PlayerEntity* EntityManager::createPlayer(const Vector3 initPos,double size, physx::PxPhysics* gP)
+{
+	PlayerEntity* aux = new PlayerEntity(initPos, gP,this);
+	aux->mGeo = new physx::PxSphereGeometry(size);
+	aux->mtrans = new physx::PxTransform(initPos);
+	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(1.0, 1.0, 1.0));
+	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, Vector4(1.0, 1.0, 1.0, 1.0));
+	RegisterRenderItem(aux->mItem);
+	entityList.push_back(aux);
 	return aux;
 }
 const std::list<Entity*>& EntityManager::getEntityList()

@@ -79,3 +79,8 @@ void ParticleGenerator::setActive(bool b)
 {
     active = b;
 }
+
+void ParticleGenerator::updateOriginPos(Vector3 v)
+{
+    pos + v;
+}

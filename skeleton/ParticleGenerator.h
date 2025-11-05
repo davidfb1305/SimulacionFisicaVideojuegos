@@ -36,6 +36,7 @@ public:
 	const double getR();
 	bool isActive();
 	void setActive(bool b);
+	void updateOriginPos(Vector3 v);
 	virtual void generateParticle()=0;
 };
 

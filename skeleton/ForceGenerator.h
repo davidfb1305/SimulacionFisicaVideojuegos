@@ -13,6 +13,8 @@ public:
 	virtual bool checkAddForce(Particle* p);
 	virtual bool removeForceGenerator(Particle* p);
 	virtual void addForceToParticle(Particle* p);
+	virtual bool checkAddForceEntity(Entity* p);
+	virtual void addForceToEntity(Entity* p); //WIP it will change to entity with volume
 	void setActive(bool b);
 	inline bool isActive() { return _active; };
 	~ForceGenerator();

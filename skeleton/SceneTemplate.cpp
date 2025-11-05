@@ -3,6 +3,7 @@
 SceneTemplate::SceneTemplate(physx::PxPhysics* gPh)
 {
 	mEntityManager = new EntityManager(gPh);
+	this->gPh = gPh;
 }
 
 SceneTemplate::~SceneTemplate()

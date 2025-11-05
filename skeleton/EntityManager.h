@@ -12,7 +12,7 @@
 #include "Entity.h"
 #include <iostream>
 //class Entity
-
+class PlayerEntity;
 
 class EntityManager
 {
@@ -42,6 +42,9 @@ public:
 		int rc = 0, int rct = 0, Vector3 maxdis = Vector3(0.0, 0.0, 0.0),
 		const Vector4& color = Vector4(1.0f, 1.0f, 1.0f, 1.0f), const float& mat1 = 1.0f, const float& mat2 = 1.0f, const float& mat3 = 1.0f,
 		const physx::PxVec3& vrreal = physx::PxVec3(0.0, 0.0, 0.0), double m = 0, const physx::PxVec3& g = Vector3(0.0, 0.0, 0.0));
+	
+	PlayerEntity* createPlayer(const Vector3 initPos, double size, physx::PxPhysics* gP);
+
 	const std::list<Entity*>& getEntityList();
 	void ReleaseEntities();
 	void addEntity(Entity* e);

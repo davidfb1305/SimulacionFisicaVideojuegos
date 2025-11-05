@@ -1,10 +1,11 @@
 #pragma once
 #include "SceneTemplate.h"
 class ParticleSystem;
+class PlayerEntity;
 class GameScene : public SceneTemplate
 {
 private:
-	Entity* player;
+	PlayerEntity* player;
 	ParticleSystem* rain;
 protected:
 public:

@@ -20,6 +20,7 @@ public:
 	void addGenerator(ParticleGenerator* pg);
 	void addGenForce(ForceGenerator* fg);
 	void remove(ForceGenerator* fg);
+	void updatePos(Vector3 v);
 	~ParticleSystem();
 	virtual bool update(double t) override;
 };

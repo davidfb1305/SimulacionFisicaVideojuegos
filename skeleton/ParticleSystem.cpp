@@ -25,6 +25,11 @@ void ParticleSystem::remove(ForceGenerator* fg)
     myForceList.remove(fg);
 }
 
+void ParticleSystem::updatePos(Vector3 v)
+{
+    for (auto a : generatorList) a->updateOriginPos(v);
+}
+
 ParticleSystem::~ParticleSystem()
 {
     for (auto a : generatorList) delete a;

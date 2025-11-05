@@ -18,10 +18,19 @@ bool ForceGenerator::removeForceGenerator(Particle* p)
 
 void ForceGenerator::addForceToParticle(Particle* p)
 {
-    if (checkAddForce(p)) {
         p->addForce(forceToApply);
-    }
 }
+
+bool ForceGenerator::checkAddForceEntity(Entity* p)
+{
+    return true;
+}
+
+void ForceGenerator::addForceToEntity(Entity* p)
+{
+    p->addForce(forceToApply);
+}
+
 void ForceGenerator::setActive(bool b)
 {
     _active = b;
