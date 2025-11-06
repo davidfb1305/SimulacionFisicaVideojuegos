@@ -30,6 +30,7 @@
     <ClCompile Include="whirlGenerator.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="PlayerEntity.cpp" />
+    <ClCompile Include="WindTimerGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="whirlGenerator.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="PlayerEntity.h" />
+    <ClInclude Include="WindTimerGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

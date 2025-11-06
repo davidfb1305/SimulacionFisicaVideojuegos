@@ -5,6 +5,7 @@
 #include "GausianGenerator.h"
 #include "uniformGenerator.h"
 #include "windGenerator.h"
+#include "WindTimerGenerator.h"
 GameScene::GameScene(physx::PxPhysics* gPh) :SceneTemplate(gPh)
 {
 }
@@ -13,12 +14,18 @@ GameScene::~GameScene()
 {
 }
 
+void GameScene::update(double t)
+{
+	mEntityManager->updateEntities(t);
+	rightwind->updateWindForce(t);
+}
+
 void GameScene::loadScene()
 {
 	
 	g = new GravityForceGen();
 	leftwind = new windGenerator(Vector3(-5,0,0),1);
-	rightwind = new windGenerator(Vector3(5, 0, 0), 1);
+	rightwind = new WindTimerGenerator(Vector3(5, 0, 0), 1,5);
 	leftwind->setActive(false);
 	rightwind->setActive(false);
 	forceslist.push_back(leftwind);
