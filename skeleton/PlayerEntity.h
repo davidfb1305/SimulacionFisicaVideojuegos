@@ -12,8 +12,8 @@ private:
 	ParticleSystem* _jetPackPS;
 	ForceGenerator* jetPackForce;
 	ForceGenerator* jetPackForceForParticles;
-	float mass = 10.0;
-	float k = 10.0;
+	float mass = 1.0;
+	float k = 0.0;
 protected:
 
 public:
@@ -23,5 +23,8 @@ public:
 	void integrate(double t);
 	void addForces() override;
 	bool update(double t) override;
+	inline Vector3 getVel() { return vel; };
+	inline float getK() { return k; };
+	void setForceToParticleSystem(const std::list<ForceGenerator*>& fg);
 };
 

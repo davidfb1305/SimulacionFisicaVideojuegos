@@ -1,5 +1,5 @@
 #include "ForceGenerator.h"
-
+#include "PlayerEntity.h"
 ForceGenerator::ForceGenerator(Vector3 force)
 {
     forceToApply = force;
@@ -23,10 +23,10 @@ void ForceGenerator::addForceToParticle(Particle* p)
 
 bool ForceGenerator::checkAddForceEntity(Entity* p)
 {
-    return true;
+    return _active;
 }
 
-void ForceGenerator::addForceToEntity(Entity* p)
+void ForceGenerator::addForceToEntity(PlayerEntity* p)
 {
     p->addForce(forceToApply);
 }

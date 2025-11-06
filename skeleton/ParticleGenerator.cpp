@@ -3,7 +3,7 @@
 
 
 ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vector3 vr,
-    double ms,Vector3 a, double rd, int genprob,std::list<ForceGenerator*> fl)
+    double ms,Vector3 a, double rd, int genprob, float t,std::list<ForceGenerator*> fl)
 {
     mEntityManager = m;
     pos = p;
@@ -12,9 +12,11 @@ ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vec
     mass = ms;
     ac = a;
     r = rd;
+    time = t;
     generateProb = genprob;
     forceList = fl;
 }
+
 
 ParticleGenerator::~ParticleGenerator()
 {
@@ -82,5 +84,5 @@ void ParticleGenerator::setActive(bool b)
 
 void ParticleGenerator::updateOriginPos(Vector3 v)
 {
-    pos + v;
+    pos += v;
 }

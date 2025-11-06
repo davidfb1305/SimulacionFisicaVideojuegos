@@ -1,8 +1,9 @@
 #include "uniformGenerator.h"
 #include "EntityManager.h"
 uniformGenerator::uniformGenerator(EntityManager* m, Vector3 p, Vector3 _posVar, Vector3 v, Vector3 vr,
-	double ms, Vector3 _velVar, Vector3 a, Vector3 _acVar, Vector4 _color, Vector4 _colorVar, double rd, int geprob, std::list<ForceGenerator*> fl)
-	:ParticleGenerator(m, p, v,vr,ms, a, rd,geprob, fl)
+	double ms, Vector3 _velVar, Vector3 a, Vector3 _acVar, Vector4 _color, Vector4 _colorVar, 
+	double rd, int geprob, float t, std::list<ForceGenerator*> fl)
+	:ParticleGenerator(m, p, v,vr,ms, a, rd,geprob,t, fl)
 {
 	std::random_device __randomDevice;
 	RANDOM = std::mt19937(__randomDevice());
@@ -38,6 +39,6 @@ void uniformGenerator::generateParticle()
 
 		Vector4 c = color + (colorVar * auxx);
 		double rd = r;
-		mEntityManager->createMassParticle(p, v,velReal,mass, a, 0.999, 0, r, 1, 10.0, Vector3(0, 0, 0), c)->setForceList(forceList);
+		mEntityManager->createMassParticle(p, v,velReal,mass, a, 0.999, 0, r, 1, time, Vector3(0, 0, 0), c)->setForceList(forceList);
 	}
 }

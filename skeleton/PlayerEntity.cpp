@@ -8,17 +8,19 @@ PlayerEntity::PlayerEntity(const Vector3 initPos, physx::PxPhysics* gP, EntityMa
 {
 	vel = Vector3(0,0,0);
 	ac = Vector3(0,0,0);
-	jetPackForce = new ForceGenerator(Vector3(0,0,0));
+	jetPackForce = new ForceGenerator(Vector3(0,30,0));
 	lastpos = initPos;
 	_jetPackPS = new ParticleSystem(em);
 	//Rain gausian
-	_jetPackPS->addGenerator(new GausianGenerator(em, Vector3(initPos+Vector3(0,-2,0)), Vector3(0, 0, 0),
-		Vector3(0.0, -1.0, 0.0), Vector3(1.0, 1.0, 1.0), 1, Vector3(0.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0),
-		Vector3(0, 0, 0), Vector4(1.0, 0.0, 0.0, 1.0), Vector4(0, 0, 0.5, 0), 1, 100));
-	em->addEntity(_jetPackPS);
-	jetPackForceForParticles = new ForceGenerator(Vector3(0, -20, 0));
-	_jetPackPS->addForceGenerator(jetPackForceForParticles);
+	_jetPackPS->addGenerator(new GausianGenerator(em, Vector3(-10.0, 0.0, 0.0), Vector3(0.1, 0.1, 0.1), Vector3(1.1, 1.1, 1.1), Vector3(1.0, 1.0, 1.0), 1, Vector3(1.1, 1.1, 1.1)
+		, Vector3(0.0, -20.0, 0.0), Vector3(50, 0, 50), Vector4(1.0, 0, 0.0, 1), Vector4(0.2, 0, 0.0, 0), 1, 100,2));
 
+	em->addEntity(_jetPackPS);
+	jetPackForceForParticles = new ForceGenerator(Vector3(0, -50, 0));
+	_jetPackPS->addForceGenerator(jetPackForceForParticles);
+	addForceGenerator(jetPackForce);
+	_jetPackPS->setActive(true);
+	jetPackForce->setActive(true);
 }
 
 PlayerEntity::~PlayerEntity()
@@ -31,7 +33,7 @@ void PlayerEntity::inputListener(unsigned char key)
 	{
 	case 'Z': {
 		_jetPackPS->setActive(!_jetPackPS->isActive());
-		jetPackForce->setActive(jetPackForce->isActive());
+		jetPackForce->setActive(!jetPackForce->isActive());
 		break;
 		}
 	}
@@ -46,7 +48,7 @@ void PlayerEntity::integrate(double t) {
 }
 void PlayerEntity::addForces()
 {
-	for (ForceGenerator* f : forceList) {
+	for (auto f : forceList) {
 		if (f->checkAddForceEntity(this)) f->addForceToEntity(this);
 	}
 }
@@ -56,5 +58,14 @@ bool PlayerEntity::update(double t)
 	addForces();
 	ac = forceToAdd * pow(mass, -1);
 	integrate(t);
+	if (mtrans->p.y < -10) { mtrans->p.y = -10.0;
+	vel = Vector3(0, 0, 0);
+	}
+	
     return true;
+}
+
+void PlayerEntity::setForceToParticleSystem(const std::list<ForceGenerator*>& fg)
+{
+	for(auto a : fg) _jetPackPS->addForceGenerator(a);
 }

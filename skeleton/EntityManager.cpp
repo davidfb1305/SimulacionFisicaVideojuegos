@@ -108,8 +108,11 @@ void EntityManager::updateEntities(double t)
 		if (!a->update(t)) entityListToRemove.push_back(a);
 	}
 	for (auto a : entityListToRemove) {
-		entityList.remove(a);
+
+		DeregisterRenderItem(a->mItem);
 		delete a;
+		entityList.remove(a);
+	
 	}
 	entityListToRemove.clear();
 }

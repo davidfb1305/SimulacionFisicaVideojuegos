@@ -1,5 +1,5 @@
 #include "windGenerator.h"
-
+#include "PlayerEntity.h"
 windGenerator::windGenerator(const Vector3& wVel, float k)
     :ForceGenerator(Vector3(0.0,0.0,0.0))
 {
@@ -9,6 +9,14 @@ windGenerator::windGenerator(const Vector3& wVel, float k)
 
 windGenerator::~windGenerator()
 {
+}
+
+void windGenerator::addForceToEntity(PlayerEntity* p)
+{   
+    Vector3 velp = p->getVel();
+    Vector3 force(k1 * (windVel - velp) + p->getK() *
+        (windVel.magnitude() - velp.magnitude()) * (windVel - velp));
+    p->addForce(force);
 }
 
 bool windGenerator::checkAddForce(Particle* p)

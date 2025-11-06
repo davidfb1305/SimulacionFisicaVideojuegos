@@ -2,6 +2,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "Particle.h"
+class PlayerEntity;
 class ForceGenerator
 {
 private:
@@ -14,7 +15,7 @@ public:
 	virtual bool removeForceGenerator(Particle* p);
 	virtual void addForceToParticle(Particle* p);
 	virtual bool checkAddForceEntity(Entity* p);
-	virtual void addForceToEntity(Entity* p); //WIP it will change to entity with volume
+	virtual void addForceToEntity(PlayerEntity* p); //WIP it will change to entity with volume
 	void setActive(bool b);
 	inline bool isActive() { return _active; };
 	~ForceGenerator();

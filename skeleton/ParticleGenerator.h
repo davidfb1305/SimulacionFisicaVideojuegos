@@ -15,6 +15,7 @@ protected:
 	Vector3 velReal;
 	Vector3 ac;
 	double mass;
+	float time;
 	double r;
 	bool active = true;
 	int generateProb;
@@ -22,7 +23,7 @@ protected:
 public:
 
 	ParticleGenerator(EntityManager* m, Vector3 p = Vector3(0.0, 0.0, 0.0), Vector3 v = Vector3(0.0, 0.0, 0.0), Vector3 vr = Vector3(1.0, 1.0, 1.0),
-		double ms = 1.0,Vector3 a = Vector3(0.0, 0.0, 0.0), double rd = 1.0, int genprob = 100, std::list<ForceGenerator*> fl = std::list<ForceGenerator*>());
+		double ms = 1.0,Vector3 a = Vector3(0.0, 0.0, 0.0), double rd = 1.0, int genprob = 100,float t= 10.0,std::list<ForceGenerator*> fl = std::list<ForceGenerator*>());
 	~ParticleGenerator();
 	void setPos(Vector3 v);
 	void setVel(Vector3 v);

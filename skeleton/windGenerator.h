@@ -11,6 +11,7 @@ protected:
 public:
 	windGenerator(const Vector3& wVel, float k);
 	~windGenerator();
+	void addForceToEntity(PlayerEntity* p) override;
 	bool checkAddForce(Particle* p) override;
 	bool removeForceGenerator(Particle* p) override;
 	void addForceToParticle(Particle* p) override;
