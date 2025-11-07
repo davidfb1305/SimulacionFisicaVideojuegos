@@ -1,5 +1,3 @@
-# SimulacionFisicaVideojuegos
-Memoria proyeceto intermedio
 CONTROLES
 JUGADOR: X para activar y desactivar el jetpack
 		B para disparar desde la camara(proyectil tipo 1)
