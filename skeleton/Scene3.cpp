@@ -8,7 +8,6 @@ Scene3::Scene3(physx::PxPhysics* gPh) :SceneTemplate(gPh)
 {
 	std::cout << "Q activa y desactiva el viento, G la gravedad y T el ciclon\n";
 
-	loadScene();
 }
 
 Scene3::~Scene3()
@@ -20,6 +19,7 @@ Scene3::~Scene3()
 
 void Scene3::loadScene()
 {
+	mEntityManager = new EntityManager(gPh);
 	prueba = new ParticleSystem(mEntityManager);
 	//Rain gausian
 	prueba->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 30.0, 0.0), Vector3(300.1, 0.1, 300.1),

@@ -2,7 +2,7 @@
 
 SceneTemplate::SceneTemplate(physx::PxPhysics* gPh)
 {
-	mEntityManager = new EntityManager(gPh);
+	
 	this->gPh = gPh;
 }
 
@@ -18,7 +18,7 @@ void SceneTemplate::loadScene()
 
 void SceneTemplate::unLoadScene()
 {
-	mEntityManager->ReleaseEntities();
+	//mEntityManager->ReleaseEntities();
 	delete mEntityManager;
 }
 void SceneTemplate::inputListener(unsigned char key, const physx::PxTransform& camera) {

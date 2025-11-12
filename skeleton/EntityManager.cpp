@@ -92,7 +92,9 @@ void EntityManager::ReleaseEntities()
 		entityListToRemove.push_back(a);
 	}
 	for (auto a : entityListToRemove) {
+		if(a->mItem != nullptr)DeregisterRenderItem(a->mItem);
 		delete a;
+		entityList.remove(a);
 	}
 	entityList.clear();
 }
@@ -109,7 +111,7 @@ void EntityManager::updateEntities(double t)
 	}
 	for (auto a : entityListToRemove) {
 
-		DeregisterRenderItem(a->mItem);
+		if (a->mItem != nullptr)DeregisterRenderItem(a->mItem);
 		delete a;
 		entityList.remove(a);
 	

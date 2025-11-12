@@ -16,8 +16,10 @@ void SceneManager::nextScene()
 {
 	if (scenes.size() == 1) return;
 	if (actSceneIndex == scenes.size() - 1) actSceneIndex = 0;
+	else actSceneIndex++;
 	actScene->unLoadScene();
-	actScene = scenes[actSceneIndex + 1];
+
+	actScene = scenes[actSceneIndex];
 	actScene->loadScene();
 }
 
@@ -25,8 +27,9 @@ void SceneManager::previousScene()
 {
 	if (scenes.size() == 1) return;
 	if (actSceneIndex == 0) actSceneIndex = (scenes.size() - 1);
+	else actSceneIndex--;
 	actScene->unLoadScene();
-	actScene = scenes[actSceneIndex - 1];
+	actScene = scenes[actSceneIndex];
 	actScene->loadScene();
 }
 

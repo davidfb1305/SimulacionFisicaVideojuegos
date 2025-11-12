@@ -25,6 +25,7 @@ PlayerEntity::PlayerEntity(const Vector3 initPos, physx::PxPhysics* gP, EntityMa
 
 PlayerEntity::~PlayerEntity()
 {
+
 }
 
 void PlayerEntity::inputListener(unsigned char key)

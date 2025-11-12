@@ -11,7 +11,7 @@ Scene1::~Scene1()
 
 void Scene1::loadScene()
 {
-
+	mEntityManager = new EntityManager(gPh);
 	mEntityManager->createAxes();
 	mEntityManager->createParticle(Vector3(0, 0, 0), Vector3(3, 0, 0), Vector3(0, 0, 0), 1, 0);
 }
