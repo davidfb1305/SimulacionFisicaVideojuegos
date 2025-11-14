@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include <list>
+#include "SpringForceGenerator.h"
 enum MoveType
 {
 	SemiEuler= 0,

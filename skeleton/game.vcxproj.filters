@@ -31,6 +31,8 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="PlayerEntity.cpp" />
     <ClCompile Include="WindTimerGenerator.cpp" />
+    <ClCompile Include="Scene4.cpp" />
+    <ClCompile Include="SpringForceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -64,6 +66,8 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="PlayerEntity.h" />
     <ClInclude Include="WindTimerGenerator.h" />
+    <ClInclude Include="Scene4.h" />
+    <ClInclude Include="SpringForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -15,6 +15,7 @@
 #include "Scene1.h"
 #include "Scene2.h"
 #include "Scene3.h"
+#include "Scene4.h"
 #include "GameScene.h"
 std::string display_text = "This is a test";
 
@@ -62,20 +63,15 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	//entityManager = new EntityManager(gPhysics);
-	//entityManager->createAxes();
-	sceneManager = new SceneManager();
 
+	sceneManager = new SceneManager();
+	//create the scenes
+	sceneManager->addScene(new Scene4(gPhysics));
 	sceneManager->addScene(new Scene1(gPhysics));
 	sceneManager->addScene(new Scene3(gPhysics));
 	sceneManager->addScene(new Scene2(gPhysics));
 	sceneManager->addScene(new GameScene(gPhysics));
 	
-
-
-	//entityManager->createParticle(Vector3(0,0,0),Vector3(3,0,0),Vector3(0,0,0),1,0);
-	//entityManager->createBullet(Vector3(0.0,0.0,0.0),Vector3(0.0,10.0,0.0),Vector3(0.0,0.0,0.0),0.999,0,2.0,
-	//	Vector4(1.0f,0.0f,1.0f,1.0f),1,1,1,Vector3(500.0,0.0,0.0),1.0, sceneDesc.gravity);
 	}
 
 
