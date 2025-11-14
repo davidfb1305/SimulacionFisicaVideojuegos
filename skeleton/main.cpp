@@ -66,6 +66,7 @@ void initPhysics(bool interactive)
 
 	sceneManager = new SceneManager();
 	//create the scenes
+
 	sceneManager->addScene(new Scene4(gPhysics));
 	sceneManager->addScene(new Scene1(gPhysics));
 	sceneManager->addScene(new Scene3(gPhysics));

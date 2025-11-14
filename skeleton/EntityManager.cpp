@@ -42,7 +42,6 @@ Entity* EntityManager::createMassParticle(const Vector3& transform, const Vector
 {
 	Particle* aux = new Particle(transform,v,a,d,mt,rc,rct,maxdis);
 	aux->setMass(ms);
-		//Particle(transform,v,vr,ms,a,d,mt,rc,rct,maxdis);
 	aux->mGeo = new physx::PxSphereGeometry(r);
 	aux->mtrans = new physx::PxTransform(transform);
 	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(mat1, mat2, mat3));

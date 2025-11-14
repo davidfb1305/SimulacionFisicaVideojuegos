@@ -1,5 +1,6 @@
 #include "SpringForceGenerator.h"
 #include "Particle.h"
+
 SpringForceGenerator::SpringForceGenerator(Entity* ori, double k, double resting_length)
 : ForceGenerator(Vector3(0.0,0.0,0.0)){
 	_ori = ori;
