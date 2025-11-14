@@ -19,11 +19,36 @@ void Scene4::loadScene()
 	p2 = mEntityManager->createMassParticle(Vector3(10.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0),
 			Vector3(0.0, 0.0, 0.0), 1.0, Vector3(0.0, 0.0, 0.0), 0.999, 0, 1.0, 0, 0, Vector3(), Vector4(1.0, 1.0, 1.0, 1.0));
 	spring = new SpringForceGenerator(p1, 1.0, 10);
-	GravityForceGen* g = new GravityForceGen();
+	g = new GravityForceGen();
 	p2->addForceGenerator(spring);
 	p2->addForceGenerator(g);
+	p3 = mEntityManager->createMassParticle(Vector3(20.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0),
+		Vector3(0.0, 0.0, 0.0), 2.0, Vector3(0.0, 0.0, 0.0), 0.999, 0, 1.0, 0, 0, Vector3(), Vector4(1.0, 1.0, 1.0, 1.0));
+	spring1 = new SpringForceGenerator(p2, 1.0, 10);
+	spring2 = new SpringForceGenerator(p3, 1.0, 10);
+	g = new GravityForceGen();
+	p3->addForceGenerator(spring1);
+	p2->addForceGenerator(spring2);
+	p3->addForceGenerator(g);
 }
 
 void Scene4::inputListener(unsigned char key, const physx::PxTransform& camera)
 {
+	switch (toupper(key))
+	{
+	case 'G':
+		g->setActive(!g->isActive());
+		std::cout << "Gravedad = " << g->isActive() << "\n";
+		break;
+	case 'M':
+		spring->setK(spring->getK()+1);
+		std::cout << "mas k = " << spring->getK() << "\n";
+		break;
+	case 'N':
+		
+		spring->setK(spring->getK() - 1);
+		std::cout << "menos k = " << spring->getK() << "\n";
+		break;
+	}
+
 }
