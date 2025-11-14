@@ -3,7 +3,7 @@
 #include "SpringForceGenerator.h"
 #include "GravityForceGen.h"
 Scene4::Scene4(physx::PxPhysics* gPh)
-{
+:SceneTemplate(gPh){
 }
 
 Scene4::~Scene4()

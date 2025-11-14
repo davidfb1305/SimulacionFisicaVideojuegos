@@ -1,5 +1,6 @@
 #pragma once
 #include "ForceGenerator.h"
+#include "Entity.h"
 class SpringForceGenerator: public ForceGenerator
 {
 private:

@@ -1,5 +1,5 @@
 #include "whirlGenerator.h"
-
+#include "Particle.h"
 whirlGenerator::whirlGenerator(Vector3 o, float k)
     :ForceGenerator(Vector3(0.0, 0.0, 0.0)) {
     k1 = k;

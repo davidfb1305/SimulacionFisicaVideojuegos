@@ -1,7 +1,8 @@
 #pragma once
 #include "core.hpp"
 #include "RenderUtils.hpp"
-#include "Particle.h"
+#include "Entity.h"
+class Particle;
 class PlayerEntity;
 class ForceGenerator
 {

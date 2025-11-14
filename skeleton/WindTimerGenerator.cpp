@@ -1,5 +1,6 @@
 #include "WindTimerGenerator.h"
 #include "PlayerEntity.h"
+#include "Particle.h"
 WindTimerGenerator::WindTimerGenerator(const Vector3& wVel, float k, float t)
     :ForceGenerator(Vector3(0.0, 0.0, 0.0))
 {

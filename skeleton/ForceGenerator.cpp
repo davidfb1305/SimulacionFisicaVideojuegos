@@ -1,5 +1,6 @@
 #include "ForceGenerator.h"
 #include "PlayerEntity.h"
+#include "Particle.h"
 ForceGenerator::ForceGenerator(Vector3 force)
 {
     forceToApply = force;
