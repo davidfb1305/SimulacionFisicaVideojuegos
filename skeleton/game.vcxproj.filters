@@ -33,6 +33,8 @@
     <ClCompile Include="WindTimerGenerator.cpp" />
     <ClCompile Include="Scene4.cpp" />
     <ClCompile Include="SpringForceGenerator.cpp" />
+    <ClCompile Include="Scene5.cpp" />
+    <ClCompile Include="BuoyancyForceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -68,6 +70,8 @@
     <ClInclude Include="WindTimerGenerator.h" />
     <ClInclude Include="Scene4.h" />
     <ClInclude Include="SpringForceGenerator.h" />
+    <ClInclude Include="Scene5.h" />
+    <ClInclude Include="BuoyancyForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

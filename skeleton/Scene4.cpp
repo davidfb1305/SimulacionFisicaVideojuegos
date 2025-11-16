@@ -14,7 +14,7 @@ void Scene4::loadScene()
 {   //Cambiar masa de p1 para crear un muelle en un punto fijo; (Para esta prueba se usa Particle pero si el origen no se
 	//va a modificar podria ser una entidad pura o cualquier otro tipo de entidad, generador,bullet...)
 	mEntityManager = new EntityManager(gPh);
-	/*p1 = mEntityManager->createMassParticle(Vector3(0.0, 30.0, 0.0), Vector3(0.0, 0.0, 0.0),
+	p1 = mEntityManager->createMassParticle(Vector3(0.0, 30.0, 0.0), Vector3(0.0, 0.0, 0.0),
 		Vector3(0.0, 0.0, 0.0), 1.0, Vector3(0.0, 0.0, 0.0), 0.999, 0,1.0,0,0,Vector3(),Vector4(1.0,1.0,1.0,1.0));
 	p2 = mEntityManager->createMassParticle(Vector3(10.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0),
 			Vector3(0.0, 0.0, 0.0), 1.0, Vector3(0.0, 0.0, 0.0), 0.999, 0, 1.0, 0, 0, Vector3(), Vector4(1.0, 1.0, 1.0, 1.0));
@@ -29,8 +29,8 @@ void Scene4::loadScene()
 	g = new GravityForceGen();
 	p3->addForceGenerator(spring1);
 	p2->addForceGenerator(spring2);
-	p3->addForceGenerator(g);*/
-	mEntityManager->createPlane(Vector3(1,1,1), Vector3(10, 0.001, 10));
+	p3->addForceGenerator(g);
+	
 }
 
 void Scene4::inputListener(unsigned char key, const physx::PxTransform& camera)
