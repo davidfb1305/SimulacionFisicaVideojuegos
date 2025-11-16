@@ -32,7 +32,7 @@ Entity::Entity()
 }
 bool
 Entity::update(double d) {
-	return false;
+	return true;
 }
 
 void Entity::addForces()

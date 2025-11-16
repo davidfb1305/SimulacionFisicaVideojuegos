@@ -45,6 +45,8 @@ public:
 	
 	PlayerEntity* createPlayer(const Vector3 initPos, double size, physx::PxPhysics* gP);
 
+	Entity* createPlane(const Vector3 initPos= Vector3(0.0,0.0,0.0), Vector3 size = Vector3(10.0,1.0,10.0), const Vector4& color = Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+
 	const std::list<Entity*>& getEntityList();
 	void ReleaseEntities();
 	void addEntity(Entity* e);

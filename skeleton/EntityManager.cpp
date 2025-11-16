@@ -74,6 +74,18 @@ PlayerEntity* EntityManager::createPlayer(const Vector3 initPos,double size, phy
 	entityList.push_back(aux);
 	return aux;
 }
+Entity* EntityManager::createPlane(const Vector3 initPos,  Vector3 size, const Vector4& color)
+{
+	Entity* aux = new Entity();
+	//aux->setMass(1);
+	aux->mGeo = new physx::PxBoxGeometry(size);
+	aux->mtrans = new physx::PxTransform(initPos);
+	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(1.0, 1.0, 1.0));
+	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
+	RegisterRenderItem(aux->mItem);
+	entityList.push_back(aux);
+	return aux;
+}
 const std::list<Entity*>& EntityManager::getEntityList()
 {
 	return entityList;
