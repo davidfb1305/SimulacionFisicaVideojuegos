@@ -36,8 +36,8 @@ Particle::Particle(const Vector3& p, const Vector3& v,
 
 	
 	velReal = vr;
-	massReal = pow(mass, -1);
-	massSim =  pow(mass, -1);
+	massReal = mass;
+	massSim =  mass;
 	
 }
 
@@ -49,8 +49,8 @@ void Particle::setLastPos(Vector3 a)
 
 void Particle::setMass(double d)
 {
-	massReal = pow(d, -1);
-	massSim = pow(d, -1);
+	massReal = d;
+	massSim = d;
 }
 
 bool Particle::uptadeDestroyCondition(double t)
@@ -84,13 +84,15 @@ void Particle::integrate(double t)
 	switch (mMt)
 	{
 	case SemiEuler:
-		vel += (t * ac);
+		vel += (t * ac * pow(massSim, -1));
+		vel *= pow(dumping, t);
 		mtrans->p += (t * vel);
 		break;
 	case Euler:
-		mtrans->p += (t * vel);
-		vel += (t * ac);
+
+		vel += (t * ac * pow(massSim, -1));
 		vel *= pow(dumping, t);
+		mtrans->p += (t * vel);
 		break;
 	case Valet:
 		Vector3 aux = lastpos;
