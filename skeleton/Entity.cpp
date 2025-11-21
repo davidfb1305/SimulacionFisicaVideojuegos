@@ -59,6 +59,10 @@ void Entity::removeForceGenerator(ForceGenerator* fg)
 	forceList.remove(fg);
 }
 
+bool Entity::uptadeDestroyCondition(double t) {
+	return true;
+}
+
 void Entity::clearForce()
 {
 	forceToAdd = Vector3(0, 0, 0);

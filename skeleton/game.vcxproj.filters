@@ -35,6 +35,7 @@
     <ClCompile Include="SpringForceGenerator.cpp" />
     <ClCompile Include="Scene5.cpp" />
     <ClCompile Include="BuoyancyForceGenerator.cpp" />
+    <ClCompile Include="RigidStatic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="Scene5.h" />
     <ClInclude Include="BuoyancyForceGenerator.h" />
+    <ClInclude Include="RigidStatic.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

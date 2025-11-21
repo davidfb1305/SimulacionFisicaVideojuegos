@@ -7,6 +7,7 @@ protected:
 public:
 	GravityForceGen();
 	~GravityForceGen();
+	void addForceToParticle(Particle* p) override;
 	bool checkAddForce(Particle* p) override;
 	bool removeForceGenerator(Particle* p) override;
 };

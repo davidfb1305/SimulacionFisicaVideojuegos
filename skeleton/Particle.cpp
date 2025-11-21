@@ -36,8 +36,8 @@ Particle::Particle(const Vector3& p, const Vector3& v,
 
 	
 	velReal = vr;
-	massReal = mass;
-	massSim = massReal;
+	massReal = pow(mass, -1);
+	massSim =  pow(mass, -1);
 	
 }
 
@@ -49,8 +49,8 @@ void Particle::setLastPos(Vector3 a)
 
 void Particle::setMass(double d)
 {
-	massReal = d;
-	massSim = d;
+	massReal = pow(d, -1);
+	massSim = pow(d, -1);
 }
 
 bool Particle::uptadeDestroyCondition(double t)
@@ -110,7 +110,7 @@ bool Particle::update(double t)
 {
 	clearForce();
 	addForces();
-	ac =  forceToAdd* pow(massSim,-1);
+	ac =  forceToAdd;
 	integrate(t);
 
 	return uptadeDestroyCondition(t);

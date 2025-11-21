@@ -1,19 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include <list>
-#include "SpringForceGenerator.h"
-enum MoveType
-{
-	SemiEuler= 0,
-	Euler,
-	Valet
 
-};
-enum RemoveCondition {
-	NONE = 0,
-	TIME,
-	DISTANCE
-};
 
 class Particle: public Entity
 {
@@ -21,13 +9,6 @@ protected:
 	physx::PxVec3 vel;
 	physx::PxVec3 ac;
 	double dumping;
-	MoveType mMt;
-	RemoveCondition mRc;
-	double timeToRemove;
-	physx::PxVec3 initpos;
-	physx::PxVec3 maxpos;
-	physx::PxVec3 maxdistance;
-
 	double massReal = 0.0;
 	Vector3 velReal;
 	double massSim = 0.0;
@@ -44,9 +25,10 @@ public:
 	void setMass(double d);
 	inline void setK(double d) { k = 1.0; };
 	inline double getK() { return k; };
+	inline double getMass() { return massSim; };
 	inline const Vector3& getPos() { return mtrans->p; };
  	inline const Vector3 getVel() { return vel; };
-	bool uptadeDestroyCondition(double t);
+	bool uptadeDestroyCondition(double t) override;
 	~Particle();
 	virtual bool update(double t) override;
 	

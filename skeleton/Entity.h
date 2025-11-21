@@ -3,10 +3,28 @@
 #include "RenderUtils.hpp"
 #include <list>
 class ForceGenerator;
+enum MoveType
+{
+	SemiEuler = 0,
+	Euler,
+	Valet
+
+};
+enum RemoveCondition {
+	NONE = 0,
+	TIME,
+	DISTANCE
+};
 class Entity
 {
 
 protected: 
+	MoveType mMt;
+	RemoveCondition mRc;
+	double timeToRemove;
+	physx::PxVec3 initpos;
+	physx::PxVec3 maxpos;
+	physx::PxVec3 maxdistance;
 	bool active = false;
 	virtual void addForces();
 
@@ -29,7 +47,7 @@ public:
 	void addForceGenerator(ForceGenerator* fg);
 	void removeForceGenerator(ForceGenerator* fg);
 	void clearForce();
-
+	virtual bool uptadeDestroyCondition(double t);
 	virtual bool update(double t);
 };
 	
