@@ -29,6 +29,7 @@ Entity::Entity()
 		mItem = nullptr;
 		mshape = nullptr;	
 		forceToAdd = Vector3(0, 0, 0);
+		
 }
 bool
 Entity::update(double d) {

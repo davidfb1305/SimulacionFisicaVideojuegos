@@ -99,6 +99,7 @@ RigidStatic* EntityManager::createPxPlane(const Vector3 initPos, Vector3 size, c
 	RigidStatic* aux = new RigidStatic();
 	aux->mGeo = new physx::PxBoxGeometry(size);
 	aux->mtrans = new physx::PxTransform(initPos);
+	aux->_mRigid = gPhysics->createRigidStatic(*aux->mtrans);
 	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(1.0, 1.0, 1.0));
 	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
 	aux->_mRigid->attachShape(*aux->mshape);

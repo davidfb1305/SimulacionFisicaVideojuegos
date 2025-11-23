@@ -3,6 +3,9 @@
 
 RigidStatic::RigidStatic()
 {
+	vel = Vector3(0.0, 0.0, 0.0);
+	ac = Vector3(0.0, 0.0, 0.0);
+	dumping = 0;
 }
 
 RigidStatic::~RigidStatic()

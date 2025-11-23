@@ -17,6 +17,7 @@
 #include "Scene3.h"
 #include "Scene4.h"
 #include "Scene5.h"
+#include "Scene6.h"
 #include "GameScene.h"
 std::string display_text = "This is a test";
 
@@ -69,11 +70,12 @@ void initPhysics(bool interactive)
 	//create the scenes
 
 
-	sceneManager->addScene(new Scene5(gPhysics,gScene));
+	sceneManager->addScene(new Scene6(gPhysics, gScene));
 	sceneManager->addScene(new Scene1(gPhysics,gScene));
 	sceneManager->addScene(new Scene2(gPhysics,gScene));
 	sceneManager->addScene(new Scene3(gPhysics,gScene));
 	sceneManager->addScene(new Scene4(gPhysics,gScene));
+	sceneManager->addScene(new Scene5(gPhysics, gScene));
 	sceneManager->addScene(new GameScene(gPhysics,gScene));
 	
 	}
