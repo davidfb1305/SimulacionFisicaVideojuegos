@@ -9,10 +9,12 @@ private:
 	double massReal = 0.0;
 protected:
 	physx::PxRigidStatic* _mRigid;
+	friend class EntityManager;
 public:
 	RigidStatic();
 	~RigidStatic();
-	bool uptadeDestroyCondition(double t);
+	physx::PxRigidStatic* getRigidStatic();
+	bool updateDestroyCondition(double t) override;
 	virtual bool update(double t) override;
 };
 

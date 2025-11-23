@@ -28,7 +28,7 @@ public:
 	inline double getMass() { return massSim; };
 	inline const Vector3& getPos() { return mtrans->p; };
  	inline const Vector3 getVel() { return vel; };
-	bool uptadeDestroyCondition(double t) override;
+	bool updateDestroyCondition(double t) override;
 	~Particle();
 	virtual bool update(double t) override;
 	

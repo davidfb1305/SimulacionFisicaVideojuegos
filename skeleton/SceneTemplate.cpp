@@ -1,8 +1,8 @@
 #include "SceneTemplate.h"
 
-SceneTemplate::SceneTemplate(physx::PxPhysics* gPh)
+SceneTemplate::SceneTemplate(physx::PxPhysics* gPh, physx::PxScene* gScene)
 {
-	
+	_gScene = gScene;
 	this->gPh = gPh;
 }
 

@@ -9,7 +9,7 @@ private:
 	ParticleSystem* explosion;
 protected:
 public:
-	Scene2(physx::PxPhysics* gPh);
+	Scene2(physx::PxPhysics* gPh, physx::PxScene* gScene);
 	~Scene2();
 	void loadScene() override;
 	void inputListener(unsigned char key, const physx::PxTransform& camera) override;

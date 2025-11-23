@@ -18,7 +18,7 @@ private:
 	std::list<ForceGenerator*> forceslist;
 protected:
 public:
-	GameScene(physx::PxPhysics* gPh);
+	GameScene(physx::PxPhysics* gPh, physx::PxScene* gScene);
 	~GameScene();
 	void update(double t)override;
 	void loadScene() override;

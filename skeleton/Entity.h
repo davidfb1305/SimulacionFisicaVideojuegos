@@ -47,7 +47,7 @@ public:
 	void addForceGenerator(ForceGenerator* fg);
 	void removeForceGenerator(ForceGenerator* fg);
 	void clearForce();
-	virtual bool uptadeDestroyCondition(double t);
+	virtual bool updateDestroyCondition(double t);
 	virtual bool update(double t);
 };
 	

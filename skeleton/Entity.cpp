@@ -50,6 +50,7 @@ void Entity::setForceList(std::list<ForceGenerator*> fl)
 }
 
 void Entity::addForceGenerator(ForceGenerator* fg)
+
 {
 	forceList.push_back(fg);
 }
@@ -59,7 +60,7 @@ void Entity::removeForceGenerator(ForceGenerator* fg)
 	forceList.remove(fg);
 }
 
-bool Entity::uptadeDestroyCondition(double t) {
+bool Entity::updateDestroyCondition(double t) {
 	return true;
 }
 

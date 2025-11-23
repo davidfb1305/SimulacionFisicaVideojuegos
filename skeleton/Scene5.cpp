@@ -2,8 +2,8 @@
 #include "BuoyancyForceGenerator.h"
 #include "GravityForceGen.h"
 #include "Particle.h"
-Scene5::Scene5(physx::PxPhysics* gPh):
-SceneTemplate(gPh){
+Scene5::Scene5(physx::PxPhysics* gPh, physx::PxScene* gScene):
+SceneTemplate(gPh,gScene){
 }
 
 Scene5::~Scene5()
@@ -12,7 +12,7 @@ Scene5::~Scene5()
 
 void Scene5::loadScene()
 {
-	mEntityManager = new EntityManager(gPh);
+	mEntityManager = new EntityManager(gPh, _gScene);
 	//body
 	Entity* p = mEntityManager->createMassParticle(Vector3(0.0, 10.0, 0.0), Vector3(0.0, 0.0, 0.0),
 		Vector3(0.0, 0.0, 0.0), 100.0, Vector3(0.0, 0.0, 0.0), 0.5, 0, 1.0, 0, 0, Vector3(), Vector4(1.0, 1.0, 1.0, 1.0));

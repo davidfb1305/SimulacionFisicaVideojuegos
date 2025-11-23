@@ -2,8 +2,8 @@
 #include "Particle.h"
 #include "SpringForceGenerator.h"
 #include "GravityForceGen.h"
-Scene4::Scene4(physx::PxPhysics* gPh)
-:SceneTemplate(gPh){
+Scene4::Scene4(physx::PxPhysics* gPh, physx::PxScene* gScene)
+:SceneTemplate(gPh,gScene){
 }
 
 Scene4::~Scene4()
@@ -13,7 +13,7 @@ Scene4::~Scene4()
 void Scene4::loadScene()
 {   //Cambiar masa de p1 para crear un muelle en un punto fijo; (Para esta prueba se usa Particle pero si el origen no se
 	//va a modificar podria ser una entidad pura o cualquier otro tipo de entidad, generador,bullet...)
-	mEntityManager = new EntityManager(gPh);
+	mEntityManager = new EntityManager(gPh, _gScene);
 	p1 = mEntityManager->createMassParticle(Vector3(0.0, 30.0, 0.0), Vector3(0.0, 0.0, 0.0),
 		Vector3(0.0, 0.0, 0.0), 1.0, Vector3(0.0, 0.0, 0.0), 0.999, 0,1.0,0,0,Vector3(),Vector4(1.0,1.0,1.0,1.0));
 	p2 = mEntityManager->createMassParticle(Vector3(10.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0),

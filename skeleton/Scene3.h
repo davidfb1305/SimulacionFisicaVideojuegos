@@ -15,7 +15,7 @@ private:
 
 protected:
 public:
-	Scene3(physx::PxPhysics* gPh);
+	Scene3(physx::PxPhysics* gPh, physx::PxScene* gScene);
 	~Scene3();
 	void loadScene() override;
 	void inputListener(unsigned char key, const physx::PxTransform& camera) override;

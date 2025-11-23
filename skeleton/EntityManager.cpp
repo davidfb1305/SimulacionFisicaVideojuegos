@@ -1,11 +1,13 @@
 #include "EntityManager.h"
 #include "Particle.h"
 #include "PlayerEntity.h"
+#include "RigidStatic.h"
 #include "Bullet.h"
-EntityManager::EntityManager(physx::PxPhysics* gP)
+EntityManager::EntityManager(physx::PxPhysics* gP, physx::PxScene* gScene)
 {
 	entityList = std::list<Entity*>();
 	gPhysics = gP;
+	_gScene = gScene;
 }
 
 EntityManager::~EntityManager()
@@ -26,6 +28,7 @@ Entity* EntityManager::createSphere(const Vector3& transform, double r, const Ve
 	entityList.push_back(aux);
 	return aux;
 }
+
 Entity* EntityManager::createParticle(const Vector3& transform, const Vector3& v, const Vector3& a, double d,int mt, double r, int rc, int rct, Vector3 maxdis, const Vector4& color, const float& mat1, const float& mat2, const float& mat3)
 {
 	Particle* aux = new Particle(transform,v,a,d, mt,rc,rct,maxdis);
@@ -38,6 +41,7 @@ Entity* EntityManager::createParticle(const Vector3& transform, const Vector3& v
 	aux->setLastPos(transform);
 	return aux;
 }
+
 Entity* EntityManager::createMassParticle(const Vector3& transform, const Vector3& v, const Vector3& vr, double ms, const Vector3& a, double d, int mt, double r, int rc, int rct, Vector3 maxdis, const Vector4& color, const float& mat1, const float& mat2, const float& mat3)
 {
 	Particle* aux = new Particle(transform,v,a,d,mt,rc,rct,maxdis);
@@ -51,6 +55,7 @@ Entity* EntityManager::createMassParticle(const Vector3& transform, const Vector
 	aux->setLastPos(transform);
 	return aux;
 }
+
 Entity* EntityManager::createBullet(const Vector3& transform, const Vector3& v, const Vector3& a, double d, int mt, double r, int rc, int rct, Vector3 maxdis, const Vector4& color, const float& mat1, const float& mat2, const float& mat3, const physx::PxVec3& vrreal, double m, const physx::PxVec3& g)
 {
 	Bullet* aux = new Bullet(transform,v,vrreal,a,d,mt,m,g);
@@ -63,6 +68,7 @@ Entity* EntityManager::createBullet(const Vector3& transform, const Vector3& v, 
 	aux->setLastPos(transform);
 	return aux;
 }
+
 PlayerEntity* EntityManager::createPlayer(const Vector3 initPos,double size, physx::PxPhysics* gP)
 {
 	PlayerEntity* aux = new PlayerEntity(initPos, gP,this);
@@ -74,6 +80,7 @@ PlayerEntity* EntityManager::createPlayer(const Vector3 initPos,double size, phy
 	entityList.push_back(aux);
 	return aux;
 }
+
 Entity* EntityManager::createPlane(const Vector3 initPos,  Vector3 size, const Vector4& color)
 {
 	Entity* aux = new Entity();
@@ -86,10 +93,26 @@ Entity* EntityManager::createPlane(const Vector3 initPos,  Vector3 size, const V
 	entityList.push_back(aux);
 	return aux;
 }
+
+RigidStatic* EntityManager::createPxPlane(const Vector3 initPos, Vector3 size, const Vector4& color)
+{
+	RigidStatic* aux = new RigidStatic();
+	aux->mGeo = new physx::PxBoxGeometry(size);
+	aux->mtrans = new physx::PxTransform(initPos);
+	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(1.0, 1.0, 1.0));
+	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
+	aux->_mRigid->attachShape(*aux->mshape);
+	_gScene->addActor(*aux->getRigidStatic());
+	RegisterRenderItem(aux->mItem);
+	entityList.push_back(aux);
+	return aux;
+}
+
 const std::list<Entity*>& EntityManager::getEntityList()
 {
 	return entityList;
 }
+
 void EntityManager::createAxes()
 {
 	createSphere();
@@ -97,6 +120,7 @@ void EntityManager::createAxes()
 	createSphere(Vector3(0, 10, 0), 1, Vector4(0, 1, 0, 1));
 	createSphere(Vector3(0, 0, 10), 1, Vector4(0, 0, 1, 1));
 }
+
 void EntityManager::ReleaseEntities()
 {
 	for (auto a : entityList) {

@@ -6,7 +6,7 @@
 #include "uniformGenerator.h"
 #include "windGenerator.h"
 #include "WindTimerGenerator.h"
-GameScene::GameScene(physx::PxPhysics* gPh) :SceneTemplate(gPh)
+GameScene::GameScene(physx::PxPhysics* gPh,physx::PxScene* gScene) :SceneTemplate(gPh,gScene)
 {
 }
 
@@ -22,7 +22,7 @@ void GameScene::update(double t)
 
 void GameScene::loadScene()
 {
-	mEntityManager = new EntityManager(gPh);
+	mEntityManager = new EntityManager(gPh, _gScene);
 	g = new GravityForceGen();
 	leftwind = new windGenerator(Vector3(-5,0,0),1);
 	rightwind = new WindTimerGenerator(Vector3(5, 0, 0), 1,5);

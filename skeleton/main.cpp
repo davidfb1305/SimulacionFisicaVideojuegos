@@ -69,12 +69,12 @@ void initPhysics(bool interactive)
 	//create the scenes
 
 
-	sceneManager->addScene(new Scene5(gPhysics));
-	sceneManager->addScene(new Scene1(gPhysics));
-	sceneManager->addScene(new Scene2(gPhysics));
-	sceneManager->addScene(new Scene3(gPhysics));
-	sceneManager->addScene(new Scene4(gPhysics));
-	sceneManager->addScene(new GameScene(gPhysics));
+	sceneManager->addScene(new Scene5(gPhysics,gScene));
+	sceneManager->addScene(new Scene1(gPhysics,gScene));
+	sceneManager->addScene(new Scene2(gPhysics,gScene));
+	sceneManager->addScene(new Scene3(gPhysics,gScene));
+	sceneManager->addScene(new Scene4(gPhysics,gScene));
+	sceneManager->addScene(new GameScene(gPhysics,gScene));
 	
 	}
 

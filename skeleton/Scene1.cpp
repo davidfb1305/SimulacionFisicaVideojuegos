@@ -1,6 +1,6 @@
 #include "Scene1.h"
 
-Scene1::Scene1(physx::PxPhysics* gPh) : SceneTemplate(gPh)
+Scene1::Scene1(physx::PxPhysics* gPh, physx::PxScene* gScene) : SceneTemplate(gPh,gScene)
 {
 
 }
@@ -11,7 +11,7 @@ Scene1::~Scene1()
 
 void Scene1::loadScene()
 {
-	mEntityManager = new EntityManager(gPh);
+	mEntityManager = new EntityManager(gPh,_gScene);
 	mEntityManager->createAxes();
 	mEntityManager->createParticle(Vector3(0, 0, 0), Vector3(3, 0, 0), Vector3(0, 0, 0), 1, 0);
 }

@@ -2,7 +2,7 @@
 #include "GausianGenerator.h"
 #include "uniformGenerator.h"
 #include "ParticleSystem.h"
-Scene2::Scene2(physx::PxPhysics* gPh): SceneTemplate(gPh)
+Scene2::Scene2(physx::PxPhysics* gPh, physx::PxScene* gScene): SceneTemplate(gPh,gScene)
 {
 	
 }
@@ -13,7 +13,7 @@ Scene2::~Scene2()
 
 void Scene2::loadScene()
 {
-	mEntityManager = new EntityManager(gPh);
+	mEntityManager = new EntityManager(gPh, _gScene);
 	rain = new ParticleSystem(mEntityManager);
 	//Rain gausian
 	rain->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 30.0, 0.0), Vector3(300.1, 0.1, 300.1), Vector3(0.1, -22.0, 0.1), Vector3(1.0, 1.0, 1.0), 1, Vector3(0.0, -0.5, 0.0), Vector3(0.0, 0.0, 0.0),Vector3(0,0,0),Vector4(0.0,0.0,1.0,1.0),Vector4(0,0,0.5,0), 1,100));

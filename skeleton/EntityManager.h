@@ -13,17 +13,18 @@
 #include <iostream>
 //class Entity
 class PlayerEntity;
-
+class RigidStatic;
 class EntityManager
 {
 private:
 	std::list<Entity*> entityList;
 	std::list<Entity*> entityListToRemove;
 	physx::PxPhysics* gPhysics;
+	physx::PxScene* _gScene;
 protected:
 
 public:
-	EntityManager(physx::PxPhysics* gPh);
+	EntityManager(physx::PxPhysics* gPh, physx::PxScene* gScene);
 	~EntityManager();
 	void createAxes();
 	Entity* createSphere(const Vector3& transform = Vector3(0,0,0), double r = 1,
@@ -44,8 +45,19 @@ public:
 		const physx::PxVec3& vrreal = physx::PxVec3(0.0, 0.0, 0.0), double m = 0, const physx::PxVec3& g = Vector3(0.0, 0.0, 0.0));
 	
 	PlayerEntity* createPlayer(const Vector3 initPos, double size, physx::PxPhysics* gP);
-
+	/// <summary>
+	/// Is only a visual plane 
+	/// </summary>
+	/// <param name="initPos"></param>
+	/// <param name="size"></param>
+	/// <param name="color"></param>
+	/// <returns></returns>
 	Entity* createPlane(const Vector3 initPos= Vector3(0.0,0.0,0.0), Vector3 size = Vector3(10.0,1.0,10.0), const Vector4& color = Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+	/// <summary>
+	/// Use a rigidStatic
+	/// </summary>
+	/// <returns></returns>
+	RigidStatic* createPxPlane(const Vector3 initPos = Vector3(0.0, 0.0, 0.0), Vector3 size = Vector3(10.0, 1.0, 10.0), const Vector4& color = Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 
 	const std::list<Entity*>& getEntityList();
 	void ReleaseEntities();

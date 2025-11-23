@@ -7,7 +7,7 @@ private:
 protected:
 
 public:
-	Scene5(physx::PxPhysics* gPh);
+	Scene5(physx::PxPhysics* gPh, physx::PxScene* gScene);
 	~Scene5();
 	void loadScene() override;
 

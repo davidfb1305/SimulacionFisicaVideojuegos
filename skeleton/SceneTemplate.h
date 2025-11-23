@@ -8,8 +8,9 @@ private:
 protected:
 	EntityManager* mEntityManager;
 	physx::PxPhysics* gPh;
+	physx::PxScene* _gScene;
 public:
-	SceneTemplate(physx::PxPhysics* gPh);
+	SceneTemplate(physx::PxPhysics* gPh, physx::PxScene* gScene);
 	~SceneTemplate();
 	void unLoadScene();
 	virtual void update(double t);

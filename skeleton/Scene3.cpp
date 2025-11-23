@@ -4,7 +4,7 @@
 #include "GausianGenerator.h"
 #include "windGenerator.h"
 #include "whirlGenerator.h"
-Scene3::Scene3(physx::PxPhysics* gPh) :SceneTemplate(gPh)
+Scene3::Scene3(physx::PxPhysics* gPh, physx::PxScene* gScene) :SceneTemplate(gPh,gScene)
 {
 	std::cout << "Q activa y desactiva el viento, G la gravedad y T el ciclon\n";
 
@@ -19,7 +19,7 @@ Scene3::~Scene3()
 
 void Scene3::loadScene()
 {
-	mEntityManager = new EntityManager(gPh);
+	mEntityManager = new EntityManager(gPh, _gScene);
 	prueba = new ParticleSystem(mEntityManager);
 	//Rain gausian
 	prueba->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 30.0, 0.0), Vector3(300.1, 0.1, 300.1),

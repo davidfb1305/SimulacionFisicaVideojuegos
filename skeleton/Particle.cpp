@@ -53,7 +53,7 @@ void Particle::setMass(double d)
 	massSim = d;
 }
 
-bool Particle::uptadeDestroyCondition(double t)
+bool Particle::updateDestroyCondition(double t)
 {
 	switch (mRc)
 	{
@@ -115,5 +115,5 @@ bool Particle::update(double t)
 	ac =  forceToAdd;
 	integrate(t);
 
-	return uptadeDestroyCondition(t);
+	return updateDestroyCondition(t);
 }
