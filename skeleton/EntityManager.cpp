@@ -2,6 +2,7 @@
 #include "Particle.h"
 #include "PlayerEntity.h"
 #include "RigidStatic.h"
+#include "RigidDynamic.h"
 #include "Bullet.h"
 EntityManager::EntityManager(physx::PxPhysics* gP, physx::PxScene* gScene)
 {
@@ -104,6 +105,24 @@ RigidStatic* EntityManager::createPxPlane(const Vector3 initPos, Vector3 size, c
 	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
 	aux->_mRigid->attachShape(*aux->mshape);
 	_gScene->addActor(*aux->getRigidStatic());
+	RegisterRenderItem(aux->mItem);
+	entityList.push_back(aux);
+	return aux;
+}
+
+RigidDynamic* EntityManager::createPxBox(const Vector3 initPos, const Vector3 velL, const Vector3 velAn, Vector3 size, const Vector4& color, float mass)
+{
+	RigidDynamic* aux = new RigidDynamic();
+	aux->mGeo = new physx::PxBoxGeometry(size);
+	aux->mtrans = new physx::PxTransform(initPos);
+	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(1.0, 1.0, 1.0));
+	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
+	aux->_mRigid = gPhysics->createRigidDynamic(*aux->mtrans);
+	aux->_mRigid->attachShape(*aux->mshape);
+	physx::PxRigidBodyExt::updateMassAndInertia(*aux->_mRigid,mass);
+	aux->_mRigid->setAngularVelocity(velAn);
+	aux->_mRigid->setLinearVelocity(velL);
+	_gScene->addActor(*aux->_mRigid);
 	RegisterRenderItem(aux->mItem);
 	entityList.push_back(aux);
 	return aux;
