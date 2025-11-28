@@ -20,6 +20,7 @@ uniformGenerator::~uniformGenerator()
 
 void uniformGenerator::generate()
 {
+	if (entityList.size() == _maxEntities) return;
 	if (generateProb > rand() % 101) {
 		std::uniform_real_distribution<float> _u(-0.5, 0.5);
 
@@ -39,6 +40,9 @@ void uniformGenerator::generate()
 
 		Vector4 c = color + (colorVar * auxx);
 		double rd = r;
-		mEntityManager->createMassParticle(p, v,velReal,mass, a, 0.999, 0, r, 1, time, Vector3(0, 0, 0), c)->setForceList(forceList);
+		Entity* e = mEntityManager->createMassParticle(p, v,velReal,mass, a, 0.999, 0, r, 1, time, Vector3(0, 0, 0), c);
+		entityList.push_back(e);
+		e->setForceList(forceList);
+		e->setParentListPointer(&entityList);
 	}
 }

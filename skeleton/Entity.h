@@ -27,7 +27,7 @@ protected:
 	physx::PxVec3 maxdistance;
 	bool active = false;
 	virtual void addForces();
-
+	std::list<Entity*>* mparentGeneratorList = nullptr;
 	std::list<ForceGenerator*> forceList;
 public:
 	physx::PxGeometry* mGeo;
@@ -46,6 +46,7 @@ public:
 	void setForceList(std::list<ForceGenerator*> fl);
 	void addForceGenerator(ForceGenerator* fg);
 	void removeForceGenerator(ForceGenerator* fg);
+	void setParentListPointer(std::list<Entity*>* l);
 	void clearForce();
 	virtual bool updateDestroyCondition(double t);
 	virtual bool update(double t);

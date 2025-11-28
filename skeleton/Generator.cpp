@@ -1,6 +1,7 @@
 #include "Generator.h"
 Generator::Generator(int _max)
 {
+    _maxEntities = _max;
     entityList = std::list<Entity*>();
 }
 Generator::~Generator()

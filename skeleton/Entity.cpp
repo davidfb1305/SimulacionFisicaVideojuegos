@@ -13,6 +13,7 @@ Entity::Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, R
 
 Entity::~Entity()
 {
+	if (mparentGeneratorList != nullptr) mparentGeneratorList->remove(this);
 	if(mItem!=nullptr)
 	DeregisterRenderItem(mItem);
 }
@@ -59,6 +60,11 @@ void Entity::addForceGenerator(ForceGenerator* fg)
 void Entity::removeForceGenerator(ForceGenerator* fg)
 {
 	forceList.remove(fg);
+}
+
+void Entity::setParentListPointer(std::list<Entity*>* l)
+{
+	mparentGeneratorList = l;
 }
 
 bool Entity::updateDestroyCondition(double t) {

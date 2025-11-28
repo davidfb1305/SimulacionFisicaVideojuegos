@@ -20,6 +20,7 @@ GausianGenerator::~GausianGenerator()
 
 void GausianGenerator::generate()
 {
+	if (entityList.size() == _maxEntities) return;
 	if (generateProb > rand() % 101) {
 		std::normal_distribution<float> _u(-0.5, 0.5);
 
@@ -40,6 +41,8 @@ void GausianGenerator::generate()
 		Vector4 c = color + (colorVar * auxx);
 		double rd = r;
 		Entity* e = mEntityManager->createMassParticle(p, v,velReal,mass, a, 0.999, 0, r, 1, time, Vector3(0, 0, 0), c);
+		entityList.push_back(e);
 		e->setForceList(forceList);
+		e->setParentListPointer(&entityList);
 	}
 }

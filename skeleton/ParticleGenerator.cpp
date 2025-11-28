@@ -3,7 +3,7 @@
 
 
 ParticleGenerator::ParticleGenerator(EntityManager* m, Vector3 p, Vector3 v, Vector3 vr,
-    double ms,Vector3 a, double rd, int genprob, float t,std::list<ForceGenerator*> fl)
+    double ms,Vector3 a, double rd, int genprob, float t,std::list<ForceGenerator*> fl) : Generator()
 {
     mEntityManager = m;
     pos = p;
