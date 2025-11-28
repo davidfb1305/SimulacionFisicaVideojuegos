@@ -102,9 +102,9 @@ RigidStatic* EntityManager::createPxPlane(const Vector3 initPos, Vector3 size, c
 	aux->mtrans = new physx::PxTransform(initPos);
 	aux->_mRigid = gPhysics->createRigidStatic(*aux->mtrans);
 	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(1.0, 1.0, 1.0));
-	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
 	aux->_mRigid->attachShape(*aux->mshape);
 	_gScene->addActor(*aux->getRigidStatic());
+	aux->mItem = new RenderItem(aux->mshape, aux->_mRigid, color);
 	RegisterRenderItem(aux->mItem);
 	entityList.push_back(aux);
 	return aux;
@@ -115,14 +115,15 @@ RigidDynamic* EntityManager::createPxBox(const Vector3 initPos, const Vector3 ve
 	RigidDynamic* aux = new RigidDynamic();
 	aux->mGeo = new physx::PxBoxGeometry(size);
 	aux->mtrans = new physx::PxTransform(initPos);
-	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(1.0, 1.0, 1.0));
-	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, color);
+	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(0.5, 0.5, 0.5));
+	
 	aux->_mRigid = gPhysics->createRigidDynamic(*aux->mtrans);
 	aux->_mRigid->attachShape(*aux->mshape);
-	physx::PxRigidBodyExt::updateMassAndInertia(*aux->_mRigid,mass);
+	physx::PxRigidBodyExt::setMassAndUpdateInertia(*aux->_mRigid, mass);
 	aux->_mRigid->setAngularVelocity(velAn);
 	aux->_mRigid->setLinearVelocity(velL);
 	_gScene->addActor(*aux->_mRigid);
+	aux->mItem = new RenderItem(aux->mshape, aux->_mRigid, color);
 	RegisterRenderItem(aux->mItem);
 	entityList.push_back(aux);
 	return aux;

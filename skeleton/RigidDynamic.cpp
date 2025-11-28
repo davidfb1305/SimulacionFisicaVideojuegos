@@ -21,6 +21,5 @@ bool RigidDynamic::updateDestroyCondition(double t)
 
 bool RigidDynamic::update(double t)
 {
-    _mRigid->addForce(Vector3(0,-10,0));
     return true;
 }
