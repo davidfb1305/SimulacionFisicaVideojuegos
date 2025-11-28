@@ -261,6 +261,7 @@
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GausianGenerator.cpp" />
+    <ClCompile Include="Generator.cpp" />
     <ClCompile Include="GravityForceGen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -298,6 +299,7 @@
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GausianGenerator.h" />
+    <ClInclude Include="Generator.h" />
     <ClInclude Include="GravityForceGen.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGenerator.h" />

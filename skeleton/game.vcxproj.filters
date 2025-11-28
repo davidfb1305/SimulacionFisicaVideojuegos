@@ -38,6 +38,7 @@
     <ClCompile Include="RigidStatic.cpp" />
     <ClCompile Include="Scene6.cpp" />
     <ClCompile Include="RigidDynamic.cpp" />
+    <ClCompile Include="Generator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -78,6 +79,7 @@
     <ClInclude Include="RigidStatic.h" />
     <ClInclude Include="Scene6.h" />
     <ClInclude Include="RigidDynamic.h" />
+    <ClInclude Include="Generator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -1,27 +1,27 @@
 #pragma once
 #include "Entity.h"
 #include "Particle.h"
-#include "ParticleGenerator.h"
+#include "Generator.h"
 #include <list>
 class EntityManager;
 class ForceGenerator;
-class ParticleSystem : public Entity
+class EntitySystem : public Entity
 {
 private:
 
-	std::list<ParticleGenerator*> generatorList;
+	std::list<Generator*> generatorList;
 	std::list<ForceGenerator*>  myForceList;
 	EntityManager* mEntityManager;
 	
 protected:
 
 public:
-	ParticleSystem(EntityManager* em);
-	void addGenerator(ParticleGenerator* pg);
+	EntitySystem(EntityManager* em);
+	void addGenerator(Generator* pg);
 	void addGenForce(ForceGenerator* fg);
 	void remove(ForceGenerator* fg);
 	void updatePos(Vector3 v);
-	~ParticleSystem();
+	~EntitySystem();
 	virtual bool update(double t) override;
 };
 

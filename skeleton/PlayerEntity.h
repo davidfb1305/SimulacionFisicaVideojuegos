@@ -1,6 +1,6 @@
 #pragma once
 #include "Entity.h"
-class ParticleSystem;
+class EntitySystem;
 class EntityManager; 
 class PlayerEntity :public Entity
 {
@@ -9,7 +9,7 @@ private:
 	physx::PxVec3 ac;
 	double dumping = 0.999;
 	physx::PxVec3 lastpos;
-	ParticleSystem* _jetPackPS;
+	EntitySystem* _jetPackPS;
 	ForceGenerator* jetPackForce;
 	ForceGenerator* jetPackForceForParticles;
 	float mass = 1.0;

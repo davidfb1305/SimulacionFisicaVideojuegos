@@ -1,6 +1,6 @@
 #pragma once
 #include "SceneTemplate.h"
-class ParticleSystem;
+class EntitySystem;
 class whirlGenerator;
 class windGenerator;
 class GravityForceGen;
@@ -8,7 +8,7 @@ class Scene3 : public SceneTemplate
 {
 
 private:
-	ParticleSystem* prueba;
+	EntitySystem* prueba;
 	whirlGenerator* _whirlGen;
 	windGenerator* _windGen;
 	GravityForceGen* _gravityGen;

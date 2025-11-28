@@ -37,7 +37,7 @@ void GameScene::loadScene()
 	player->addForceGenerator(leftwind);
 	player->setForceToParticleSystem(forceslist);
 	//Rain gausian
-	rain = new ParticleSystem(mEntityManager);
+	rain = new EntitySystem(mEntityManager);
 
 	rain->addGenerator(new uniformGenerator(mEntityManager, Vector3(0.0, 100.0, 0.0), Vector3(300.1, 0.1, 300.1),
 		Vector3(0.0, 0.0, 0.0), Vector3(1.0, 1.0, 1.0), 1, Vector3(0.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0),

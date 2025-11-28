@@ -1,12 +1,12 @@
 #pragma once
 #include "SceneTemplate.h"
-class ParticleSystem;
+class EntitySystem;
 class Scene2 : public SceneTemplate
 {
 private:
-	ParticleSystem* rain;
-	ParticleSystem* fog;
-	ParticleSystem* explosion;
+	EntitySystem* rain;
+	EntitySystem* fog;
+	EntitySystem* explosion;
 protected:
 public:
 	Scene2(physx::PxPhysics* gPh, physx::PxScene* gScene);

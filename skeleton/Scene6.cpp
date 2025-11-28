@@ -12,7 +12,7 @@ void Scene6::loadScene()
 {
 	mEntityManager = new EntityManager(gPh, _gScene);
 	mEntityManager->createPxPlane();
-	mEntityManager->createPxBox(Vector3(0, 50, 0),Vector3(1,0,0), Vector3(1, 0, 1), Vector3(5,5, 5), Vector4(0.0, 1, 0.0,1),10.0);
+	mEntityManager->createPxBox(Vector3(0, 50, 0),Vector3(1,0,0), Vector3(1, 0, 1), Vector3(0.5, 0.5, 0.5), Vector3(5,5, 5), Vector4(0.0, 1, 0.0, 1), 10.0);
 }
 
 void Scene6::inputListener(unsigned char key, const physx::PxTransform& camera)

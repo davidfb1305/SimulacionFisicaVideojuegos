@@ -110,12 +110,12 @@ RigidStatic* EntityManager::createPxPlane(const Vector3 initPos, Vector3 size, c
 	return aux;
 }
 
-RigidDynamic* EntityManager::createPxBox(const Vector3 initPos, const Vector3 velL, const Vector3 velAn, Vector3 size, const Vector4& color, float mass)
+RigidDynamic* EntityManager::createPxBox(const Vector3 initPos, const Vector3 velL, const Vector3 pxMaterial, const Vector3 velAn, Vector3 size, const Vector4& color, float mass)
 {
 	RigidDynamic* aux = new RigidDynamic();
 	aux->mGeo = new physx::PxBoxGeometry(size);
 	aux->mtrans = new physx::PxTransform(initPos);
-	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(0.5, 0.5, 0.5));
+	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(pxMaterial.x, pxMaterial.y, pxMaterial.z));
 	
 	aux->_mRigid = gPhysics->createRigidDynamic(*aux->mtrans);
 	aux->_mRigid->attachShape(*aux->mshape);

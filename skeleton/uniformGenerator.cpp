@@ -18,7 +18,7 @@ uniformGenerator::~uniformGenerator()
 {
 }
 
-void uniformGenerator::generateParticle()
+void uniformGenerator::generate()
 {
 	if (generateProb > rand() % 101) {
 		std::uniform_real_distribution<float> _u(-0.5, 0.5);

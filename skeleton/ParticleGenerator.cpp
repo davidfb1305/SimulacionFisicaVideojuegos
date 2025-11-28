@@ -37,16 +37,6 @@ void ParticleGenerator::setac(Vector3 v)
     ac = v;
 }
 
-void ParticleGenerator::setmForceList(std::list<ForceGenerator*> fl)
-{
-    forceList = fl;
-}
-
-void ParticleGenerator::addForceGen(ForceGenerator* f)
-{
-    forceList.push_back(f);
-}
-
 void ParticleGenerator::setR(double v)
 {
     r = v;
@@ -72,17 +62,8 @@ const double ParticleGenerator::getR()
     return r;
 }
 
-bool ParticleGenerator::isActive()
+void ParticleGenerator::generate()
 {
-    return active;
 }
 
-void ParticleGenerator::setActive(bool b)
-{
-    active = b;
-}
 
-void ParticleGenerator::updateOriginPos(Vector3 v)
-{
-    pos += v;
-}

@@ -1,46 +1,46 @@
 #include "ParticleSystem.h"
 #include "ForceGenerator.h"
-ParticleSystem::ParticleSystem(EntityManager* em) : mEntityManager(em)
+EntitySystem::EntitySystem(EntityManager* em) : mEntityManager(em)
 {
     mItem = nullptr;
     myForceList = std::list<ForceGenerator*>();
 }
 
-void ParticleSystem::addGenerator(ParticleGenerator* pg)
+void EntitySystem::addGenerator(Generator* pg)
 {
     generatorList.push_back(pg);
     pg->setmForceList(myForceList);
     
 }
 
-void ParticleSystem::addGenForce(ForceGenerator* fg)
+void EntitySystem::addGenForce(ForceGenerator* fg)
 {
     myForceList.push_back(fg);
     for (auto a : generatorList) a->
         addForceGen(fg);
 }
 
-void ParticleSystem::remove(ForceGenerator* fg)
+void EntitySystem::remove(ForceGenerator* fg)
 {
     myForceList.remove(fg);
 }
 
-void ParticleSystem::updatePos(Vector3 v)
+void EntitySystem::updatePos(Vector3 v)
 {
     for (auto a : generatorList) a->updateOriginPos(v);
 }
 
 
 
-ParticleSystem::~ParticleSystem()
+EntitySystem::~EntitySystem()
 {
     for (auto a : generatorList) delete a;
 }
 
-bool ParticleSystem::update(double t)
+bool EntitySystem::update(double t)
 {
-    if (active) { 
-        for (ParticleGenerator* pg : generatorList) if (pg->isActive())pg->generateParticle(); 
+    if (active) {
+        for (Generator* pg : generatorList) if (pg->isActive())pg->generate();
     }
     return true;
 }

@@ -18,7 +18,7 @@ GausianGenerator::~GausianGenerator()
 {
 }
 
-void GausianGenerator::generateParticle()
+void GausianGenerator::generate()
 {
 	if (generateProb > rand() % 101) {
 		std::normal_distribution<float> _u(-0.5, 0.5);

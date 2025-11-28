@@ -1,7 +1,7 @@
 #pragma once
 #include "SceneTemplate.h"
 #include <list>
-class ParticleSystem;
+class EntitySystem;
 class PlayerEntity;
 class GravityForceGen;
 class windGenerator;
@@ -14,7 +14,7 @@ private:
 	GravityForceGen* g;
 	windGenerator* leftwind;
 	WindTimerGenerator* rightwind;
-	ParticleSystem* rain;
+	EntitySystem* rain;
 	std::list<ForceGenerator*> forceslist;
 protected:
 public:
