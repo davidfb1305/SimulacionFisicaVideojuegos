@@ -12,7 +12,7 @@ PlayerEntity::PlayerEntity(const Vector3 initPos, physx::PxPhysics* gP, EntityMa
 	lastpos = initPos;
 	_jetPackPS = new EntitySystem(em);
 	//Rain gausian
-	_jetPackPS->addGenerator(new GausianGenerator(em, Vector3(-10.0, 0.0, 0.0), Vector3(0.1, 0.1, 0.1), Vector3(1.1, 1.1, 1.1), Vector3(1.0, 1.0, 1.0), 1, Vector3(1.1, 1.1, 1.1)
+	_jetPackPS->addGenerator(new ParticleGausianGenerator(em, Vector3(-10.0, 0.0, 0.0), Vector3(0.1, 0.1, 0.1), Vector3(1.1, 1.1, 1.1), Vector3(1.0, 1.0, 1.0), 1, Vector3(1.1, 1.1, 1.1)
 		, Vector3(0.0, -20.0, 0.0), Vector3(50, 0, 50), Vector4(1.0, 0, 0.0, 1), Vector4(0.2, 0, 0.0, 0), 1, 100,2));
 
 	em->addEntity(_jetPackPS);

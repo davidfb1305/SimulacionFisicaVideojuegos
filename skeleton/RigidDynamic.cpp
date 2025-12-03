@@ -1,12 +1,13 @@
 #include "RigidDynamic.h"
 
-RigidDynamic::RigidDynamic()
+RigidDynamic::RigidDynamic(physx::PxScene* mS)
 {
-
+    mScene = mS;
 }
 
 RigidDynamic::~RigidDynamic()
 {
+    mScene->removeActor(*_mRigid);
 }
 
 physx::PxRigidDynamic* RigidDynamic::getPxRigidDynamic()

@@ -97,7 +97,7 @@ Entity* EntityManager::createPlane(const Vector3 initPos,  Vector3 size, const V
 
 RigidStatic* EntityManager::createPxPlane(const Vector3 initPos, Vector3 size, const Vector4& color)
 {
-	RigidStatic* aux = new RigidStatic();
+	RigidStatic* aux = new RigidStatic(_gScene);
 	aux->mGeo = new physx::PxBoxGeometry(size);
 	aux->mtrans = new physx::PxTransform(initPos);
 	aux->_mRigid = gPhysics->createRigidStatic(*aux->mtrans);
@@ -112,7 +112,7 @@ RigidStatic* EntityManager::createPxPlane(const Vector3 initPos, Vector3 size, c
 
 RigidDynamic* EntityManager::createPxBox(const Vector3 initPos, const Vector3 velL, const Vector3 pxMaterial, const Vector3 velAn, Vector3 size, const Vector4& color, float mass)
 {
-	RigidDynamic* aux = new RigidDynamic();
+	RigidDynamic* aux = new RigidDynamic(_gScene);
 	aux->mGeo = new physx::PxBoxGeometry(size);
 	aux->mtrans = new physx::PxTransform(initPos);
 	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(pxMaterial.x, pxMaterial.y, pxMaterial.z));

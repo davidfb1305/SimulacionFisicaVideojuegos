@@ -6,8 +6,9 @@ private:
 protected:
 	physx::PxRigidDynamic* _mRigid;
 	friend class EntityManager;
+	physx::PxScene* mScene;
 public:
-	RigidDynamic();
+	RigidDynamic(physx::PxScene* mS);
 	~RigidDynamic();
 	physx::PxRigidDynamic* getPxRigidDynamic();
 	bool updateDestroyCondition(double t) override;

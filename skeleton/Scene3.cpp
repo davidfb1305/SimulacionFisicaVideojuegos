@@ -22,7 +22,7 @@ void Scene3::loadScene()
 	mEntityManager = new EntityManager(gPh, _gScene);
 	prueba = new EntitySystem(mEntityManager);
 	//Rain gausian
-	prueba->addGenerator(new GausianGenerator(mEntityManager, Vector3(0.0, 30.0, 0.0), Vector3(300.1, 0.1, 300.1),
+	prueba->addGenerator(new ParticleGausianGenerator(mEntityManager, Vector3(0.0, 30.0, 0.0), Vector3(300.1, 0.1, 300.1),
 		Vector3(0.0, 0.0, 0.0), Vector3(1.0, 1.0, 1.0), 1, Vector3(0.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0),
 		Vector3(0, 0, 0), Vector4(0.0, 0.0, 1.0, 1.0), Vector4(0, 0, 0.5, 0), 1, 100));
 	mEntityManager->addEntity(prueba);

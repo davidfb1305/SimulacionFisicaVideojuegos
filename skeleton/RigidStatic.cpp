@@ -1,8 +1,9 @@
 #include "RigidStatic.h"
 
 
-RigidStatic::RigidStatic()
+RigidStatic::RigidStatic(physx::PxScene* mS)
 {
+	mScene = mS;
 	vel = Vector3(0.0, 0.0, 0.0);
 	ac = Vector3(0.0, 0.0, 0.0);
 	dumping = 0;
@@ -10,6 +11,7 @@ RigidStatic::RigidStatic()
 
 RigidStatic::~RigidStatic()
 {
+	mScene->removeActor(*_mRigid);
 }
 
 physx::PxRigidStatic* RigidStatic::getRigidStatic()

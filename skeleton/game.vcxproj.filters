@@ -39,6 +39,7 @@
     <ClCompile Include="Scene6.cpp" />
     <ClCompile Include="RigidDynamic.cpp" />
     <ClCompile Include="Generator.cpp" />
+    <ClCompile Include="pxBoxGausianGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="Scene6.h" />
     <ClInclude Include="RigidDynamic.h" />
     <ClInclude Include="Generator.h" />
+    <ClInclude Include="pxBoxGausianGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
