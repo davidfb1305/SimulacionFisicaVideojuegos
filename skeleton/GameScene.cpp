@@ -1,7 +1,7 @@
 #include "GameScene.h"
 #include "PlayerEntity.h"
 #include "GravityForceGen.h"
-#include "particleSystem.h"
+#include "EntitySystem.h"
 #include "GausianGenerator.h"
 #include "uniformGenerator.h"
 #include "windGenerator.h"

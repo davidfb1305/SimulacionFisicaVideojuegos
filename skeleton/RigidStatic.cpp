@@ -11,6 +11,7 @@ RigidStatic::RigidStatic(physx::PxScene* mS)
 
 RigidStatic::~RigidStatic()
 {
+	if (mparentGeneratorList != nullptr) mparentGeneratorList->remove(this);
 	mScene->removeActor(*_mRigid);
 }
 
@@ -28,3 +29,4 @@ bool RigidStatic::update(double t)
 {
 	return true;
 }
+

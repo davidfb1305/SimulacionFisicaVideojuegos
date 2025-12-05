@@ -1,5 +1,5 @@
 #include "PlayerEntity.h"
-#include "ParticleSystem.h"
+#include "EntitySystem.h"
 #include "GausianGenerator.h"
 #include "ForceGenerator.h"
 #include "EntityManager.h"

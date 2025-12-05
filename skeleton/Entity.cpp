@@ -76,3 +76,9 @@ void Entity::clearForce()
 	forceToAdd = Vector3(0, 0, 0);
 }
 
+void Entity::setRemoveConTime(float t)
+{
+	mRc = TIME;
+	timeToRemove = t;
+}
+

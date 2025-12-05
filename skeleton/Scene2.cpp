@@ -1,7 +1,7 @@
 #include "Scene2.h"
 #include "GausianGenerator.h"
 #include "uniformGenerator.h"
-#include "ParticleSystem.h"
+#include "EntitySystem.h"
 Scene2::Scene2(physx::PxPhysics* gPh, physx::PxScene* gScene): SceneTemplate(gPh,gScene)
 {
 	

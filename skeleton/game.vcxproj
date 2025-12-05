@@ -266,7 +266,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleGenerator.cpp" />
-    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="EntitySystem.cpp" />
     <ClCompile Include="PlayerEntity.cpp" />
     <ClCompile Include="pxBoxGausianGenerator.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
@@ -304,7 +304,7 @@
     <ClInclude Include="GravityForceGen.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGenerator.h" />
-    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="EntitySystem.h" />
     <ClInclude Include="PlayerEntity.h" />
     <ClInclude Include="pxBoxGausianGenerator.h" />
     <ClInclude Include="RenderUtils.hpp" />

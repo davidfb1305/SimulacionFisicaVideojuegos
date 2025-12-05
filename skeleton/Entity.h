@@ -48,6 +48,7 @@ public:
 	void removeForceGenerator(ForceGenerator* fg);
 	void setParentListPointer(std::list<Entity*>* l);
 	void clearForce();
+	void setRemoveConTime(float t);
 	virtual bool updateDestroyCondition(double t);
 	virtual bool update(double t);
 };

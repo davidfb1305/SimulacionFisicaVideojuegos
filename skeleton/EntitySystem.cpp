@@ -1,4 +1,4 @@
-#include "ParticleSystem.h"
+#include "EntitySystem.h"
 #include "ForceGenerator.h"
 EntitySystem::EntitySystem(EntityManager* em) : mEntityManager(em)
 {

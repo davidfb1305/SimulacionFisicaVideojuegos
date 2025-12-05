@@ -1,5 +1,5 @@
 #include "Scene3.h"
-#include "ParticleSystem.h"
+#include "EntitySystem.h"
 #include "GravityForceGen.h"
 #include "GausianGenerator.h"
 #include "windGenerator.h"
