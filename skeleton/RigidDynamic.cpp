@@ -1,5 +1,5 @@
 #include "RigidDynamic.h"
-
+#include "ForceGenerator.h"
 RigidDynamic::RigidDynamic(physx::PxScene* mS)
 {
     mparentGeneratorList = nullptr;
@@ -37,5 +37,15 @@ bool RigidDynamic::updateDestroyCondition(double t)
 
 bool RigidDynamic::update(double t)
 {
+	addForces();
+	_mRigid->addForce(forceToAdd);
 	return updateDestroyCondition(t);
+}
+
+void RigidDynamic::addForces()
+{
+	forceToAdd = Vector3(0.0, 0.0, 0.0);
+	for (auto f : forceList) {
+		if (f->checkAddForceEntity(this)) f->addForceToPxEntity(this);
+	}
 }

@@ -13,5 +13,6 @@ public:
 	physx::PxRigidDynamic* getPxRigidDynamic();
 	bool updateDestroyCondition(double t) override;
 	virtual bool update(double t) override;
+	void addForces() override;
 };
 

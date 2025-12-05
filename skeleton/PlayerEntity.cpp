@@ -50,7 +50,7 @@ void PlayerEntity::integrate(double t) {
 void PlayerEntity::addForces()
 {
 	for (auto f : forceList) {
-		if (f->checkAddForceEntity(this)) f->addForceToEntity(this);
+		if (f->checkAddForceEntity(this));// f->addForceToPxEntity(this);
 	}
 }
 bool PlayerEntity::update(double t)

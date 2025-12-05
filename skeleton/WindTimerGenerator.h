@@ -13,7 +13,7 @@ protected:
 public:
 	WindTimerGenerator(const Vector3& wVel, float k, float t);
 	~WindTimerGenerator();
-	void addForceToEntity(PlayerEntity* p) override;
+	void addForceToPxEntity(RigidDynamic* p) override;
 	bool checkAddForce(Particle* p) override;
 	bool removeForceGenerator(Particle* p) override;
 	void addForceToParticle(Particle* p) override;

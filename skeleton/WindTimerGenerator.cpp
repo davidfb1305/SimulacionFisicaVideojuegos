@@ -1,5 +1,6 @@
 #include "WindTimerGenerator.h"
 #include "PlayerEntity.h"
+#include "RigidDynamic.h"
 #include "Particle.h"
 WindTimerGenerator::WindTimerGenerator(const Vector3& wVel, float k, float t)
     :ForceGenerator(Vector3(0.0, 0.0, 0.0))
@@ -16,12 +17,13 @@ WindTimerGenerator::~WindTimerGenerator()
 }
 
 
-void WindTimerGenerator::addForceToEntity(PlayerEntity* p)
+void WindTimerGenerator::addForceToPxEntity(RigidDynamic* p)
 {
-    Vector3 velp = p->getVel();
+   /* Vector3 velp = p->getVel();
     Vector3 force(k1 * (windVel - velp) + p->getK() *
         (windVel.magnitude() - velp.magnitude()) * (windVel - velp));
     p->addForce(force*actTime);
+    */
 }
 
 bool WindTimerGenerator::checkAddForce(Particle* p)

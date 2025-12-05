@@ -1,5 +1,6 @@
 #include "ForceGenerator.h"
 #include "PlayerEntity.h"
+#include "RigidDynamic.h"
 #include "Particle.h"
 ForceGenerator::ForceGenerator(Vector3 force)
 {
@@ -27,8 +28,9 @@ bool ForceGenerator::checkAddForceEntity(Entity* p)
     return _active;
 }
 
-void ForceGenerator::addForceToEntity(PlayerEntity* p)
+void ForceGenerator::addForceToPxEntity(RigidDynamic* p)
 {
+    
     p->addForce(forceToApply);
 }
 
