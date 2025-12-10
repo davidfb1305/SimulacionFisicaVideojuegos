@@ -1,5 +1,17 @@
 #include "RigidDynamic.h"
 #include "ForceGenerator.h"
+void RigidDynamic::setVolume(float f)
+{
+	volume = f;
+}
+void RigidDynamic::setLinearDamping(float d)
+{
+	_mRigid->setLinearDamping(d);
+}
+void RigidDynamic::setAngularDamping(float d)
+{
+	_mRigid->setLinearDamping(d);
+}
 RigidDynamic::RigidDynamic(physx::PxScene* mS)
 {
     mparentGeneratorList = nullptr;
@@ -35,10 +47,21 @@ bool RigidDynamic::updateDestroyCondition(double t)
 	}
 }
 
+Vector3 RigidDynamic::getLinearVel()
+{
+	return _mRigid->getLinearVelocity();
+}
+
+Vector3 RigidDynamic::getGlobalPos()
+{
+	return _mRigid->getGlobalPose().p;
+}
+
 bool RigidDynamic::update(double t)
 {
 	addForces();
-	_mRigid->addForce(forceToAdd);
+	
+	_mRigid->addForce(forceToAdd* pow(mass, -1));
 	return updateDestroyCondition(t);
 }
 
@@ -48,4 +71,9 @@ void RigidDynamic::addForces()
 	for (auto f : forceList) {
 		if (f->checkAddForceEntity(this)) f->addForceToPxEntity(this);
 	}
+}
+
+float RigidDynamic::getVolume()
+{
+	return volume;
 }

@@ -16,12 +16,10 @@ windGenerator::~windGenerator()
 void windGenerator::addForceToPxEntity(RigidDynamic* p)
 {
 
-    /*
-    Vector3 velp = p->getVel();
+    Vector3 velp = p->getLinearVel();
     Vector3 force(k1 * (windVel - velp) + p->getK() *
         (windVel.magnitude() - velp.magnitude()) * (windVel - velp));
     p->addForce(force);
-    */
 }
 
 bool windGenerator::checkAddForce(Particle* p)

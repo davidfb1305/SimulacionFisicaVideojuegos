@@ -14,6 +14,7 @@ protected:
 public:
 	BuoyancyForceGenerator(Entity* e,float h, float v, float d, float g = 9.8);
 	~BuoyancyForceGenerator();
+	void addForceToPxEntity(RigidDynamic* p) override;
 	bool checkAddForce(Particle* p) override;
 	void addForceToParticle(Particle* p) override;
 };

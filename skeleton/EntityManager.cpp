@@ -110,14 +110,20 @@ RigidStatic* EntityManager::createPxPlane(const Vector3 initPos, Vector3 size, c
 	return aux;
 }
 
-RigidDynamic* EntityManager::createPxBox(const Vector3 initPos, const Vector3 velL, const Vector3 velAn, const Vector3 pxMaterial,Vector3 size, const Vector4& color, float mass)
+RigidDynamic* EntityManager::createPxBox(const Vector3 initPos, const Vector3 velL, const Vector3 velAn,
+	const Vector3 pxMaterial,Vector3 size, const Vector4& color, float mass, float linearDamping , float angDamping,float k)
 {
 	RigidDynamic* aux = new RigidDynamic(_gScene);
 	aux->mGeo = new physx::PxBoxGeometry(size);
 	aux->mtrans = new physx::PxTransform(initPos);
+	aux->setK(k);
 	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(pxMaterial.x, pxMaterial.y, pxMaterial.z));
-	
+	aux->setVolume(size.x*size.y*size.z);
+	aux->setVolumeVec(size);
+	aux->mass = mass;
 	aux->_mRigid = gPhysics->createRigidDynamic(*aux->mtrans);
+	aux->setAngularDamping(angDamping);
+	aux->setLinearDamping(linearDamping);
 	aux->_mRigid->attachShape(*aux->mshape);
 	physx::PxRigidBodyExt::setMassAndUpdateInertia(*aux->_mRigid, mass);
 	aux->_mRigid->setAngularVelocity(velAn);

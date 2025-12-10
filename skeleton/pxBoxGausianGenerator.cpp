@@ -3,7 +3,7 @@
 #include "RigidDynamic.h"
 pxBoxGausianGenerator::pxBoxGausianGenerator(EntityManager* em,Vector3 p, Vector3 pVar, Vector3 lvel, Vector3 lvelvar, Vector3 angvel,
 	Vector3 angvelvar, Vector3 mat, Vector3 matVar, float _mass, float masvar,
-	Vector4 c, Vector4 cvar, Vector3 s, Vector3 svar, float geprob, float t, int _max, 
+	Vector4 c, Vector4 cvar, Vector3 s, Vector3 svar, float geprob, float t, int _max, float linearD, float angD, float k,
 	std::list<ForceGenerator*> fl) : Generator(_max)
 {
 	mEntityManager = em;
@@ -16,6 +16,7 @@ pxBoxGausianGenerator::pxBoxGausianGenerator(EntityManager* em,Vector3 p, Vector
 	color = c;
 	colorVar = cvar;
 	size  = s;
+	this->k = k;
 	sizeVar = svar;
 	generateProb = geprob;
 	time = t;
@@ -26,6 +27,8 @@ pxBoxGausianGenerator::pxBoxGausianGenerator(EntityManager* em,Vector3 p, Vector
 	std::random_device __randomDevice;
 	RANDOM = std::mt19937(__randomDevice());
 	forceList = fl;
+	linearDamping = linearD;
+	angDamping = angD;
 	active = true;
 }
 
@@ -68,10 +71,10 @@ void pxBoxGausianGenerator::generate()
 		auxz = _u(RANDOM);
 		Vector4 c = color + (colorVar.multiply(Vector4(auxx, auxy, auxz,_m)));
 		
-		RigidDynamic* e = mEntityManager->createPxBox(p,lv,angv,m,s,c,10.0);
+		RigidDynamic* e = mEntityManager->createPxBox(p,lv,angv,m,s,c,10.0,linearDamping,angDamping,k);
 		
 		entityList.push_back(e);
-		e->setRemoveConTime(5);
+		e->setRemoveConTime(50);
 		e->setParentListPointer(&entityList);
 		e->setForceList(forceList);
 		e->setParentListPointer(&entityList);
