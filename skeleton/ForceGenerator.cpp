@@ -28,7 +28,7 @@ bool ForceGenerator::checkAddForceEntity(Entity* p)
     return _active;
 }
 
-void ForceGenerator::addForceToPxEntity(RigidDynamic* p)
+void ForceGenerator::addForceToPxEntity(mRigidDynamic* p)
 {
     
     p->addForce(forceToApply);

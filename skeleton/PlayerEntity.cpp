@@ -1,26 +1,27 @@
 #include "PlayerEntity.h"
 #include "EntitySystem.h"
 #include "GausianGenerator.h"
+#include "SpringForceGenerator.h"
 #include "ForceGenerator.h"
 #include "EntityManager.h"
-PlayerEntity::PlayerEntity(const Vector3 initPos, physx::PxPhysics* gP, EntityManager* em)
-	:Entity()
+#include "Particle.h"
+PlayerEntity::PlayerEntity(physx::PxScene* mS,const Vector3 initPos, physx::PxPhysics* gP, EntityManager* em)
+	:mRigidDynamic(mS)
 {
-	vel = Vector3(0,0,0);
-	ac = Vector3(0,0,0);
 	jetPackForce = new ForceGenerator(Vector3(0,30,0));
+	jetPackForce->setActive(false);
 	lastpos = initPos;
 	_jetPackPS = new EntitySystem(em);
 	//Rain gausian
+	jetpack = em->createMassParticle(Vector3(-10.0, 0.0, 0.0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10);
 	_jetPackPS->addGenerator(new ParticleGausianGenerator(em, Vector3(-10.0, 0.0, 0.0), Vector3(0.1, 0.1, 0.1), Vector3(1.1, 1.1, 1.1), Vector3(1.0, 1.0, 1.0), 1, Vector3(1.1, 1.1, 1.1)
 		, Vector3(0.0, -20.0, 0.0), Vector3(50, 0, 50), Vector4(1.0, 0, 0.0, 1), Vector4(0.2, 0, 0.0, 0), 1, 100,2));
-
 	em->addEntity(_jetPackPS);
+	SpringForceGenerator* spring = new SpringForceGenerator(jetpack,300.0,1);
+	addForceGenerator(spring);
 	jetPackForceForParticles = new ForceGenerator(Vector3(0, -50, 0));
 	_jetPackPS->addForceGenerator(jetPackForceForParticles);
-	addForceGenerator(jetPackForce);
-	_jetPackPS->setActive(true);
-	jetPackForce->setActive(true);
+	jetpack->addForceGenerator(jetPackForce);
 }
 
 PlayerEntity::~PlayerEntity()
@@ -39,32 +40,16 @@ void PlayerEntity::inputListener(unsigned char key)
 		}
 	}
 }
-void PlayerEntity::integrate(double t) {
-	vel += (t * ac);
-	mtrans->p += (t * vel);
-	Vector3 aux = mtrans->p - lastpos;
-	lastpos = mtrans->p;
-	_jetPackPS->updatePos(aux);
 
-}
-void PlayerEntity::addForces()
+bool PlayerEntity::update(double d)
 {
-	for (auto f : forceList) {
-		if (f->checkAddForceEntity(this));// f->addForceToPxEntity(this);
-	}
-}
-bool PlayerEntity::update(double t)
-{
-	clearForce();
 	addForces();
-	ac = forceToAdd * pow(mass, -1);
-	integrate(t);
-	if (mtrans->p.y < -10) { mtrans->p.y = -10.0;
-	vel = Vector3(0, 0, 0);
-	}
-	
-    return true;
+	_jetPackPS->updatePos(jetpack->mtrans->p);
+	_mRigid->addForce(forceToAdd * pow(mass, -1));
+	return true;
 }
+
+
 
 void PlayerEntity::setForceToParticleSystem(const std::list<ForceGenerator*>& fg)
 {

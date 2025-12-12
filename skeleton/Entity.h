@@ -27,6 +27,7 @@ protected:
 	physx::PxVec3 maxdistance;
 	bool active = false;
 	virtual void addForces();
+	bool naturalDestroy = false;
 	std::list<Entity*>* mparentGeneratorList = nullptr;
 	std::list<ForceGenerator*> forceList;
 public:
@@ -38,7 +39,7 @@ public:
 
 	physx::PxVec3 forceToAdd;
 	Entity(physx::PxGeometry* g, physx::PxTransform* t, physx::PxShape* s, RenderItem* r,std::list<ForceGenerator*> fl = std::list<ForceGenerator*>());
-	~Entity();
+	virtual ~Entity();
 	Entity();
 	void setActive(bool b);
 	bool isActive();

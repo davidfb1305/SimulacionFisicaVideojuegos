@@ -13,7 +13,7 @@ windGenerator::~windGenerator()
 {
 }
 
-void windGenerator::addForceToPxEntity(RigidDynamic* p)
+void windGenerator::addForceToPxEntity(mRigidDynamic* p)
 {
 
     Vector3 velp = p->getLinearVel();

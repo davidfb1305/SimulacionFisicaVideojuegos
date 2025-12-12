@@ -13,7 +13,7 @@ public:
 	SpringForceGenerator(Entity* ori, double k, double resting_length);
 	~SpringForceGenerator();
 	void addForceToParticle(Particle* p) override;
-	void addForceToPxEntity(RigidDynamic* p) override;
+	void addForceToPxEntity(mRigidDynamic* p) override;
 	inline void setK(double k) { _k = k; };
 	inline const double getK() { return _k; };
 	inline void setLength(double l) { _resting_length = l; };

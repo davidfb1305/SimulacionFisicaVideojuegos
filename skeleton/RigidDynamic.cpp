@@ -1,35 +1,34 @@
 #include "RigidDynamic.h"
 #include "ForceGenerator.h"
-void RigidDynamic::setVolume(float f)
+void mRigidDynamic::setVolume(float f)
 {
 	volume = f;
 }
-void RigidDynamic::setLinearDamping(float d)
+void mRigidDynamic::setLinearDamping(float d)
 {
 	_mRigid->setLinearDamping(d);
 }
-void RigidDynamic::setAngularDamping(float d)
+void mRigidDynamic::setAngularDamping(float d)
 {
 	_mRigid->setLinearDamping(d);
 }
-RigidDynamic::RigidDynamic(physx::PxScene* mS)
+mRigidDynamic::mRigidDynamic(physx::PxScene* mS)
 {
     mparentGeneratorList = nullptr;
     mScene = mS;
 }
 
-RigidDynamic::~RigidDynamic()
+mRigidDynamic::~mRigidDynamic()
 {
-    if (mparentGeneratorList != nullptr) mparentGeneratorList->remove(this);
     mScene->removeActor(*_mRigid);
 }
 
-physx::PxRigidDynamic* RigidDynamic::getPxRigidDynamic()
+physx::PxRigidDynamic* mRigidDynamic::getPxRigidDynamic()
 {
     return _mRigid;
 }
 
-bool RigidDynamic::updateDestroyCondition(double t)
+bool mRigidDynamic::updateDestroyCondition(double t)
 {
 	switch (mRc)
 	{
@@ -47,25 +46,26 @@ bool RigidDynamic::updateDestroyCondition(double t)
 	}
 }
 
-Vector3 RigidDynamic::getLinearVel()
+Vector3 mRigidDynamic::getLinearVel()
 {
 	return _mRigid->getLinearVelocity();
 }
 
-Vector3 RigidDynamic::getGlobalPos()
+Vector3 mRigidDynamic::getGlobalPos()
 {
 	return _mRigid->getGlobalPose().p;
 }
 
-bool RigidDynamic::update(double t)
+bool mRigidDynamic::update(double t)
 {
 	addForces();
 	
 	_mRigid->addForce(forceToAdd* pow(mass, -1));
-	return updateDestroyCondition(t);
+	naturalDestroy = updateDestroyCondition(t);
+	return naturalDestroy;
 }
 
-void RigidDynamic::addForces()
+void mRigidDynamic::addForces()
 {
 	forceToAdd = Vector3(0.0, 0.0, 0.0);
 	for (auto f : forceList) {
@@ -73,7 +73,7 @@ void RigidDynamic::addForces()
 	}
 }
 
-float RigidDynamic::getVolume()
+float mRigidDynamic::getVolume()
 {
 	return volume;
 }

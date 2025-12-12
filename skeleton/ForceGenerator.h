@@ -3,7 +3,7 @@
 #include "RenderUtils.hpp"
 #include "Entity.h"
 class Particle;
-class RigidDynamic;
+class mRigidDynamic;
 class PlayerEntity;
 class ForceGenerator
 {
@@ -17,7 +17,7 @@ public:
 	virtual bool removeForceGenerator(Particle* p);
 	virtual void addForceToParticle(Particle* p);
 	virtual bool checkAddForceEntity(Entity* p);
-	virtual void addForceToPxEntity(RigidDynamic* p);
+	virtual void addForceToPxEntity(mRigidDynamic* p);
 	void setActive(bool b);
 	inline bool isActive() { return _active; };
 	~ForceGenerator();

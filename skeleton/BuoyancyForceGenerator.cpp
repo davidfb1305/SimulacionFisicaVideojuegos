@@ -22,7 +22,7 @@ bool BuoyancyForceGenerator::checkAddForce(Particle* p)
 	return _active;
 }
 
-void BuoyancyForceGenerator::addForceToPxEntity(RigidDynamic* p)
+void BuoyancyForceGenerator::addForceToPxEntity(mRigidDynamic* p)
 {
 	float h = p->getGlobalPos().y;
 	float h0 = _refEntity->mtrans->p.y;

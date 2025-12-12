@@ -72,11 +72,24 @@ Entity* EntityManager::createBullet(const Vector3& transform, const Vector3& v, 
 
 PlayerEntity* EntityManager::createPlayer(const Vector3 initPos,double size, physx::PxPhysics* gP)
 {
-	PlayerEntity* aux = new PlayerEntity(initPos, gP,this);
-	aux->mGeo = new physx::PxSphereGeometry(size);
+	PlayerEntity* aux = new PlayerEntity(_gScene,initPos, gP,this);
+	aux->mGeo = new physx::PxBoxGeometry(Vector3(size,size,size));
 	aux->mtrans = new physx::PxTransform(initPos);
-	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(1.0, 1.0, 1.0));
-	aux->mItem = new RenderItem(aux->mshape, aux->mtrans, Vector4(1.0, 1.0, 1.0, 1.0));
+	aux->setK(1);
+	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(1, 1, 1));
+	aux->setVolume(size * size * size);
+	aux->setVolumeVec(Vector3(size,size,size));
+	aux->mass = 10.0;
+	aux->_mRigid = gPhysics->createRigidDynamic(*aux->mtrans);
+	aux->setAngularDamping(0.9);
+	aux->setLinearDamping(0.9);
+	aux->_mRigid->attachShape(*aux->mshape);
+	physx::PxRigidBodyExt::setMassAndUpdateInertia(*aux->_mRigid, aux->mass);
+	_gScene->addActor(*aux->_mRigid);
+	aux->_mRigid->setAngularVelocity(Vector3(0.0,0.0,0.0));
+	aux->_mRigid->setLinearVelocity(Vector3(0.0,0.0,0.0));
+
+	aux->mItem = new RenderItem(aux->mshape, aux->_mRigid,Vector4(1.0,1.0,1.0,1.0));
 	RegisterRenderItem(aux->mItem);
 	entityList.push_back(aux);
 	return aux;
@@ -110,10 +123,10 @@ RigidStatic* EntityManager::createPxPlane(const Vector3 initPos, Vector3 size, c
 	return aux;
 }
 
-RigidDynamic* EntityManager::createPxBox(const Vector3 initPos, const Vector3 velL, const Vector3 velAn,
+mRigidDynamic* EntityManager::createPxBox(const Vector3 initPos, const Vector3 velL, const Vector3 velAn,
 	const Vector3 pxMaterial,Vector3 size, const Vector4& color, float mass, float linearDamping , float angDamping,float k)
 {
-	RigidDynamic* aux = new RigidDynamic(_gScene);
+	mRigidDynamic* aux = new mRigidDynamic(_gScene);
 	aux->mGeo = new physx::PxBoxGeometry(size);
 	aux->mtrans = new physx::PxTransform(initPos);
 	aux->setK(k);

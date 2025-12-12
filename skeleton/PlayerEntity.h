@@ -1,30 +1,25 @@
 #pragma once
-#include "Entity.h"
+#include "RigidDynamic.h"
 class EntitySystem;
 class EntityManager; 
-class PlayerEntity :public Entity
+class PlayerEntity :public mRigidDynamic
 {
 private:
-	physx::PxVec3 vel;
-	physx::PxVec3 ac;
-	double dumping = 0.999;
+	
+protected:
 	physx::PxVec3 lastpos;
 	EntitySystem* _jetPackPS;
 	ForceGenerator* jetPackForce;
 	ForceGenerator* jetPackForceForParticles;
 	float mass = 1.0;
-	float k = 0.0;
-protected:
-
+	float k = 1.0;
+	friend class EntityManager;
+	Entity* jetpack;
 public:
-	PlayerEntity(const Vector3 initPos, physx::PxPhysics* gP, EntityManager* em);
+	PlayerEntity(physx::PxScene* mS, const Vector3 initPos, physx::PxPhysics* gP, EntityManager* em);
 	~PlayerEntity();
 	void inputListener(unsigned char key);
-	void integrate(double t);
-	void addForces() override;
-	bool update(double t) override;
-	inline Vector3 getVel() { return vel; };
-	inline float getK() { return k; };
+	bool update(double d) override;
 	void setForceToParticleSystem(const std::list<ForceGenerator*>& fg);
 };
 

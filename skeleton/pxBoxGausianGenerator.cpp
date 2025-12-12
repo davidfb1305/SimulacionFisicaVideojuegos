@@ -71,10 +71,10 @@ void pxBoxGausianGenerator::generate()
 		auxz = _u(RANDOM);
 		Vector4 c = color + (colorVar.multiply(Vector4(auxx, auxy, auxz,_m)));
 		
-		RigidDynamic* e = mEntityManager->createPxBox(p,lv,angv,m,s,c,10.0,linearDamping,angDamping,k);
+		mRigidDynamic* e = mEntityManager->createPxBox(p,lv,angv,m,s,c,10.0,linearDamping,angDamping,k);
 		
 		entityList.push_back(e);
-		e->setRemoveConTime(50);
+		e->setRemoveConTime(5);
 		e->setParentListPointer(&entityList);
 		e->setForceList(forceList);
 		e->setParentListPointer(&entityList);

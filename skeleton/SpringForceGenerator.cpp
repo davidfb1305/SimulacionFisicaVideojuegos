@@ -22,9 +22,9 @@ void SpringForceGenerator::addForceToParticle(Particle* p)
 	p->addForce(forceToApply);
 }
 
-void SpringForceGenerator::addForceToPxEntity(RigidDynamic* p)
+void SpringForceGenerator::addForceToPxEntity(mRigidDynamic* p)
 {
-	Vector3 relativePos = _ori->mtrans->p - p->mtrans->p;
+	Vector3 relativePos = _ori->mtrans->p - (p->getGlobalPos());
 	float length = relativePos.normalize();
 	float deltaX = length - _resting_length;
 	forceToApply = relativePos * deltaX * _k;

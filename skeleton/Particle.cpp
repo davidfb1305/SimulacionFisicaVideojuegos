@@ -114,6 +114,6 @@ bool Particle::update(double t)
 	addForces();
 	ac =  forceToAdd;
 	integrate(t);
-
-	return updateDestroyCondition(t);
+	naturalDestroy = updateDestroyCondition(t);
+	return naturalDestroy;
 }

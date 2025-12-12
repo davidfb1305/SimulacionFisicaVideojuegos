@@ -39,10 +39,10 @@ void GameScene::loadScene()
 	//Rain gausian
 	rain = new EntitySystem(mEntityManager);
 
-	rain->addGenerator(new particleUniformGenerator(mEntityManager, Vector3(0.0, 100.0, 0.0), Vector3(300.1, 0.1, 300.1),
+	/*rain->addGenerator(new particleUniformGenerator(mEntityManager, Vector3(0.0, 100.0, 0.0), Vector3(300.1, 0.1, 300.1),
 		Vector3(0.0, 0.0, 0.0), Vector3(1.0, 1.0, 1.0), 1, Vector3(0.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0),
 		Vector3(0, 0, 0), Vector4(0.0, 0.0, 1.0, 1.0), Vector4(0, 0, 0.5, 0), 1, 100));
-	mEntityManager->addEntity(rain);
+	mEntityManager->addEntity(rain);*/
 	rain->addGenForce(g);
 	rain->addGenForce(leftwind);
 	rain->addGenForce(rightwind);

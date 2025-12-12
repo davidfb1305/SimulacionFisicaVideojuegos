@@ -34,6 +34,7 @@ void EntitySystem::updatePos(Vector3 v)
 
 EntitySystem::~EntitySystem()
 {
+    
     for (auto a : generatorList) delete a;
 }
 

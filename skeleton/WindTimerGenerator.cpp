@@ -17,7 +17,7 @@ WindTimerGenerator::~WindTimerGenerator()
 }
 
 
-void WindTimerGenerator::addForceToPxEntity(RigidDynamic* p)
+void WindTimerGenerator::addForceToPxEntity(mRigidDynamic* p)
 {
     Vector3 velp = p->getLinearVel();
     Vector3 force(k1 * (windVel - velp) + p->getK() *

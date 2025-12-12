@@ -6,6 +6,7 @@ Generator::Generator(int _max)
 }
 Generator::~Generator()
 {
+   
 }
 bool Generator::isActive()
 {
