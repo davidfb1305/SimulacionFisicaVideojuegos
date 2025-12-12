@@ -89,7 +89,7 @@ PlayerEntity* EntityManager::createPlayer(const Vector3 initPos,double size, phy
 	aux->_mRigid->setAngularVelocity(Vector3(0.0,0.0,0.0));
 	aux->_mRigid->setLinearVelocity(Vector3(0.0,0.0,0.0));
 
-	aux->mItem = new RenderItem(aux->mshape, aux->_mRigid,Vector4(1.0,1.0,1.0,1.0));
+	aux->mItem = new RenderItem(aux->mshape, aux->_mRigid,Vector4(0.0,1.0,0.0,1.0));
 	RegisterRenderItem(aux->mItem);
 	entityList.push_back(aux);
 	return aux;

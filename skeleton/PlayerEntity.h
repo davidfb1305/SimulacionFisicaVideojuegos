@@ -11,10 +11,12 @@ protected:
 	EntitySystem* _jetPackPS;
 	ForceGenerator* jetPackForce;
 	ForceGenerator* jetPackForceForParticles;
+	ForceGenerator* gravityForMyParticle;
 	float mass = 1.0;
 	float k = 1.0;
 	friend class EntityManager;
 	Entity* jetpack;
+	Entity* opositeSpring;
 public:
 	PlayerEntity(physx::PxScene* mS, const Vector3 initPos, physx::PxPhysics* gP, EntityManager* em);
 	~PlayerEntity();

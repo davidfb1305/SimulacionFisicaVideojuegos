@@ -5,14 +5,14 @@
 #include "ForceGenerator.h"
 #include "EntityManager.h"
 #include "Particle.h"
+#include "GravityForceGen.h"
 PlayerEntity::PlayerEntity(physx::PxScene* mS,const Vector3 initPos, physx::PxPhysics* gP, EntityManager* em)
 	:mRigidDynamic(mS)
 {
-	jetPackForce = new ForceGenerator(Vector3(0,30,0));
+	jetPackForce = new ForceGenerator(Vector3(0,300,0));
 	jetPackForce->setActive(false);
 	lastpos = initPos;
 	_jetPackPS = new EntitySystem(em);
-	//Rain gausian
 	jetpack = em->createMassParticle(Vector3(-10.0, 0.0, 0.0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10);
 	_jetPackPS->addGenerator(new ParticleGausianGenerator(em, Vector3(-10.0, 0.0, 0.0), Vector3(0.1, 0.1, 0.1), Vector3(1.1, 1.1, 1.1), Vector3(1.0, 1.0, 1.0), 1, Vector3(1.1, 1.1, 1.1)
 		, Vector3(0.0, -20.0, 0.0), Vector3(50, 0, 50), Vector4(1.0, 0, 0.0, 1), Vector4(0.2, 0, 0.0, 0), 1, 100,2));
@@ -21,7 +21,17 @@ PlayerEntity::PlayerEntity(physx::PxScene* mS,const Vector3 initPos, physx::PxPh
 	addForceGenerator(spring);
 	jetPackForceForParticles = new ForceGenerator(Vector3(0, -50, 0));
 	_jetPackPS->addForceGenerator(jetPackForceForParticles);
+	gravityForMyParticle = new GravityForceGen();
 	jetpack->addForceGenerator(jetPackForce);
+
+	opositeSpring = em->createMassParticle(Vector3(10.0, 0.0, 0.0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10);
+	_jetPackPS->addGenerator(new ParticleGausianGenerator(em, Vector3(-10.0, 0.0, 0.0), Vector3(0.1, 0.1, 0.1), Vector3(1.1, 1.1, 1.1), Vector3(1.0, 1.0, 1.0), 1, Vector3(1.1, 1.1, 1.1)
+		, Vector3(0.0, -20.0, 0.0), Vector3(50, 0, 50), Vector4(1.0, 0, 0.0, 1), Vector4(0.2, 0, 0.0, 0), 1, 100, 2));
+	spring = new SpringForceGenerator(opositeSpring, 300.0, 1);
+	opositeSpring->addForceGenerator(jetPackForce);
+	opositeSpring->addForceGenerator(gravityForMyParticle);
+	jetpack->addForceGenerator(gravityForMyParticle);
+	addForceGenerator(spring);
 }
 
 PlayerEntity::~PlayerEntity()
