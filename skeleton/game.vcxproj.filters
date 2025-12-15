@@ -40,6 +40,7 @@
     <ClCompile Include="RigidDynamic.cpp" />
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="pxBoxGausianGenerator.cpp" />
+    <ClCompile Include="TimerEntitySystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -82,6 +83,7 @@
     <ClInclude Include="RigidDynamic.h" />
     <ClInclude Include="Generator.h" />
     <ClInclude Include="pxBoxGausianGenerator.h" />
+    <ClInclude Include="TimerEntitySystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -14,7 +14,6 @@ protected:
 	void setVolume(float f);
 	void setLinearDamping(float d);
 	void setAngularDamping(float d);
-
 	void inline setVolumeVec(const Vector3& v) { volumeVec = v; };
 public:
 

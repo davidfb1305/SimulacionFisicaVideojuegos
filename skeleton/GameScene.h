@@ -18,6 +18,7 @@ private:
 	std::list<ForceGenerator*> forceslist;
 protected:
 public:
+	Vector3 ZERO = Vector3(0.0, 0.0, 0.0);
 	GameScene(physx::PxPhysics* gPh, physx::PxScene* gScene);
 	~GameScene();
 	void update(double t)override;

@@ -9,12 +9,10 @@ class EntitySystem : public Entity
 {
 private:
 
+protected:
 	std::list<Generator*> generatorList;
 	std::list<ForceGenerator*>  myForceList;
 	EntityManager* mEntityManager;
-	
-protected:
-
 public:
 	EntitySystem(EntityManager* em);
 	void addGenerator(Generator* pg);

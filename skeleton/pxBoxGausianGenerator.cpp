@@ -32,6 +32,11 @@ pxBoxGausianGenerator::pxBoxGausianGenerator(EntityManager* em,Vector3 p, Vector
 	active = true;
 }
 
+void pxBoxGausianGenerator::blockZAxesMove()
+{
+	_blockZAxesMove = true;
+}
+
 void pxBoxGausianGenerator::generate()
 {
 	if (entityList.size() == _maxEntities) return;
@@ -78,6 +83,9 @@ void pxBoxGausianGenerator::generate()
 		e->setParentListPointer(&entityList);
 		e->setForceList(forceList);
 		e->setParentListPointer(&entityList);
+		if (_blockZAxesMove) {
+			e->getPxRigidDynamic()->setRigidDynamicLockFlag(physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Z, true); // lock de z 
+		}
 	
 	}
 }

@@ -19,7 +19,7 @@
 #include "Scene5.h"
 #include "Scene6.h"
 #include "GameScene.h"
-std::string display_text = "This is a test";
+std::string display_text = "jetpack juego";
 
 
 using namespace physx;
@@ -69,15 +69,16 @@ void initPhysics(bool interactive)
 
 	sceneManager = new SceneManager();
 	//create the scenes
+	//camera TODO
+	Camera* cam = GetCamera();
 
-
-	sceneManager->addScene(new Scene6(gPhysics, gScene));
+	sceneManager->addScene(new GameScene(gPhysics, gScene));
 	sceneManager->addScene(new Scene1(gPhysics,gScene));
 	sceneManager->addScene(new Scene2(gPhysics,gScene));
 	sceneManager->addScene(new Scene3(gPhysics,gScene));
 	sceneManager->addScene(new Scene4(gPhysics,gScene));
 	sceneManager->addScene(new Scene5(gPhysics, gScene));
-	sceneManager->addScene(new GameScene(gPhysics,gScene));
+	sceneManager->addScene(new Scene6(gPhysics, gScene));
 	
 	}
 

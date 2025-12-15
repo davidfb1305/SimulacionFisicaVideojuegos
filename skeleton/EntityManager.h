@@ -12,6 +12,7 @@
 #include "Entity.h"
 #include <iostream>
 //class Entity
+class Particle;
 class PlayerEntity;
 class RigidStatic;
 class mRigidDynamic;
@@ -59,7 +60,6 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	RigidStatic* createPxPlane(const Vector3 initPos = Vector3(0.0, 0.0, 0.0), Vector3 size = Vector3(100.0, 1.0, 100.0), const Vector4& color = Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-
 	mRigidDynamic* createPxBox(const Vector3 initPos = Vector3(0.0, 0.0, 0.0), const Vector3 velL = Vector3(0.0, 0.0, 0.0),
 		const Vector3 velAn = Vector3(0.0, 0.0, 0.0), const Vector3 pxMaterial= Vector3(0.0, 0.0, 0.0), 
 		Vector3 size = Vector3(10.0, 10.0, 10.0), const Vector4& color = Vector4(1.0f, 1.0f, 1.0f, 1.0f), float mass = 1, float linearDamping = 0.999, float angDamping = 0.999, float k = 1.0);
