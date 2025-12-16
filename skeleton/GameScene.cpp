@@ -1,4 +1,5 @@
 #include "GameScene.h"
+#include "PxPhysicsAPI.h"
 #include "PlayerEntity.h"
 #include "GravityForceGen.h"
 #include "EntitySystem.h"
@@ -10,6 +11,7 @@
 #include "TimerEntitySystem.h"
 GameScene::GameScene(physx::PxPhysics* gPh,physx::PxScene* gScene) :SceneTemplate(gPh,gScene)
 {
+	
 }
 
 GameScene::~GameScene()
@@ -24,7 +26,7 @@ void GameScene::update(double t)
 }
 
 void GameScene::loadScene()
-{
+{	
 	mEntityManager = new EntityManager(gPh, _gScene);
 	g = new GravityForceGen();
 	leftwind = new windGenerator(Vector3(-105,9.81,0),1);
@@ -34,6 +36,7 @@ void GameScene::loadScene()
 	forceslist.push_back(leftwind);
 	forceslist.push_back(rightwind);
 	player = mEntityManager->createPlayer(Vector3(0, 10, 0), 5, gPh);
+	_gScene->setSimulationEventCallback(player);
 	player->addForceGenerator(g);
 	forceslist.push_back(g);
 	player->addForceGenerator(rightwind);

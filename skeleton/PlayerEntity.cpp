@@ -65,9 +65,34 @@ bool PlayerEntity::update(double d)
 	return true;
 }
 
+void PlayerEntity::onContact(const physx::PxContactPairHeader& pairHeader, const physx::PxContactPair* pairs, physx::PxU32 nbPairs)
+{
+	std::cout << "OEOEOEO";
+}
+
 
 
 void PlayerEntity::setForceToParticleSystem(const std::list<ForceGenerator*>& fg)
 {
 	for(auto a : fg) _jetPackPS->addForceGenerator(a);
+}
+
+void PlayerEntity::onConstraintBreak(physx::PxConstraintInfo* constraints, physx::PxU32 count)
+{
+}
+
+void PlayerEntity::onWake(physx::PxActor** actors, physx::PxU32 count)
+{
+}
+
+void PlayerEntity::onSleep(physx::PxActor** actors, physx::PxU32 count)
+{
+}
+
+void PlayerEntity::onTrigger(physx::PxTriggerPair* pairs, physx::PxU32 count)
+{
+}
+
+void PlayerEntity::onAdvance(const  physx::PxRigidBody* const* bodyBuffer, const  physx::PxTransform* poseBuffer, const  physx::PxU32 count)
+{
 }
