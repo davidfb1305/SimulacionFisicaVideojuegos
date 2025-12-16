@@ -18,13 +18,15 @@ protected:
 	friend class EntityManager;
 	Particle* jetpack;
 	Particle* opositeSpring;
+	std::list<physx::PxRigidActor*> itemsToIgnore;
+	int vida = 50;
 public:
 	PlayerEntity(physx::PxScene* mS, const Vector3 initPos, physx::PxPhysics* gP, EntityManager* em);
 	~PlayerEntity();
 	void inputListener(unsigned char key);
 	bool update(double d) override;
 	void setForceToParticleSystem(const std::list<ForceGenerator*>& fg);
-
+	void addToIgnoreList(physx::PxRigidActor* a);
 
 	// Heredado vía PxSimulationEventCallback
 	void onContact(const physx::PxContactPairHeader& pairHeader, const physx::PxContactPair* pairs, physx::PxU32 nbPairs) override;

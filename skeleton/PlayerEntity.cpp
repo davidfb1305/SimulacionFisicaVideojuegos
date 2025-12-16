@@ -22,7 +22,7 @@ PlayerEntity::PlayerEntity(physx::PxScene* mS,const Vector3 initPos, physx::PxPh
 	_jetPackPS->addForceGenerator(jetPackForceForParticles);
 	gravityForMyParticle = new GravityForceGen();
 	jetpack->addForceGenerator(jetPackForce);
-
+	itemsToIgnore = std::list<physx::PxRigidActor*>();
 	opositeSpring = (Particle*)em->createMassParticle(Vector3(10.0, 0.0, 0.0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10);
 
 	spring = new SpringForceGenerator(opositeSpring, 400.0, 1);
@@ -67,7 +67,12 @@ bool PlayerEntity::update(double d)
 
 void PlayerEntity::onContact(const physx::PxContactPairHeader& pairHeader, const physx::PxContactPair* pairs, physx::PxU32 nbPairs)
 {
-	std::cout << "OEOEOEO";
+	physx::PxRigidActor* actor1 = pairHeader.actors[1];
+	for (physx::PxRigidActor* a : itemsToIgnore) {
+		if ( a == actor1) return;
+	}
+	vida--;
+	
 }
 
 
@@ -75,6 +80,11 @@ void PlayerEntity::onContact(const physx::PxContactPairHeader& pairHeader, const
 void PlayerEntity::setForceToParticleSystem(const std::list<ForceGenerator*>& fg)
 {
 	for(auto a : fg) _jetPackPS->addForceGenerator(a);
+}
+
+void PlayerEntity::addToIgnoreList(physx::PxRigidActor* a)
+{
+	itemsToIgnore.push_back(a);
 }
 
 void PlayerEntity::onConstraintBreak(physx::PxConstraintInfo* constraints, physx::PxU32 count)

@@ -6,6 +6,7 @@
 #include "GausianGenerator.h"
 #include "pxBoxGausianGenerator.h"
 #include "uniformGenerator.h"
+#include "RigidStatic.h"
 #include "windGenerator.h"
 #include "WindTimerGenerator.h"
 #include "TimerEntitySystem.h"
@@ -42,8 +43,11 @@ void GameScene::loadScene()
 	player->addForceGenerator(rightwind);
 	player->addForceGenerator(leftwind);
 	player->setForceToParticleSystem(forceslist);
-	mEntityManager->createPxPlane();
-	mEntityManager->createPxPlane(Vector3(0,100,0));
+	//create the planes
+	RigidStatic* a = mEntityManager->createPxPlane();
+	player->addToIgnoreList(a->getRigidStatic());
+	a = mEntityManager->createPxPlane(Vector3(0,100,0));
+	player->addToIgnoreList(a->getRigidStatic());
 	//Rain gausian
 	rain = new EntitySystem(mEntityManager);
 
@@ -57,11 +61,31 @@ void GameScene::loadScene()
 	rain->setActive(true);
 
 	//Cubes timersystems
-	TimerEntitySystem* auxTimeSys = new TimerEntitySystem(mEntityManager,1.3);
+	TimerEntitySystem* auxTimeSys = new TimerEntitySystem(mEntityManager,7);
 	mEntityManager->addEntity(auxTimeSys);
-	pxBoxGausianGenerator* pxBoxgen = new pxBoxGausianGenerator(mEntityManager, Vector3(75, 75, 0), ZERO, Vector3(-15.0,0,0), ZERO, Vector3(10, 20, 30), Vector3(5, 10, 15),
-		Vector3(0.8, 0.8, 0.8), Vector3(0.2, 0.1, 0.2), 10, 5, Vector4(0.7, 0.5, 0.8, 1.0), Vector4(0.3, 0.2, 0.4, 0.0), Vector3(2, 2, 1),
-		Vector3(0.3, 0.3, 0.2), 90);
+	pxBoxGausianGenerator* pxBoxgen = new pxBoxGausianGenerator(mEntityManager, Vector3(75, 5, 0), ZERO, Vector3(-15.0,0,0), ZERO, Vector3(10, 20, 30), Vector3(5, 10, 15),
+		Vector3(0.8, 0.8, 0.8), Vector3(0.2, 0.1, 0.2), 10, 5, Vector4(0.7, 0.5, 0.8, 1.0), Vector4(0.3, 0.2, 0.4, 0.0), Vector3(4, 4, 2),
+		Vector3(3, 2.3, 1.2), 90);
+	auxTimeSys->addGenForce(leftwind);
+	pxBoxgen->blockZAxesMove();
+	auxTimeSys->addGenerator(pxBoxgen);
+	auxTimeSys->setActive(true);
+
+	auxTimeSys = new TimerEntitySystem(mEntityManager, 9);
+	mEntityManager->addEntity(auxTimeSys);
+	pxBoxgen = new pxBoxGausianGenerator(mEntityManager, Vector3(75, 45, 0), ZERO, Vector3(-15.0, 0, 0), ZERO, Vector3(10, 20, 30), Vector3(5, 10, 15),
+		Vector3(0.8, 0.8, 0.8), Vector3(0.2, 0.1, 0.2), 10, 5, Vector4(0.1, 0.2, 0.8, 1.0), Vector4(0.3, 0.2, 0.4, 0.0), Vector3(4, 4, 2),
+		Vector3(3, 2.3, 1.2), 90);
+	auxTimeSys->addGenForce(leftwind);
+	pxBoxgen->blockZAxesMove();
+	auxTimeSys->addGenerator(pxBoxgen);
+	auxTimeSys->setActive(true);
+
+	auxTimeSys = new TimerEntitySystem(mEntityManager, 4);
+	mEntityManager->addEntity(auxTimeSys);
+	pxBoxgen = new pxBoxGausianGenerator(mEntityManager, Vector3(75, 75, 0), ZERO, Vector3(-15.0, 0, 0), ZERO, Vector3(10, 20, 30), Vector3(5, 10, 15),
+		Vector3(0.8, 0.8, 0.8), Vector3(0.2, 0.1, 0.2), 10, 5, Vector4(0.7, 0.8, 0.3, 1.0), Vector4(0.3, 0.2, 0.4, 0.0), Vector3(4, 4, 2),
+		Vector3(3, 2.3, 1.2), 90);
 	auxTimeSys->addGenForce(leftwind);
 	pxBoxgen->blockZAxesMove();
 	auxTimeSys->addGenerator(pxBoxgen);
