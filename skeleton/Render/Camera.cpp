@@ -48,6 +48,7 @@ Camera::Camera(const PxVec3& eye, const PxVec3& dir)
 
 void Camera::handleMouse(int button, int state, int x, int y)
 {
+	if (blockCam) return;
 	PX_UNUSED(state);
 	PX_UNUSED(button);
 	mMouseX = x;
@@ -56,6 +57,7 @@ void Camera::handleMouse(int button, int state, int x, int y)
 
 bool Camera::handleKey(unsigned char key, int x, int y, float speed)
 {
+	if (blockCam) return false;
 	PX_UNUSED(x);
 	PX_UNUSED(y);
 
@@ -73,13 +75,35 @@ bool Camera::handleKey(unsigned char key, int x, int y, float speed)
 
 void Camera::handleAnalogMove(float x, float y)
 {
+	if (blockCam) return;
 	PxVec3 viewY = mDir.cross(PxVec3(0,1,0)).getNormalized();
 	mEye += mDir*y;
 	mEye += viewY*x;
 }
 
+void Camera::setEye(const physx::PxVec3& eye)
+{
+	mEye = eye;
+}
+
+void Camera::setDir(const physx::PxVec3& dir)
+{
+	mDir = dir.getNormalized();
+}
+
+void Camera::setBlockCamera(bool b)
+{
+	blockCam = b;
+}
+
+bool Camera::getBlockCamera()
+{
+	return blockCam;
+}
+
 void Camera::handleMotion(int x, int y)
 {
+	if (blockCam) return;
 	int dx = mMouseX - x;
 	int dy = mMouseY - y;
 

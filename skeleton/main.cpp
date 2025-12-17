@@ -71,7 +71,8 @@ void initPhysics(bool interactive)
 	//create the scenes
 	//camera TODO
 	Camera* cam = GetCamera();
-
+	cam->setEye(Vector3(2, 50, 120));
+	cam->setDir(Vector3(0, 0, -1));
 	sceneManager->addScene(new GameScene(gPhysics, gScene));
 	sceneManager->addScene(new Scene1(gPhysics,gScene));
 	sceneManager->addScene(new Scene2(gPhysics,gScene));
@@ -128,6 +129,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	case '-':
 		sceneManager->previousScene();
+		break;
+	case 'Q':
+		GetCamera()->setBlockCamera(!GetCamera()->getBlockCamera());
 		break;
 	default:
 		break;
