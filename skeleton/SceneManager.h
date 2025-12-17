@@ -10,7 +10,8 @@ private:
 	int actSceneIndex;
 	physx::PxPhysics* gPh;
 protected:
-
+	bool flagNext = false;
+	bool flagPrevious= false;
 public:
 	SceneManager();
 	~SceneManager();
@@ -19,5 +20,10 @@ public:
 	void updateScene(double t);
 	void addScene(SceneTemplate* newScene);
 	void inputListener(unsigned char key, const  physx::PxTransform& camera);
+	void setFlagNext();
+	void setFlagPrevious();
+	bool getFlagNext();
+	bool getFlagPrevious();
+
 };
 

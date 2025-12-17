@@ -10,9 +10,11 @@
 #include "windGenerator.h"
 #include "WindTimerGenerator.h"
 #include "TimerEntitySystem.h"
-GameScene::GameScene(physx::PxPhysics* gPh,physx::PxScene* gScene) :SceneTemplate(gPh,gScene)
+#include "SceneManager.h"
+GameScene::GameScene(physx::PxPhysics* gPh,physx::PxScene* gScene, SceneManager* smanager, int* bt) :SceneTemplate(gPh,gScene)
 {
-	
+	sm = smanager;
+	bestTime = bt;
 }
 
 GameScene::~GameScene()
@@ -21,13 +23,21 @@ GameScene::~GameScene()
 
 void GameScene::update(double t)
 {
+	
 	mEntityManager->updateEntities(t);
 	///TODO LIMITAR LA SUBIDA DEL JETPACK POR DEBAJO Y POR ARRIBA
 	timerWind->updateWindForce(t);
+	actTime += t;
+	display_text = "VIDA = " + std::to_string(player->getVida())  + "  TIEMPO "+ std::to_string((int)actTime);
+	if (player->getVida() <= 0) { 
+		sm->setFlagPrevious(); 
+		if ((int)actTime > *bestTime) *bestTime = (int)actTime;
+	}
 }
 
 void GameScene::loadScene()
 {	
+	float actTime = 0;
 	mEntityManager = new EntityManager(gPh, _gScene);
 	g = new GravityForceGen();
 	leftwind = new windGenerator(Vector3(-105,9.81,0),1);
@@ -40,25 +50,13 @@ void GameScene::loadScene()
 	_gScene->setSimulationEventCallback(player);
 	player->addForceGenerator(g);
 	forceslist.push_back(g);
-	player->addForceGenerator(timerWind);
-	player->addForceGenerator(leftwind);
 	player->setForceToParticleSystem(forceslist);
 	//create the planes
 	RigidStatic* a = mEntityManager->createPxPlane();
 	player->addToIgnoreList(a->getRigidStatic());
 	a = mEntityManager->createPxPlane(Vector3(0,100,0));
 	player->addToIgnoreList(a->getRigidStatic());
-	//Rain gausian
-	rain = new EntitySystem(mEntityManager);
-
-	/*rain->addGenerator(new particleUniformGenerator(mEntityManager, Vector3(0.0, 100.0, 0.0), Vector3(300.1, 0.1, 300.1),
-		Vector3(0.0, 0.0, 0.0), Vector3(1.0, 1.0, 1.0), 1, Vector3(0.0, 0.0, 0.0), Vector3(0.0, 0.0, 0.0),
-		Vector3(0, 0, 0), Vector4(0.0, 0.0, 1.0, 1.0), Vector4(0, 0, 0.5, 0), 1, 100));
-	mEntityManager->addEntity(rain);*/
-	rain->addGenForce(g);
-	rain->addGenForce(leftwind);
-	rain->addGenForce(timerWind);
-	rain->setActive(true);
+	
 
 	//Cubes timersystems
 	TimerEntitySystem* auxTimeSys = new TimerEntitySystem(mEntityManager,7);

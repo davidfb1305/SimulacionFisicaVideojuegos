@@ -27,7 +27,7 @@ public:
 	bool update(double d) override;
 	void setForceToParticleSystem(const std::list<ForceGenerator*>& fg);
 	void addToIgnoreList(physx::PxRigidActor* a);
-
+	int getVida();
 	// Heredado vía PxSimulationEventCallback
 	void onContact(const physx::PxContactPairHeader& pairHeader, const physx::PxContactPair* pairs, physx::PxU32 nbPairs) override;
 	void onWake(physx::PxActor** actors, physx::PxU32 count) override;

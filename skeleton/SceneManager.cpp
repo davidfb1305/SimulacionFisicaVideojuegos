@@ -21,6 +21,7 @@ void SceneManager::nextScene()
 
 	actScene = scenes[actSceneIndex];
 	actScene->loadScene();
+	flagNext = false;
 }
 
 void SceneManager::previousScene()
@@ -31,6 +32,7 @@ void SceneManager::previousScene()
 	actScene->unLoadScene();
 	actScene = scenes[actSceneIndex];
 	actScene->loadScene();
+	flagPrevious = false;
 }
 
 void SceneManager::updateScene(double t)
@@ -47,4 +49,24 @@ void SceneManager::addScene(SceneTemplate* newScene)
 }
 void SceneManager::inputListener(unsigned char key, const  physx::PxTransform& camera) {
 	actScene->inputListener(key, camera);
+}
+
+void SceneManager::setFlagNext()
+{
+	flagNext = true;
+}
+
+void SceneManager::setFlagPrevious()
+{
+	flagPrevious = true;
+}
+
+bool SceneManager::getFlagNext()
+{
+	return flagNext;
+}
+
+bool SceneManager::getFlagPrevious()
+{
+	return flagPrevious;
 }

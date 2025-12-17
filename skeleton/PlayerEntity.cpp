@@ -57,11 +57,7 @@ void PlayerEntity::inputListener(unsigned char key)
 }
 
 bool PlayerEntity::update(double d)
-{
-	// Display text
-	std::string vidatext =  "VIDA = \d",vida;
-	drawText(vidatext, 10, 0);
-	
+{	
 	addForces();
 	_jetPackPS->updatePos(jetpack->mtrans->p);
 	_mRigid->addForce(forceToAdd * pow(mass, -1));
@@ -101,6 +97,11 @@ void PlayerEntity::setForceToParticleSystem(const std::list<ForceGenerator*>& fg
 void PlayerEntity::addToIgnoreList(physx::PxRigidActor* a)
 {
 	itemsToIgnore.push_back(a);
+}
+
+int PlayerEntity::getVida()
+{
+	return vida;
 }
 
 void PlayerEntity::onConstraintBreak(physx::PxConstraintInfo* constraints, physx::PxU32 count)

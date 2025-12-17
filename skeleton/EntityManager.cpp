@@ -73,7 +73,7 @@ Entity* EntityManager::createBullet(const Vector3& transform, const Vector3& v, 
 PlayerEntity* EntityManager::createPlayer(const Vector3 initPos,double size, physx::PxPhysics* gP)
 {
 	PlayerEntity* aux = new PlayerEntity(_gScene,initPos, gP,this);
-	aux->mGeo = new physx::PxBoxGeometry(Vector3(size,size,size));
+	aux->mGeo = new physx::PxSphereGeometry(size);
 	aux->mtrans = new physx::PxTransform(initPos);
 	aux->setK(1);
 	aux->mshape = CreateShape(*aux->mGeo, gPhysics->createMaterial(1, 1, 1));

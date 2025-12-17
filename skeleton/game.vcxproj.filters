@@ -41,6 +41,7 @@
     <ClCompile Include="Generator.cpp" />
     <ClCompile Include="pxBoxGausianGenerator.cpp" />
     <ClCompile Include="TimerEntitySystem.cpp" />
+    <ClCompile Include="InitScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -84,6 +85,7 @@
     <ClInclude Include="Generator.h" />
     <ClInclude Include="pxBoxGausianGenerator.h" />
     <ClInclude Include="TimerEntitySystem.h" />
+    <ClInclude Include="InitScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -19,9 +19,9 @@
 #include "Scene5.h"
 #include "Scene6.h"
 #include "GameScene.h"
+#include "InitScene.h"
 std::string display_text = "jetpack juego";
-
-
+int* bestTime = 0;
 using namespace physx;
 
 PxDefaultAllocator		gAllocator;
@@ -73,7 +73,9 @@ void initPhysics(bool interactive)
 	Camera* cam = GetCamera();
 	cam->setEye(Vector3(2, 50, 120));
 	cam->setDir(Vector3(0, 0, -1));
-	sceneManager->addScene(new GameScene(gPhysics, gScene));
+	bestTime = new int(0);
+	sceneManager->addScene(new InitScene(gPhysics, gScene,sceneManager,bestTime));
+	sceneManager->addScene(new GameScene(gPhysics, gScene,sceneManager,bestTime));
 	sceneManager->addScene(new Scene1(gPhysics,gScene));
 	sceneManager->addScene(new Scene2(gPhysics,gScene));
 	sceneManager->addScene(new Scene3(gPhysics,gScene));
@@ -92,8 +94,10 @@ void stepPhysics(bool interactive, double t)
 	PX_UNUSED(interactive);
 
 	gScene->simulate(t);
-	sceneManager->updateScene(t);
 	gScene->fetchResults(true);
+	sceneManager->updateScene(t);
+	if (sceneManager->getFlagNext()) sceneManager->nextScene();
+	if (sceneManager->getFlagPrevious()) sceneManager->previousScene();
 	std::this_thread::sleep_for(std::chrono::microseconds(10));
 }
 
