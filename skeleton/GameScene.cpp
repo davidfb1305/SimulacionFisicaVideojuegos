@@ -37,7 +37,7 @@ void GameScene::update(double t)
 
 void GameScene::loadScene()
 {	
-	float actTime = 0;
+	actTime = 0;
 	mEntityManager = new EntityManager(gPh, _gScene);
 	g = new GravityForceGen();
 	leftwind = new windGenerator(Vector3(-105,9.81,0),1);
