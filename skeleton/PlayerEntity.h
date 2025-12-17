@@ -13,7 +13,7 @@ protected:
 	ForceGenerator* jetPackForce;
 	ForceGenerator* jetPackForceForParticles;
 	ForceGenerator* gravityForMyParticle;
-	float mass = 1.0;
+	float mass = 5.0;
 	float k = 1.0;
 	friend class EntityManager;
 	Particle* jetpack;

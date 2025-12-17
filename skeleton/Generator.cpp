@@ -29,5 +29,5 @@ void Generator::addForceGen(ForceGenerator* f)
 }
 void Generator::updateOriginPos(Vector3 v)
 {
-    pos += v;
+    pos = v;
 }

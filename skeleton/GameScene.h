@@ -13,7 +13,7 @@ private:
 	PlayerEntity* player;
 	GravityForceGen* g;
 	windGenerator* leftwind;
-	WindTimerGenerator* rightwind;
+	WindTimerGenerator* timerWind;
 	EntitySystem* rain;
 	std::list<ForceGenerator*> forceslist;
 protected:

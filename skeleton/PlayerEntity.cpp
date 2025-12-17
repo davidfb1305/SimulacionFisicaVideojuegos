@@ -8,34 +8,40 @@
 PlayerEntity::PlayerEntity(physx::PxScene* mS,const Vector3 initPos, physx::PxPhysics* gP, EntityManager* em)
 	:mRigidDynamic(mS)
 {
-	jetPackForce = new ForceGenerator(Vector3(0,300,0));
+	jetPackForce = new ForceGenerator(Vector3(0,400,0));
 	jetPackForce->setActive(false);
 	lastpos = initPos;
 	_jetPackPS = new EntitySystem(em);
-	jetpack = (Particle*)em->createMassParticle(Vector3(-10.0, 0.0, 0.0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10);
-	_jetPackPS->addGenerator(new ParticleGausianGenerator(em, Vector3(-10.0, 0.0, 0.0), Vector3(0.1, 0.1, 0.1), Vector3(1.1, 1.1, 1.1), Vector3(1.0, 1.0, 1.0), 10, Vector3(1.1, 1.1, 1.1)
-		, Vector3(0.0, -20.0, 0.0), Vector3(50, 0, 50), Vector4(1.0, 0, 0.0, 1), Vector4(0.2, 0, 0.0, 0), 1, 100,2));
+	jetpack = (Particle*)em->createMassParticle(initPos+Vector3(-10.0, 0.0, 0.0), Vector3(0, 0, 0), Vector3(0, 0, 0), 20);
+	
+	
+	_jetPackPS->addGenerator(new ParticleGausianGenerator(em, initPos+Vector3(-10.0, 0.0, 0.0), Vector3(0.1, 0.1, 0.1), Vector3(1.1, -1.1, 1.1), Vector3(1.0, -1.0, 1.0), 10, Vector3(1.1, -1.1, 1.1)
+		, Vector3(0.0, -20.0, 0.0), Vector3(50, 0, 50), Vector4(0.9, 0, 0.0, 1), Vector4(0.1, 0, 0.0, 0), 1, 100,2));
 	em->addEntity(_jetPackPS);
-	SpringForceGenerator* spring = new SpringForceGenerator(jetpack,400.0,1);
+	SpringForceGenerator* spring = new SpringForceGenerator(jetpack,700.0,1);
 	addForceGenerator(spring);
 	jetPackForceForParticles = new ForceGenerator(Vector3(0, -50, 0));
-	_jetPackPS->addForceGenerator(jetPackForceForParticles);
 	gravityForMyParticle = new GravityForceGen();
-	jetpack->addForceGenerator(jetPackForce);
-	itemsToIgnore = std::list<physx::PxRigidActor*>();
-	opositeSpring = (Particle*)em->createMassParticle(Vector3(10.0, 0.0, 0.0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10);
+	_jetPackPS->addGenForce(jetPackForceForParticles);
+	_jetPackPS->addGenForce(gravityForMyParticle);
 
-	spring = new SpringForceGenerator(opositeSpring, 400.0, 1);
+	jetpack->addForceGenerator(jetPackForce);
+	_jetPackPS->addGenForce(gravityForMyParticle);
+	itemsToIgnore = std::list<physx::PxRigidActor*>();
+	opositeSpring = (Particle*)em->createMassParticle(initPos+Vector3(10.0, 0.0, 0.0), Vector3(0, 0, 0), Vector3(0, 0, 0), 20);
+
+	spring = new SpringForceGenerator(opositeSpring, 700.0, 1);
 	opositeSpring->addForceGenerator(jetPackForce);
 	opositeSpring->addForceGenerator(gravityForMyParticle);
 	jetpack->addForceGenerator(gravityForMyParticle);
 	addForceGenerator(spring);
+
 	
 }
 
 PlayerEntity::~PlayerEntity()
 {
-
+	this->_mRigid->getScene()->setSimulationEventCallback(nullptr);
 }
 
 void PlayerEntity::inputListener(unsigned char key)
@@ -52,15 +58,25 @@ void PlayerEntity::inputListener(unsigned char key)
 
 bool PlayerEntity::update(double d)
 {
+	// Display text
+	std::string vidatext =  "VIDA = \d",vida;
+	drawText(vidatext, 10, 0);
+	
 	addForces();
 	_jetPackPS->updatePos(jetpack->mtrans->p);
 	_mRigid->addForce(forceToAdd * pow(mass, -1));
-	if (jetpack->mtrans->p.y > 95 || jetpack->mtrans->p.y < 5) {
+	if (jetpack->mtrans->p.y > 95 ) {
 		jetpack->setVel(Vector3(0.0, 0.0, 0.0));
-		jetpack->mtrans->p.y = _mRigid->getGlobalPose().p.y;
+		jetpack->mtrans->p.y = 95;
 		opositeSpring->setVel(Vector3(0.0, 0.0, 0.0));
-		opositeSpring->mtrans->p.y = _mRigid->getGlobalPose().p.y;
+		opositeSpring->mtrans->p.y = 95;
 		
+	}
+	else if (jetpack->mtrans->p.y < 5) {
+		jetpack->setVel(Vector3(0.0, 0.0, 0.0));
+		jetpack->mtrans->p.y = 5;
+		opositeSpring->setVel(Vector3(0.0, 0.0, 0.0));
+		opositeSpring->mtrans->p.y =5;
 	}
 	return true;
 }

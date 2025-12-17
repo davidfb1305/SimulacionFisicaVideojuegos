@@ -23,7 +23,7 @@ void GameScene::update(double t)
 {
 	mEntityManager->updateEntities(t);
 	///TODO LIMITAR LA SUBIDA DEL JETPACK POR DEBAJO Y POR ARRIBA
-	rightwind->updateWindForce(t);
+	timerWind->updateWindForce(t);
 }
 
 void GameScene::loadScene()
@@ -31,16 +31,16 @@ void GameScene::loadScene()
 	mEntityManager = new EntityManager(gPh, _gScene);
 	g = new GravityForceGen();
 	leftwind = new windGenerator(Vector3(-105,9.81,0),1);
-	rightwind = new WindTimerGenerator(Vector3(5, 0, 0), 1,5);
+	timerWind = new WindTimerGenerator(Vector3(-105, 9.81,0), 1,5);
 	leftwind->setActive(true);
-	rightwind->setActive(false);
+	timerWind->setActive(true);
 	forceslist.push_back(leftwind);
-	forceslist.push_back(rightwind);
-	player = mEntityManager->createPlayer(Vector3(0, 10, 0), 5, gPh);
+	forceslist.push_back(timerWind);
+	player = mEntityManager->createPlayer(Vector3(-20, 10, 0), 5, gPh);
 	_gScene->setSimulationEventCallback(player);
 	player->addForceGenerator(g);
 	forceslist.push_back(g);
-	player->addForceGenerator(rightwind);
+	player->addForceGenerator(timerWind);
 	player->addForceGenerator(leftwind);
 	player->setForceToParticleSystem(forceslist);
 	//create the planes
@@ -57,14 +57,14 @@ void GameScene::loadScene()
 	mEntityManager->addEntity(rain);*/
 	rain->addGenForce(g);
 	rain->addGenForce(leftwind);
-	rain->addGenForce(rightwind);
+	rain->addGenForce(timerWind);
 	rain->setActive(true);
 
 	//Cubes timersystems
 	TimerEntitySystem* auxTimeSys = new TimerEntitySystem(mEntityManager,7);
 	mEntityManager->addEntity(auxTimeSys);
 	pxBoxGausianGenerator* pxBoxgen = new pxBoxGausianGenerator(mEntityManager, Vector3(75, 5, 0), ZERO, Vector3(-15.0,0,0), ZERO, Vector3(10, 20, 30), Vector3(5, 10, 15),
-		Vector3(0.8, 0.8, 0.8), Vector3(0.2, 0.1, 0.2), 10, 5, Vector4(0.7, 0.5, 0.8, 1.0), Vector4(0.3, 0.2, 0.4, 0.0), Vector3(4, 4, 2),
+		Vector3(0.8, 0.8, 0.8), Vector3(0.2, 0.1, 0.2), 20, 5, Vector4(0.7, 0.5, 0.8, 1.0), Vector4(0.3, 0.2, 0.4, 0.0), Vector3(4, 4, 2),
 		Vector3(3, 2.3, 1.2), 90);
 	auxTimeSys->addGenForce(leftwind);
 	pxBoxgen->blockZAxesMove();
@@ -74,9 +74,9 @@ void GameScene::loadScene()
 	auxTimeSys = new TimerEntitySystem(mEntityManager, 9);
 	mEntityManager->addEntity(auxTimeSys);
 	pxBoxgen = new pxBoxGausianGenerator(mEntityManager, Vector3(75, 45, 0), ZERO, Vector3(-15.0, 0, 0), ZERO, Vector3(10, 20, 30), Vector3(5, 10, 15),
-		Vector3(0.8, 0.8, 0.8), Vector3(0.2, 0.1, 0.2), 10, 5, Vector4(0.1, 0.2, 0.8, 1.0), Vector4(0.3, 0.2, 0.4, 0.0), Vector3(4, 4, 2),
+		Vector3(0.8, 0.8, 0.8), Vector3(0.2, 0.1, 0.2), 30, 5, Vector4(0.1, 0.2, 0.8, 1.0), Vector4(0.3, 0.2, 0.4, 0.0), Vector3(4, 4, 2),
 		Vector3(3, 2.3, 1.2), 90);
-	auxTimeSys->addGenForce(leftwind);
+	auxTimeSys->addGenForce(timerWind);
 	pxBoxgen->blockZAxesMove();
 	auxTimeSys->addGenerator(pxBoxgen);
 	auxTimeSys->setActive(true);
@@ -115,7 +115,7 @@ void GameScene::inputListener(unsigned char key, const physx::PxTransform& camer
 		leftwind->setActive(!leftwind->isActive());
 		break;
 	case 'R': 
-		rightwind->setActive(!rightwind->isActive());
+		timerWind->setActive(!timerWind->isActive());
 		break;
 	}
 }
