@@ -39,8 +39,7 @@ void GameScene::loadScene()
 {	
 	actTime = 0;
 	mEntityManager = new EntityManager(gPh, _gScene);
-	g = new GravityForceGen();
-	leftwind = new windGenerator(Vector3(-105,9.81,0),1);
+	leftwind = new windGenerator(Vector3(-105, 9.81, 0), 1);
 	timerWind = new WindTimerGenerator(Vector3(-105, 9.81,0), 1,5);
 	leftwind->setActive(true);
 	timerWind->setActive(true);
@@ -48,9 +47,6 @@ void GameScene::loadScene()
 	forceslist.push_back(timerWind);
 	player = mEntityManager->createPlayer(Vector3(-20, 10, 0), 5, gPh);
 	_gScene->setSimulationEventCallback(player);
-	player->addForceGenerator(g);
-	forceslist.push_back(g);
-	player->setForceToParticleSystem(forceslist);
 	//create the planes
 	RigidStatic* a = mEntityManager->createPxPlane();
 	player->addToIgnoreList(a->getRigidStatic());
@@ -95,25 +91,4 @@ void GameScene::loadScene()
 void GameScene::inputListener(unsigned char key, const physx::PxTransform& camera)
 {
 	player->inputListener(key);
-	switch (toupper(key))
-	{
-	case 'V': 
-		;
-		mEntityManager->createBullet(camera.p, GetCamera()->getDir() * 50.0, Vector3(0.0, 0.0, 0.0), 0.999, 0, 1.0, 1, 10, Vector3(0, 0, 0),
-			Vector4(1.0f, 1.0f, 0.0f, 1.0f), 1, 1, 1, Vector3(500.0, 0.0, 0.0), 1.0, Vector3(0.0, -9.81, 0.0));
-		break;
-	case 'B': 
-		mEntityManager->createBullet(camera.p, GetCamera()->getDir() * 10.0, Vector3(0.0, 0.0, 0.0), 0.999, 0, 2.0, 1, 10, Vector3(0, 0, 0),
-			Vector4(1.0f, 0.0f, 1.0f, 1.0f), 1, 1, 1, Vector3(500.0, 0.0, 0.0), 1.0, Vector3(0.0, -9.81, 0.0));
-		break;
-	case 'G': 
-		g->setActive(!g->isActive());
-		break;
-	case 'L': 
-		leftwind->setActive(!leftwind->isActive());
-		break;
-	case 'R': 
-		timerWind->setActive(!timerWind->isActive());
-		break;
-	}
 }

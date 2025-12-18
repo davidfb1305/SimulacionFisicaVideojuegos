@@ -8,7 +8,7 @@
 PlayerEntity::PlayerEntity(physx::PxScene* mS,const Vector3 initPos, physx::PxPhysics* gP, EntityManager* em)
 	:mRigidDynamic(mS)
 {
-	jetPackForce = new ForceGenerator(Vector3(0,400,0));
+	jetPackForce = new ForceGenerator(Vector3(0, 400, 0));
 	jetPackForce->setActive(false);
 	lastpos = initPos;
 	_jetPackPS = new EntitySystem(em);
@@ -18,9 +18,9 @@ PlayerEntity::PlayerEntity(physx::PxScene* mS,const Vector3 initPos, physx::PxPh
 	_jetPackPS->addGenerator(new ParticleGausianGenerator(em, initPos+Vector3(-10.0, 0.0, 0.0), Vector3(0.1, 0.1, 0.1), Vector3(1.1, -1.1, 1.1), Vector3(1.0, -1.0, 1.0), 10, Vector3(1.1, -1.1, 1.1)
 		, Vector3(0.0, -20.0, 0.0), Vector3(50, 0, 50), Vector4(0.9, 0, 0.0, 1), Vector4(0.1, 0, 0.0, 0), 1, 100,2));
 	em->addEntity(_jetPackPS);
-	SpringForceGenerator* spring = new SpringForceGenerator(jetpack,700.0,1);
+	SpringForceGenerator* spring = new SpringForceGenerator(jetpack, 700.0, 1);
 	addForceGenerator(spring);
-	jetPackForceForParticles = new ForceGenerator(Vector3(0, -50, 0));
+	jetPackForceForParticles = new ForceGenerator(Vector3(0, -400, 0));
 	gravityForMyParticle = new GravityForceGen();
 	_jetPackPS->addGenForce(jetPackForceForParticles);
 	_jetPackPS->addGenForce(gravityForMyParticle);

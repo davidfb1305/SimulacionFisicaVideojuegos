@@ -20,7 +20,7 @@ mRigidDynamic::mRigidDynamic(physx::PxScene* mS)
 
 mRigidDynamic::~mRigidDynamic()
 {
-    mScene->removeActor(*_mRigid);
+	mScene->removeActor(*_mRigid);
 }
 
 physx::PxRigidDynamic* mRigidDynamic::getPxRigidDynamic()

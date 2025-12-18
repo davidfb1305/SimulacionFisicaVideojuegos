@@ -12,7 +12,6 @@ class GameScene : public SceneTemplate
 private:
 	bool windDir = false; 
 	PlayerEntity* player;
-	GravityForceGen* g;
 	windGenerator* leftwind;
 	WindTimerGenerator* timerWind;
 	EntitySystem* rain;
